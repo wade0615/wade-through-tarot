@@ -52,8 +52,8 @@ export function CardDeck({
           onClick={shuffleDeck}
           disabled={isShuffling}
           className={cn(
-            'px-6 py-2 rounded-lg font-medium transition-all',
-            'bg-purple-600 text-white hover:bg-purple-700',
+            'px-6 py-2 rounded-lg font-medium transition-all shadow-lg',
+            'bg-blue-600 text-white hover:bg-blue-700',
             'disabled:opacity-50 disabled:cursor-not-allowed',
             isShuffling && 'animate-pulse'
           )}
@@ -63,7 +63,7 @@ export function CardDeck({
       </div>
 
       {/* 牌組展示 */}
-      <div className="text-center text-gray-600 mb-4">
+      <div className="text-center text-blue-200 mb-4">
         已選擇 {selectedCards.length} / {maxSelection} 張牌
       </div>
 
@@ -102,7 +102,7 @@ export function CardDeck({
       </div>
 
       {/* 抽牌說明 */}
-      <div className="text-center text-gray-600 max-w-md mx-auto">
+      <div className="text-center text-blue-200 max-w-md mx-auto">
         <p className="text-sm">
           {canAddCard() 
             ? '點擊牌堆抽取一張牌' 
@@ -113,10 +113,10 @@ export function CardDeck({
 
       {/* 可選：顯示部分牌面供選擇 */}
       <div className="mt-8">
-        <div className="text-center text-gray-700 font-medium mb-4">
+        <div className="text-center text-blue-100 font-medium mb-4">
           或從下方選擇特定牌卡：
         </div>
-        <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2 max-h-64 overflow-y-auto p-4 border rounded-lg bg-gray-50">
+        <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2 max-h-64 overflow-y-auto p-4 border border-slate-600 rounded-lg bg-slate-800/30 backdrop-blur-sm">
           {shuffledCards.slice(0, 20).map((card) => (
             <TarotCardComponent
               key={card.id}

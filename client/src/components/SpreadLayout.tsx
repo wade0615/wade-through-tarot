@@ -20,7 +20,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
   const renderSingleCardSpread = () => (
     <div className="flex justify-center">
       <div className="text-center space-y-2">
-        <div className="text-sm font-medium text-gray-700">
+        <div className="text-sm font-medium text-blue-200">
           {positions[0].name}
         </div>
         <TarotCardComponent
@@ -30,7 +30,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           onClick={() => getCardAtPosition(0) && removeCard(0)}
           className={getCardAtPosition(0) ? 'cursor-pointer' : ''}
         />
-        <div className="text-xs text-gray-500 max-w-32">
+        <div className="text-xs text-slate-400 max-w-32">
           {positions[0].description}
         </div>
       </div>
@@ -41,7 +41,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
     <div className="flex justify-center space-x-8">
       {positions.map((pos, index) => (
         <div key={index} className="text-center space-y-2">
-          <div className="text-sm font-medium text-gray-700">
+          <div className="text-sm font-medium text-blue-200">
             {pos.name}
           </div>
           <TarotCardComponent
@@ -51,7 +51,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
             onClick={() => getCardAtPosition(index) && removeCard(index)}
             className={getCardAtPosition(index) ? 'cursor-pointer' : ''}
           />
-          <div className="text-xs text-gray-500 max-w-32">
+          <div className="text-xs text-slate-400 max-w-32">
             {pos.description}
           </div>
         </div>
@@ -70,7 +70,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
         <div className="relative">
           {/* 遠程過去 (上) */}
           <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 text-center space-y-1">
-            <div className="text-xs font-medium text-gray-700">遠程過去</div>
+            <div className="text-xs font-medium text-blue-200">遠程過去</div>
             <TarotCardComponent
               card={getCardAtPosition(2)?.card}
               isReversed={getCardAtPosition(2)?.isReversed}
@@ -81,7 +81,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           
           {/* 近期過去 (左) */}
           <div className="absolute top-1/2 -left-32 transform -translate-y-1/2 text-center space-y-1">
-            <div className="text-xs font-medium text-gray-700">近期過去</div>
+            <div className="text-xs font-medium text-blue-200">近期過去</div>
             <TarotCardComponent
               card={getCardAtPosition(3)?.card}
               isReversed={getCardAtPosition(3)?.isReversed}
@@ -92,7 +92,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           
           {/* 當前狀況 (中心) */}
           <div className="text-center space-y-1">
-            <div className="text-xs font-medium text-gray-700">當前狀況</div>
+            <div className="text-xs font-medium text-blue-200">當前狀況</div>
             <TarotCardComponent
               card={getCardAtPosition(0)?.card}
               isReversed={getCardAtPosition(0)?.isReversed}
@@ -117,7 +117,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           
           {/* 近期未來 (右) */}
           <div className="absolute top-1/2 -right-32 transform -translate-y-1/2 text-center space-y-1">
-            <div className="text-xs font-medium text-gray-700">近期未來</div>
+            <div className="text-xs font-medium text-blue-200">近期未來</div>
             <TarotCardComponent
               card={getCardAtPosition(5)?.card}
               isReversed={getCardAtPosition(5)?.isReversed}
@@ -128,7 +128,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           
           {/* 可能的未來 (下) */}
           <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 text-center space-y-1">
-            <div className="text-xs font-medium text-gray-700">可能的未來</div>
+            <div className="text-xs font-medium text-blue-200">可能的未來</div>
             <TarotCardComponent
               card={getCardAtPosition(4)?.card}
               isReversed={getCardAtPosition(4)?.isReversed}
@@ -142,7 +142,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
         <div className="flex flex-col items-center space-y-4">
           {/* 最終結果 */}
           <div className="text-center space-y-1">
-            <div className="text-xs font-medium text-gray-700">最終結果</div>
+            <div className="text-xs font-medium text-blue-200">最終結果</div>
             <TarotCardComponent
               card={getCardAtPosition(9)?.card}
               isReversed={getCardAtPosition(9)?.isReversed}
@@ -153,7 +153,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           
           {/* 希望與恐懼 */}
           <div className="text-center space-y-1">
-            <div className="text-xs font-medium text-gray-700">希望與恐懼</div>
+            <div className="text-xs font-medium text-blue-200">希望與恐懼</div>
             <TarotCardComponent
               card={getCardAtPosition(8)?.card}
               isReversed={getCardAtPosition(8)?.isReversed}
@@ -164,7 +164,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           
           {/* 外在影響 */}
           <div className="text-center space-y-1">
-            <div className="text-xs font-medium text-gray-700">外在影響</div>
+            <div className="text-xs font-medium text-blue-200">外在影響</div>
             <TarotCardComponent
               card={getCardAtPosition(7)?.card}
               isReversed={getCardAtPosition(7)?.isReversed}
@@ -175,7 +175,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           
           {/* 你的方法 */}
           <div className="text-center space-y-1">
-            <div className="text-xs font-medium text-gray-700">你的方法</div>
+            <div className="text-xs font-medium text-blue-200">你的方法</div>
             <TarotCardComponent
               card={getCardAtPosition(6)?.card}
               isReversed={getCardAtPosition(6)?.isReversed}
@@ -191,12 +191,12 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
   return (
     <div className={cn('w-full', className)}>
       <div className="mb-6 text-center">
-        <h3 className="text-lg font-semibold text-gray-800 mb-2">
+        <h3 className="text-lg font-semibold text-white mb-2">
           {spreadType === 'single' && '單張牌占卜'}
           {spreadType === 'three-card' && '三張牌占卜'}
           {spreadType === 'celtic-cross' && '凱爾特十字牌陣'}
         </h3>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-blue-200">
           {spreadType === 'single' && '適合簡單問題或每日指引'}
           {spreadType === 'three-card' && '適合了解情況的過去、現在、未來'}
           {spreadType === 'celtic-cross' && '適合複雜問題的深度分析'}
@@ -210,7 +210,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
       </div>
 
       {/* 說明文字 */}
-      <div className="mt-6 text-center text-xs text-gray-500">
+      <div className="mt-6 text-center text-xs text-slate-400">
         點擊已放置的牌可以移除
       </div>
     </div>

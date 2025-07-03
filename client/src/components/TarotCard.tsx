@@ -33,14 +33,14 @@ export function TarotCardComponent({
   const cardContent = showBack || !card ? (
     // 牌背
     <div className={cn(
-      'w-full h-full rounded-lg border-2 border-purple-300',
-      'bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900',
+      'w-full h-full rounded-lg border-2 border-blue-400',
+      'bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-900',
       'flex items-center justify-center',
       'shadow-lg relative overflow-hidden'
     )}>
-      <div className="absolute inset-2 border border-purple-400 rounded opacity-50" />
-      <div className="absolute inset-4 border border-purple-400 rounded opacity-30" />
-      <div className="text-purple-200 text-center">
+      <div className="absolute inset-2 border border-blue-400 rounded opacity-50" />
+      <div className="absolute inset-4 border border-blue-400 rounded opacity-30" />
+      <div className="text-blue-200 text-center">
         <div className="text-xs opacity-60">TAROT</div>
         <div className="text-2xl">✨</div>
       </div>
@@ -98,10 +98,9 @@ export function TarotCardComponent({
     <div
       className={cn(
         sizeClasses[size],
-        'cursor-pointer transition-all duration-300 transform',
-        'hover:scale-105 hover:shadow-xl',
-        isSelected && 'ring-2 ring-purple-500 ring-offset-2 scale-105',
-        isFlipped && 'animate-pulse',
+        'cursor-pointer transition-all duration-300 transform',      'hover:scale-105 hover:shadow-xl',
+      isSelected && 'ring-2 ring-blue-400 ring-offset-2 ring-offset-slate-900 scale-105',
+      isFlipped && 'animate-pulse',
         onClick && 'hover:brightness-110',
         className
       )}

@@ -59,15 +59,15 @@ export function ReadingResult({
     <div className={cn('space-y-6', className)}>
       {/* 標題和問題 */}
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">
+        <h2 className="text-2xl font-bold text-blue-100 mb-2">
           占卜結果
         </h2>
         {currentQuestion && (
-          <p className="text-gray-600 italic">
+          <p className="text-blue-200 italic">
             「{currentQuestion}」
           </p>
         )}
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-blue-300 mt-1">
           {formatDate(new Date())}
         </p>
       </div>
@@ -79,7 +79,7 @@ export function ReadingResult({
           if (!interpretation) return null;
 
           return (
-            <div key={index} className="bg-white rounded-lg shadow-md p-6 border">
+            <div key={index} className="bg-gray-800/90 rounded-lg shadow-lg p-6 border border-blue-900/30">
               <div className="flex flex-col md:flex-row gap-6">
                 {/* 牌卡 */}
                 <div className="flex-shrink-0 flex justify-center">
@@ -94,21 +94,21 @@ export function ReadingResult({
                 <div className="flex-1 space-y-4">
                   {/* 位置和牌名 */}
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800">
+                    <h3 className="text-lg font-semibold text-blue-100">
                       {interpretation.position.name}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-2">
+                    <p className="text-sm text-blue-200 mb-2">
                       {interpretation.position.description}
                     </p>
                     <div className="flex items-center gap-2">
-                      <span className="font-medium text-gray-800">
+                      <span className="font-medium text-blue-100">
                         {interpretation.card.name}
                       </span>
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-blue-300">
                         ({interpretation.card.nameEn})
                       </span>
                       {interpretation.isReversed && (
-                        <span className="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">
+                        <span className="text-xs bg-red-900/30 text-red-300 px-2 py-1 rounded border border-red-800/50">
                           逆位
                         </span>
                       )}
@@ -117,7 +117,7 @@ export function ReadingResult({
 
                   {/* 牌義 */}
                   <div>
-                    <h4 className="font-medium text-gray-700 mb-2">
+                    <h4 className="font-medium text-blue-200 mb-2">
                       {interpretation.isReversed ? '逆位含義：' : '正位含義：'}
                     </h4>
                     <div className="flex flex-wrap gap-2 mb-3">
@@ -127,8 +127,8 @@ export function ReadingResult({
                           className={cn(
                             'px-3 py-1 rounded-full text-sm',
                             interpretation.isReversed
-                              ? 'bg-red-100 text-red-700'
-                              : 'bg-green-100 text-green-700'
+                              ? 'bg-red-900/30 text-red-300 border border-red-800/50'
+                              : 'bg-green-900/30 text-green-300 border border-green-800/50'
                           )}
                         >
                           {meaning}
@@ -139,20 +139,20 @@ export function ReadingResult({
 
                   {/* 牌卡描述 */}
                   <div>
-                    <h4 className="font-medium text-gray-700 mb-2">解釋：</h4>
-                    <p className="text-gray-600 leading-relaxed">
+                    <h4 className="font-medium text-blue-200 mb-2">解釋：</h4>
+                    <p className="text-blue-100 leading-relaxed">
                       {interpretation.card.description}
                     </p>
                   </div>
 
                   {/* 關鍵詞 */}
                   <div>
-                    <h4 className="font-medium text-gray-700 mb-2">關鍵詞：</h4>
+                    <h4 className="font-medium text-blue-200 mb-2">關鍵詞：</h4>
                     <div className="flex flex-wrap gap-2">
                       {interpretation.card.keywords.map((keyword, idx) => (
                         <span
                           key={idx}
-                          className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm"
+                          className="px-2 py-1 bg-blue-900/30 text-blue-200 rounded text-sm border border-blue-800/50"
                         >
                           {keyword}
                         </span>
@@ -167,11 +167,11 @@ export function ReadingResult({
       </div>
 
       {/* 整體總結 */}
-      <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-6 border">
-        <h3 className="text-lg font-semibold text-gray-800 mb-3">
+      <div className="bg-gradient-to-r from-gray-800/80 to-blue-900/80 rounded-lg p-6 border border-blue-800/30">
+        <h3 className="text-lg font-semibold text-blue-100 mb-3">
           整體建議
         </h3>
-        <p className="text-gray-700 leading-relaxed">
+        <p className="text-blue-200 leading-relaxed">
           {generateOverallAdvice(selectedCards, spreadType)}
         </p>
       </div>
@@ -180,13 +180,13 @@ export function ReadingResult({
       <div className="flex justify-center space-x-4">
         <button
           onClick={handleSaveReading}
-          className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
+          className="px-6 py-3 bg-blue-900 text-white rounded-lg font-medium hover:bg-blue-800 transition-colors border border-blue-700"
         >
           保存這次占卜
         </button>
         <button
           onClick={handleNewReading}
-          className="px-6 py-3 bg-gray-600 text-white rounded-lg font-medium hover:bg-gray-700 transition-colors"
+          className="px-6 py-3 bg-gray-700 text-blue-100 rounded-lg font-medium hover:bg-gray-600 transition-colors border border-gray-600"
         >
           開始新的占卜
         </button>
