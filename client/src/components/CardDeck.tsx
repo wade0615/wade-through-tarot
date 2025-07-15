@@ -63,13 +63,13 @@ export function CardDeck({
       </div>
 
       {/* 牌組展示 */}
-      <div className="text-center text-blue-200 mb-4">
+      <div className="text-center text-blue-200 mb-[64]">
         已選擇 {selectedCards.length} / {maxSelection} 張牌
       </div>
 
       {/* 牌堆 - 展示為重疊的牌背 */}
       <div className="flex justify-center mb-8">
-        <div className="relative">
+        <div className="relative w-full h-[220px]">
           {/* 創建堆疊效果 */}
           {[0, 1, 2, 3, 4].map((index) => (
             <div
@@ -79,8 +79,9 @@ export function CardDeck({
                 isShuffling && 'animate-bounce'
               )}
               style={{
-                transform: `translate(${index * 2}px, ${index * -2}px)`,
-                zIndex: 5 - index
+                transform: `translate(calc(-50% + ${index * 2}px), ${index * -2}px)`,
+                zIndex: 5 - index,
+                left: '50%',
               }}
             >
               <TarotCardComponent
@@ -112,7 +113,7 @@ export function CardDeck({
       </div>
 
       {/* 可選：顯示部分牌面供選擇 */}
-      <div className="mt-8">
+      {/* <div className="mt-8">
         <div className="text-center text-blue-100 font-medium mb-4">
           或從下方選擇特定牌卡：
         </div>
@@ -131,7 +132,7 @@ export function CardDeck({
             />
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
