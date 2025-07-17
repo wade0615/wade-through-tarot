@@ -52,7 +52,7 @@ export default function Home() {
           Wade Through Tarot
         </h1>
         <p className="text-lg text-blue-200">
-          歡迎來到塔羅占卜世界，讓直覺引導您找到答案
+          說一就是一，說二還是一，讓直覺引導找到答案
         </p>
       </div>
 
@@ -88,12 +88,12 @@ export default function Home() {
       <form onSubmit={handleQuestionSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-blue-200 mb-2">
-            您想要詢問的問題（可選）
+            想問什麼廢話？（可選）
           </label>
           <textarea
             value={currentQuestion}
             onChange={(e) => setQuestion(e.target.value)}
-            placeholder="例如：我在事業上應該做什麼選擇？"
+            placeholder="例如：哥布林跟女精靈是有未來的嗎？"
             className="w-full p-3 bg-slate-800/50 border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-white placeholder-slate-400 backdrop-blur-sm"
             rows={3}
           />
