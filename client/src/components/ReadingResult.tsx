@@ -5,6 +5,7 @@ import { SpreadLayout } from "./SpreadLayout";
 import { useTarotStore } from "@/store/tarotStore";
 import { TarotCard } from "@/data/tarotCards";
 import { spreadPositions, formatDate, cn } from "@/utils/helpers";
+import { useState } from "react";
 
 interface ReadingResultProps {
   onNewReading?: () => void;
@@ -29,6 +30,8 @@ export function ReadingResult({
     clearSelection,
   } = useTarotStore();
 
+  const [copySuccess, setCopySuccess] = useState(false);
+
   const positions = spreadPositions[spreadType];
 
   /**
@@ -37,6 +40,38 @@ export function ReadingResult({
   const handleNewReading = () => {
     clearSelection();
     onNewReading?.();
+  };
+
+  /**
+   * 複製內容到剪貼簿
+   */
+  const handleCopyContent = async () => {
+    const content = generateOverallAdvice(
+      selectedCards,
+      spreadType,
+      currentQuestion
+    );
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000);
+    } catch (err) {
+      console.error("複製失敗:", err);
+    }
+  };
+
+  /**
+   * 前往 ChatGPT 詢問
+   */
+  const handleGoToChatGPT = () => {
+    const content = generateOverallAdvice(
+      selectedCards,
+      spreadType,
+      currentQuestion
+    );
+    const encodedContent = encodeURIComponent(content);
+    const chatgptUrl = `https://chat.openai.com/?q=${encodedContent}`;
+    window.open(chatgptUrl, "_blank");
   };
 
   // const handleSaveReading = () => {
@@ -87,8 +122,29 @@ export function ReadingResult({
       <div className="bg-gradient-to-r from-gray-800/80 to-blue-900/80 rounded-lg p-6 border border-blue-800/30">
         <h3 className="text-lg font-semibold text-blue-100 mb-3">整體建議</h3>
         <p className="text-blue-200 leading-relaxed">
-          {generateOverallAdvice(selectedCards, spreadType)}
+          {generateOverallAdvice(selectedCards, spreadType, currentQuestion)}
         </p>
+
+        {/* 複製和 ChatGPT 按鈕 */}
+        <div className="flex flex-col sm:flex-row gap-3 mt-4 justify-end">
+          <button
+            onClick={handleCopyContent}
+            className={cn(
+              "px-4 py-2 rounded-lg font-medium transition-colors border",
+              copySuccess
+                ? "bg-green-600 text-white border-green-500"
+                : "bg-blue-600 text-white hover:bg-blue-700 border-blue-500"
+            )}
+          >
+            {copySuccess ? "✓ 已複製" : "📋 複製內容"}
+          </button>
+          <button
+            onClick={handleGoToChatGPT}
+            className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors border border-green-500"
+          >
+            🤖 前往 ChatGPT 詢問
+          </button>
+        </div>
       </div>
 
       {/* 牌卡解釋 */}
@@ -218,45 +274,42 @@ export function ReadingResult({
  */
 function generateOverallAdvice(
   selectedCards: Array<{ card: TarotCard; isReversed: boolean }>,
-  spreadType: string
+  spreadType: string,
+  currentQuestion: string
 ): string {
   if (selectedCards.length === 0) return "";
 
-  const hasReversed = selectedCards.some((sc) => sc.isReversed);
-  const majorCards = selectedCards.filter(
-    (sc) => sc.card.suit === "major"
-  ).length;
-
-  let advice = "";
-
-  // 根據牌陣類型給出不同建議
+  // 生成牌陣名稱
+  let spreadName = "";
   if (spreadType === "single") {
-    advice = "這張牌為您指出了當前最重要的指引方向。";
+    spreadName = "單牌陣";
   } else if (spreadType === "three-card") {
-    advice = "從過去到未來的能量流動告訴我們，";
-    if (hasReversed) {
-      advice += "雖然有些阻礙需要克服，但這也是成長的機會。";
-    } else {
-      advice += "整體能量流動順暢，是個好的發展趨勢。";
-    }
+    spreadName = "三牌陣-過去,現在,未來";
   } else if (spreadType === "celtic-cross") {
-    advice = "這個複雜的牌陣揭示了問題的多個面向。";
+    spreadName =
+      "凱爾特十字牌陣-過去,現況,未來,挑戰阻力,淺意識,顯意識,態度,環境,希望恐懼,結果";
   }
 
-  // 根據大阿爾卡納牌的數量添加建議
-  if (majorCards >= 2) {
-    advice +=
-      " 出現多張大阿爾卡納牌意味著這個問題對您的人生有重要意義，需要認真對待。";
-  } else if (majorCards === 1) {
-    advice += " 大阿爾卡納牌的出現提醒您關注人生的重要課題。";
+  // 生成抽牌結果
+  const cardResults = selectedCards
+    .map((sc, index) => {
+      const position =
+        spreadPositions[spreadType as keyof typeof spreadPositions][index];
+      const positionName = position ? position.name : `位置${index + 1}`;
+      const cardName = sc.card.name;
+      const isReversed = sc.isReversed ? "逆位" : "正位";
+      return `${positionName}: ${cardName}(${isReversed})`;
+    })
+    .join(", ");
+
+  // 構建完整的提示詞
+  let prompt = `你是一名專業的塔羅師，我用<${spreadName}>問了一個問題`;
+
+  if (currentQuestion) {
+    prompt += `，<${currentQuestion}>`;
   }
 
-  // 根據逆位牌的情況添加建議
-  if (hasReversed) {
-    advice += " 逆位牌提醒您需要反思內在，或者表示阻礙正在消散。";
-  }
+  prompt += `，抽到：<${cardResults}>，請告訴我每個牌位的意思，整體建議與結果`;
 
-  advice += " 記住，塔羅牌是指引而非命運，最終的選擇權在您手中。";
-
-  return advice;
+  return prompt;
 }
