@@ -1,16 +1,18 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useTarotStore } from '@/store/tarotStore';
-import { TarotCard } from '@/data/tarotCards';
-import { SetupView } from '@/components/SetupView';
-import { SelectionView } from '@/components/SelectionView';
-import { ResultView } from '@/components/ResultView';
+import { useState } from "react";
+import { useTarotStore } from "@/store/tarotStore";
+import { TarotCard } from "@/data/tarotCards";
+import { SetupView } from "@/components/SetupView";
+import { SelectionView } from "@/components/SelectionView";
+import { ResultView } from "@/components/ResultView";
+import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+import OfflineIndicator from "@/components/OfflineIndicator";
 
-type ViewState = 'setup' | 'selection' | 'result';
+type ViewState = "setup" | "selection" | "result";
 
 export default function Home() {
-  const [currentView, setCurrentView] = useState<ViewState>('setup');
+  const [currentView, setCurrentView] = useState<ViewState>("setup");
   const {
     // currentQuestion,
     // setQuestion,
@@ -20,7 +22,7 @@ export default function Home() {
     selectCard,
     clearSelection,
     // isReadingComplete,
-    getMaxCards
+    getMaxCards,
   } = useTarotStore();
 
   /**
@@ -31,11 +33,11 @@ export default function Home() {
   const handleCardSelect = (card: TarotCard, isReversed: boolean) => {
     const nextPosition = selectedCards.length;
     selectCard(card, nextPosition, isReversed);
-    
+
     // 如果達到最大牌數，自動切換到結果頁
     if (selectedCards.length + 1 >= getMaxCards()) {
       setTimeout(() => {
-        setCurrentView('result');
+        setCurrentView("result");
       }, 500);
     }
   };
@@ -45,28 +47,28 @@ export default function Home() {
    */
   const handleNewReading = () => {
     clearSelection();
-    setCurrentView('setup');
+    setCurrentView("setup");
   };
 
   /**
    * 處理問題提交，從設置頁面切換到選牌頁面
    */
   const handleQuestionSubmit = () => {
-    setCurrentView('selection');
+    setCurrentView("selection");
   };
 
   /**
    * 從選牌頁面返回設置頁面
    */
   const handleBackToSetup = () => {
-    setCurrentView('setup');
+    setCurrentView("setup");
   };
 
   /**
    * 從選牌頁面切換到結果頁面
    */
   const handleViewResult = () => {
-    setCurrentView('result');
+    setCurrentView("result");
   };
 
   /**
@@ -74,29 +76,31 @@ export default function Home() {
    */
   const handleSaveReading = () => {
     // 可以添加保存成功的提示
-    alert('占卜結果已保存！');
+    alert("占卜結果已保存！");
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-slate-900">
       <div className="container mx-auto px-4 py-8">
-        {currentView === 'setup' && (
+        {currentView === "setup" && (
           <SetupView onQuestionSubmit={handleQuestionSubmit} />
         )}
-        {currentView === 'selection' && (
-          <SelectionView 
+        {currentView === "selection" && (
+          <SelectionView
             onCardSelect={handleCardSelect}
             onBackToSetup={handleBackToSetup}
             onViewResult={handleViewResult}
           />
         )}
-        {currentView === 'result' && (
-          <ResultView 
+        {currentView === "result" && (
+          <ResultView
             onNewReading={handleNewReading}
             onSaveReading={handleSaveReading}
           />
         )}
       </div>
+      <PWAInstallPrompt />
+      <OfflineIndicator />
     </div>
   );
 }

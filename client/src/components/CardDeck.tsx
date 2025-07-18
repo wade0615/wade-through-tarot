@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { TarotCard, allTarotCards } from '@/data/tarotCards';
-import { TarotCardComponent } from './TarotCard';
-import { useTarotStore } from '@/store/tarotStore';
-import { shuffleArray, getRandomReversed, cn } from '@/utils/helpers';
+import { useState, useEffect } from "react";
+import { TarotCard, allTarotCards } from "@/data/tarotCards";
+import { TarotCardComponent } from "./TarotCard";
+import { useTarotStore } from "@/store/tarotStore";
+import { shuffleArray, getRandomReversed, cn } from "@/utils/helpers";
 
 interface CardDeckProps {
   onCardSelect?: (card: TarotCard, isReversed: boolean) => void;
@@ -16,10 +16,10 @@ interface CardDeckProps {
  * 牌堆組件 - 顯示可選擇的塔羅牌堆
  * 提供洗牌和選牌功能
  */
-export function CardDeck({ 
-  onCardSelect, 
+export function CardDeck({
+  onCardSelect,
   maxSelection = 3,
-  className 
+  className,
 }: CardDeckProps) {
   const [shuffledCards, setShuffledCards] = useState<TarotCard[]>([]);
   const [isShuffling, setIsShuffling] = useState(false);
@@ -53,7 +53,7 @@ export function CardDeck({
     const isReversed = getRandomReversed();
     onCardSelect?.(card, isReversed);
     // 從牌堆中移除已抽出的牌
-    setShuffledCards(prev => prev.filter(c => c.id !== card.id));
+    setShuffledCards((prev) => prev.filter((c) => c.id !== card.id));
   };
 
   /**
@@ -66,7 +66,7 @@ export function CardDeck({
   // };
 
   return (
-    <div className={cn('space-y-4', className)}>
+    <div className={cn("space-y-4", className)}>
       {/* 牌組展示 */}
       <div className="text-center text-blue-200 mb-[64]">
         已選擇 {selectedCards.length} / {maxSelection} 張牌
@@ -80,31 +80,46 @@ export function CardDeck({
             <div
               key={index}
               className={cn(
-                'absolute transition-all duration-300',
-                isShuffling && 'animate-bounce'
+                "absolute transition-all duration-300",
+                isShuffling && "animate-bounce"
               )}
               style={{
-                transform: `translate(calc(-50% + ${index * 2}px), ${index * -2}px)`,
+                transform: `translate(calc(-50% + ${index * 2}px), ${
+                  index * -2
+                }px)`,
                 zIndex: 5 - index,
-                left: '50%',
+                left: "50%",
               }}
             >
               <TarotCardComponent
                 showBack
                 size="lg"
                 className={cn(
-                  index === 0 && canAddCard() && 'hover:scale-110 cursor-pointer',
-                  index !== 0 && 'pointer-events-none'
+                  index === 0 &&
+                    canAddCard() &&
+                    "hover:scale-110 cursor-pointer",
+                  index !== 0 && "pointer-events-none"
                 )}
-                onClick={index === 0 && canAddCard() ? () => {
-                  if (shuffledCards.length > 0) {
-                    handleCardClick(shuffledCards[0]);
-                  }
-                } : undefined}
+                onClick={
+                  index === 0 && canAddCard()
+                    ? () => {
+                        if (shuffledCards.length > 0) {
+                          handleCardClick(shuffledCards[0]);
+                        }
+                      }
+                    : undefined
+                }
               />
             </div>
           ))}
         </div>
+      </div>
+
+      {/* 抽牌說明 */}
+      <div className="text-center text-blue-200 max-w-md mx-auto">
+        <p className="text-sm">
+          {canAddCard() ? "點擊牌堆抽取一張牌" : "已達到最大選牌數量"}
+        </p>
       </div>
 
       {/* 控制按鈕 */}
@@ -113,24 +128,14 @@ export function CardDeck({
           onClick={shuffleDeck}
           disabled={isShuffling}
           className={cn(
-            'px-6 py-2 rounded-lg font-medium transition-all shadow-lg',
-            'bg-blue-600 text-white hover:bg-blue-700',
-            'disabled:opacity-50 disabled:cursor-not-allowed',
-            isShuffling && 'animate-pulse'
+            "px-6 py-2 rounded-lg font-medium transition-all shadow-lg",
+            "bg-blue-600 text-white hover:bg-blue-700",
+            "disabled:opacity-50 disabled:cursor-not-allowed",
+            isShuffling && "animate-pulse"
           )}
         >
-          {isShuffling ? '洗牌中...' : '重新洗牌'}
+          {isShuffling ? "洗牌中..." : "重新洗牌"}
         </button>
-      </div>
-
-      {/* 抽牌說明 */}
-      <div className="text-center text-blue-200 max-w-md mx-auto">
-        <p className="text-sm">
-          {canAddCard() 
-            ? '點擊牌堆抽取一張牌' 
-            : '已達到最大選牌數量'
-          }
-        </p>
       </div>
     </div>
   );
