@@ -2,9 +2,10 @@
 
 import { CardDeck } from './CardDeck';
 import { useTarotStore } from '@/store/tarotStore';
+import { TarotCard } from '@/data/tarotCards';
 
 interface SelectionViewProps {
-  onCardSelect: (card: any, isReversed: boolean) => void;
+  onCardSelect: (card: TarotCard, isReversed: boolean) => void;
   onBackToSetup: () => void;
   onViewResult: () => void;
 }
@@ -20,7 +21,6 @@ export function SelectionView({
 }: SelectionViewProps) {
   const {
     currentQuestion,
-    selectedCards,
     isReadingComplete,
     getMaxCards
   } = useTarotStore();

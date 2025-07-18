@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useTarotStore } from '@/store/tarotStore';
+import { TarotCard } from '@/data/tarotCards';
 import { SetupViewNew } from '@/components/SetupViewNew';
 import { SelectionViewNew } from '@/components/SelectionViewNew';
 import { ResultViewNew } from '@/components/ResultViewNew';
@@ -27,7 +28,7 @@ export default function Home() {
    * @param card - 被選中的塔羅牌
    * @param isReversed - 是否為逆位
    */
-  const handleCardSelect = (card: any, isReversed: boolean) => {
+  const handleCardSelect = (card: TarotCard, isReversed: boolean) => {
     const nextPosition = selectedCards.length;
     selectCard(card, nextPosition, isReversed);
     

@@ -13,7 +13,7 @@ interface SpreadLayoutProps {
  * 支援單張牌、三張牌和凱爾特十字牌陣
  */
 export function SpreadLayout({ className }: SpreadLayoutProps) {
-  const { spreadType, selectedCards, removeCard } = useTarotStore();
+  const { spreadType, selectedCards } = useTarotStore();
   
   const positions = spreadPositions[spreadType];
 

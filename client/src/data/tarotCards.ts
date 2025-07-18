@@ -27,7 +27,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '愚者代表新的開始和無限的可能性。踏出舒適圈，勇敢追求夢想。',
     keywords: ['開始', '冒險', '純真', '自由'],
-    imageUrl: '/cards/major/fool.jpg'
+    imageUrl: '/cards/fool.jpeg'
   },
   {
     id: 'magician',
@@ -41,7 +41,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '魔術師象徵著將想法轉化為現實的能力。掌握自己的命運。',
     keywords: ['意志', '創造', '技能', '實現'],
-    imageUrl: '/cards/major/magician.jpg'
+    imageUrl: '/cards/magician.jpeg'
   },
   {
     id: 'high-priestess',
@@ -55,7 +55,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '女祭司代表內在智慧和直覺。相信你的第六感和內心聲音。',
     keywords: ['直覺', '神秘', '智慧', '靈性'],
-    imageUrl: '/cards/major/high-priestess.jpg'
+    imageUrl: '/cards/high-priestess.jpeg'
   },
   {
     id: 'empress',
@@ -69,7 +69,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '皇后象徵豐盛和創造力。享受生活的美好，培養創意才能。',
     keywords: ['豐盛', '創造', '母性', '美感'],
-    imageUrl: '/cards/major/empress.jpg'
+    imageUrl: '/cards/empress.jpeg'
   },
   {
     id: 'emperor',
@@ -83,7 +83,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '皇帝代表權威和秩序。建立穩固的基礎，承擔領導責任。',
     keywords: ['權威', '結構', '領導', '穩定'],
-    imageUrl: '/cards/major/emperor.jpg'
+    imageUrl: '/cards/emperor.jpeg'
   },
   {
     id: 'hierophant',
@@ -97,7 +97,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '教皇代表傳統智慧和精神指導。尋求知識和導師的建議。',
     keywords: ['傳統', '指導', '宗教', '教育'],
-    imageUrl: '/cards/major/hierophant.jpg'
+    imageUrl: '/cards/hierophant.jpeg'
   },
   {
     id: 'lovers',
@@ -111,7 +111,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '戀人代表愛情和重要的人生選擇。追隨內心，做出正確決定。',
     keywords: ['愛情', '選擇', '關係', '和諧'],
-    imageUrl: '/cards/major/lovers.jpg'
+    imageUrl: '/cards/lovers.jpeg'
   },
   {
     id: 'chariot',
@@ -125,7 +125,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '戰車象徵勝利和自我控制。保持專注，朝目標前進。',
     keywords: ['勝利', '控制', '決心', '成功'],
-    imageUrl: '/cards/major/chariot.jpg'
+    imageUrl: '/cards/chariot.jpeg'
   },
   {
     id: 'strength',
@@ -139,7 +139,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '力量代表內在的勇氣和溫柔的力量。以愛征服恐懼。',
     keywords: ['力量', '勇氣', '耐心', '自信'],
-    imageUrl: '/cards/major/strength.jpg'
+    imageUrl: '/cards/strength.jpeg'
   },
   {
     id: 'hermit',
@@ -153,7 +153,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '隱者代表內在的智慧和自我反省。獨處時光找到答案。',
     keywords: ['內省', '智慧', '指導', '尋找'],
-    imageUrl: '/cards/major/hermit.jpg'
+    imageUrl: '/cards/hermit.jpeg'
   },
   {
     id: 'wheel-of-fortune',
@@ -167,7 +167,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '命運之輪象徵生命的起伏變化。接受變化，把握機會。',
     keywords: ['命運', '變化', '機會', '循環'],
-    imageUrl: '/cards/major/wheel-of-fortune.jpg'
+    imageUrl: '/cards/fortune-wheel.jpeg'
   },
   {
     id: 'justice',
@@ -181,7 +181,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '正義代表公平和道德平衡。做出公正的判斷和決定。',
     keywords: ['正義', '平衡', '公平', '真理'],
-    imageUrl: '/cards/major/justice.jpg'
+    imageUrl: '/cards/justice.jpeg'
   },
   {
     id: 'hanged-man',
@@ -195,7 +195,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '倒吊人代表犧牲和等待的智慧。有時停下來反思更重要。',
     keywords: ['犧牲', '等待', '放下', '觀點'],
-    imageUrl: '/cards/major/hanged-man.jpg'
+    imageUrl: '/cards/hanged-man.jpeg'
   },
   {
     id: 'death',
@@ -209,7 +209,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '死神代表結束和新的開始。舊的必須死去，新的才能誕生。',
     keywords: ['結束', '轉變', '重生', '變化'],
-    imageUrl: '/cards/major/death.jpg'
+    imageUrl: '/cards/death.jpeg'
   },
   {
     id: 'temperance',
@@ -223,7 +223,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '節制象徵平衡和中庸之道。在極端中找到和諧。',
     keywords: ['平衡', '節制', '和諧', '耐心'],
-    imageUrl: '/cards/major/temperance.jpg'
+    imageUrl: '/cards/temperance.jpeg'
   },
   {
     id: 'devil',
@@ -237,7 +237,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '惡魔代表束縛和誘惑。認識自己的陰影，才能獲得真正自由。',
     keywords: ['束縛', '誘惑', '物質', '依賴'],
-    imageUrl: '/cards/major/devil.jpg'
+    imageUrl: '/cards/devil.jpeg'
   },
   {
     id: 'tower',
@@ -251,7 +251,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '塔代表突然的變化和舊結構的崩塌。破壞帶來新的可能。',
     keywords: ['變化', '破壞', '覺醒', '震撼'],
-    imageUrl: '/cards/major/tower.jpg'
+    imageUrl: '/cards/tower.jpeg'
   },
   {
     id: 'star',
@@ -265,7 +265,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '星星象徵希望和指引。即使在黑暗中，也有光明指路。',
     keywords: ['希望', '信心', '指引', '靈感'],
-    imageUrl: '/cards/major/star.jpg'
+    imageUrl: '/cards/stars.jpeg'
   },
   {
     id: 'moon',
@@ -279,7 +279,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '月亮代表潛意識和隱藏的恐懼。面對內心的陰影，尋找真相。',
     keywords: ['幻象', '潛意識', '恐懼', '直覺'],
-    imageUrl: '/cards/major/moon.jpg'
+    imageUrl: '/cards/moon.jpeg'
   },
   {
     id: 'sun',
@@ -293,7 +293,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '太陽象徵快樂和成功。生命中的美好時光即將到來。',
     keywords: ['快樂', '成功', '活力', '能量'],
-    imageUrl: '/cards/major/sun.jpg'
+    imageUrl: '/cards/sun.jpeg'
   },
   {
     id: 'judgement',
@@ -307,7 +307,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '審判代表精神覺醒和重生。寬恕過去，迎接新生。',
     keywords: ['重生', '覺醒', '寬恕', '內省'],
-    imageUrl: '/cards/major/judgement.jpg'
+    imageUrl: '/cards/judgement.jpeg'
   },
   {
     id: 'world',
@@ -321,7 +321,7 @@ const majorArcana: TarotCard[] = [
     },
     description: '世界代表完成和圓滿。一個循環的結束，也是新開始的準備。',
     keywords: ['完成', '成就', '整合', '成功'],
-    imageUrl: '/cards/major/world.jpg'
+    imageUrl: '/cards/world.jpeg'
   }
 ];
 
@@ -339,7 +339,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃一代表情感的新開始和心靈的滿足。',
     keywords: ['新愛情', '靈感', '情感', '開始'],
-    imageUrl: '/cards/cups/ace-cups.jpg'
+    imageUrl: '/cards/ace-cups.jpeg'
   },
   {
     id: 'two-cups',
@@ -353,7 +353,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃二象徵愛情和深厚的情感連結。',
     keywords: ['愛情', '夥伴', '和諧', '連結'],
-    imageUrl: '/cards/cups/two-cups.jpg'
+    imageUrl: '/cards/two-cups.jpeg'
   },
   {
     id: 'three-cups',
@@ -367,7 +367,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃三代表友誼和團體的歡樂時光。',
     keywords: ['友誼', '慶祝', '團體', '歡樂'],
-    imageUrl: '/cards/cups/three-cups.jpg'
+    imageUrl: '/cards/three-cups.jpeg'
   },
   {
     id: 'four-cups',
@@ -381,7 +381,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃四提醒我們不要錯過眼前的機會。',
     keywords: ['冷漠', '沉思', '機會', '不滿'],
-    imageUrl: '/cards/cups/four-cups.jpg'
+    imageUrl: '/cards/four-cups.jpeg'
   },
   {
     id: 'five-cups',
@@ -395,7 +395,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃五代表失望，但也提醒我們還有希望存在。',
     keywords: ['失望', '悲傷', '遺憾', '失落'],
-    imageUrl: '/cards/cups/five-cups.jpg'
+    imageUrl: '/cards/five-cups.jpeg'
   },
   {
     id: 'six-cups',
@@ -409,7 +409,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃六象徵懷舊和童年的純真回憶。',
     keywords: ['懷舊', '童年', '純真', '回憶'],
-    imageUrl: '/cards/cups/six-cups.jpg'
+    imageUrl: '/cards/six-cups.jpeg'
   },
   {
     id: 'seven-cups',
@@ -423,7 +423,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃七代表太多選擇帶來的困擾和幻想。',
     keywords: ['選擇', '幻想', '願望', '困惑'],
-    imageUrl: '/cards/cups/seven-cups.jpg'
+    imageUrl: '/cards/seven-cups.jpeg'
   },
   {
     id: 'eight-cups',
@@ -437,7 +437,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃八象徵放下過去，尋找新的道路。',
     keywords: ['放棄', '離開', '尋找', '前進'],
-    imageUrl: '/cards/cups/eight-cups.jpg'
+    imageUrl: '/cards/eight-cups.jpeg'
   },
   {
     id: 'nine-cups',
@@ -451,7 +451,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃九代表願望實現和內心的滿足。',
     keywords: ['滿足', '願望', '快樂', '成功'],
-    imageUrl: '/cards/cups/nine-cups.jpg'
+    imageUrl: '/cards/nine-cups.jpeg'
   },
   {
     id: 'ten-cups',
@@ -465,7 +465,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃十象徵家庭幸福和情感的圓滿。',
     keywords: ['家庭', '幸福', '和諧', '滿足'],
-    imageUrl: '/cards/cups/ten-cups.jpg'
+    imageUrl: '/cards/ten-cups.jpeg'
   },
   {
     id: 'page-cups',
@@ -479,7 +479,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃侍者代表創意靈感和情感的新開始。',
     keywords: ['創意', '直覺', '藝術', '學習'],
-    imageUrl: '/cards/cups/page-cups.jpg'
+    imageUrl: '/cards/page-cups.jpeg'
   },
   {
     id: 'knight-cups',
@@ -493,7 +493,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃騎士象徵浪漫的追求和情感的行動。',
     keywords: ['浪漫', '魅力', '創意', '理想'],
-    imageUrl: '/cards/cups/knight-cups.jpg'
+    imageUrl: '/cards/knight-cups.jpeg'
   },
   {
     id: 'queen-cups',
@@ -507,7 +507,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃皇后代表情感智慧和深刻的直覺能力。',
     keywords: ['直覺', '同情', '智慧', '治癒'],
-    imageUrl: '/cards/cups/queen-cups.jpg'
+    imageUrl: '/cards/queen-cups.jpeg'
   },
   {
     id: 'king-cups',
@@ -521,7 +521,7 @@ const cups: TarotCard[] = [
     },
     description: '聖盃國王象徵情感的成熟和內在的平衡。',
     keywords: ['平衡', '同情', '外交', '智慧'],
-    imageUrl: '/cards/cups/king-cups.jpg'
+    imageUrl: '/cards/king-cups.jpeg'
   }
 ];
 
@@ -539,7 +539,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣一代表物質世界的新機會和財富的開始。',
     keywords: ['機會', '財富', '成功', '實現'],
-    imageUrl: '/cards/pentacles/ace-pentacles.jpg'
+    imageUrl: '/cards/ace-pentacles.jpeg'
   },
   {
     id: 'two-pentacles',
@@ -553,7 +553,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣二象徵在多重責任中保持平衡的能力。',
     keywords: ['平衡', '適應', '管理', '靈活'],
-    imageUrl: '/cards/pentacles/two-pentacles.jpg'
+    imageUrl: '/cards/two-pentacles.jpeg'
   },
   {
     id: 'three-pentacles',
@@ -567,7 +567,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣三代表團隊合作和技能的學習發展。',
     keywords: ['團隊', '技能', '學習', '合作'],
-    imageUrl: '/cards/pentacles/three-pentacles.jpg'
+    imageUrl: '/cards/three-pentacles.jpeg'
   },
   {
     id: 'four-pentacles',
@@ -581,7 +581,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣四象徵對安全和物質的強烈需求。',
     keywords: ['安全', '控制', '保守', '穩定'],
-    imageUrl: '/cards/pentacles/four-pentacles.jpg'
+    imageUrl: '/cards/four-pentacles.jpeg'
   },
   {
     id: 'five-pentacles',
@@ -595,7 +595,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣五代表物質上的困難和挑戰時期。',
     keywords: ['困難', '貧窮', '健康', '孤立'],
-    imageUrl: '/cards/pentacles/five-pentacles.jpg'
+    imageUrl: '/cards/five-pentacles.jpeg'
   },
   {
     id: 'six-pentacles',
@@ -609,7 +609,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣六象徵慷慨的給予和接受的平衡。',
     keywords: ['慷慨', '分享', '公平', '給予'],
-    imageUrl: '/cards/pentacles/six-pentacles.jpg'
+    imageUrl: '/cards/six-pentacles.jpeg'
   },
   {
     id: 'seven-pentacles',
@@ -623,7 +623,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣七代表耐心等待努力成果的時期。',
     keywords: ['耐心', '投資', '規劃', '評估'],
-    imageUrl: '/cards/pentacles/seven-pentacles.jpg'
+    imageUrl: '/cards/seven-pentacles.jpeg'
   },
   {
     id: 'eight-pentacles',
@@ -637,7 +637,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣八象徵透過努力工作來完善技能。',
     keywords: ['技能', '努力', '專注', '學習'],
-    imageUrl: '/cards/pentacles/eight-pentacles.jpg'
+    imageUrl: '/cards/eight-pentacles.jpeg'
   },
   {
     id: 'nine-pentacles',
@@ -651,7 +651,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣九代表透過努力獲得的獨立和成功。',
     keywords: ['獨立', '成功', '奢華', '自足'],
-    imageUrl: '/cards/pentacles/nine-pentacles.jpg'
+    imageUrl: '/cards/nine-pentacles.jpeg'
   },
   {
     id: 'ten-pentacles',
@@ -665,7 +665,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣十象徵財富的累積和家族的傳承。',
     keywords: ['財富', '家族', '傳承', '安全'],
-    imageUrl: '/cards/pentacles/ten-pentacles.jpg'
+    imageUrl: '/cards/ten-pentacles.jpeg'
   },
   {
     id: 'page-pentacles',
@@ -679,7 +679,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣侍者代表學習新技能和實際計劃的開始。',
     keywords: ['學習', '計劃', '實際', '專注'],
-    imageUrl: '/cards/pentacles/page-pentacles.jpg'
+    imageUrl: '/cards/page-pentacles.jpeg'
   },
   {
     id: 'knight-pentacles',
@@ -693,7 +693,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣騎士象徵穩定可靠的努力和責任感。',
     keywords: ['勤奮', '可靠', '努力', '責任'],
-    imageUrl: '/cards/pentacles/knight-pentacles.jpg'
+    imageUrl: '/cards/knight-pentacles.jpeg'
   },
   {
     id: 'queen-pentacles',
@@ -707,7 +707,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣皇后代表實用智慧和養育他人的能力。',
     keywords: ['實用', '安全', '養育', '豐盛'],
-    imageUrl: '/cards/pentacles/queen-pentacles.jpg'
+    imageUrl: '/cards/queen-pentacles.jpeg'
   },
   {
     id: 'king-pentacles',
@@ -721,7 +721,7 @@ const pentacles: TarotCard[] = [
     },
     description: '金幣國王象徵物質世界的成功和領導能力。',
     keywords: ['成功', '領導', '財務', '豐盛'],
-    imageUrl: '/cards/pentacles/king-pentacles.jpg'
+    imageUrl: '/cards/king-pentacles.jpeg'
   }
 ];
 
@@ -739,7 +739,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍一象徵清晰的思維和新的想法突破。',
     keywords: ['思考', '想法', '突破', '真理'],
-    imageUrl: '/cards/swords/ace-swords.jpg'
+    imageUrl: '/cards/ace-swords.jpeg'
   },
   {
     id: 'two-swords',
@@ -753,7 +753,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍二代表面臨困難選擇時的猶豫不決。',
     keywords: ['決定', '僵局', '迴避', '兩難'],
-    imageUrl: '/cards/swords/two-swords.jpg'
+    imageUrl: '/cards/two-swords.jpeg'
   },
   {
     id: 'three-swords',
@@ -767,7 +767,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍三象徵心靈的痛苦和情感的創傷。',
     keywords: ['心痛', '痛苦', '悲傷', '背叛'],
-    imageUrl: '/cards/swords/three-swords.jpg'
+    imageUrl: '/cards/three-swords.jpeg'
   },
   {
     id: 'four-swords',
@@ -781,7 +781,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍四代表需要休息和恢復的時期。',
     keywords: ['休息', '沉思', '恢復', '和平'],
-    imageUrl: '/cards/swords/four-swords.jpg'
+    imageUrl: '/cards/four-swords.jpeg'
   },
   {
     id: 'five-swords',
@@ -795,7 +795,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍五象徵衝突和不光彩的勝利。',
     keywords: ['衝突', '失敗', '挫敗', '敵意'],
-    imageUrl: '/cards/swords/five-swords.jpg'
+    imageUrl: '/cards/five-swords.jpeg'
   },
   {
     id: 'six-swords',
@@ -809,7 +809,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍六代表從困境中走向平靜的過渡期。',
     keywords: ['過渡', '移動', '離開', '進步'],
-    imageUrl: '/cards/swords/six-swords.jpg'
+    imageUrl: '/cards/six-swords.jpeg'
   },
   {
     id: 'seven-swords',
@@ -823,7 +823,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍七警告欺騙和不誠實的行為。',
     keywords: ['欺騙', '策略', '偷竊', '逃避'],
-    imageUrl: '/cards/swords/seven-swords.jpg'
+    imageUrl: '/cards/seven-swords.jpeg'
   },
   {
     id: 'eight-swords',
@@ -837,7 +837,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍八象徵感到被困但其實可以自由的狀態。',
     keywords: ['受困', '限制', '無力', '束縛'],
-    imageUrl: '/cards/swords/eight-swords.jpg'
+    imageUrl: '/cards/eight-swords.jpeg'
   },
   {
     id: 'nine-swords',
@@ -851,7 +851,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍九代表極度的焦慮和內心的痛苦。',
     keywords: ['焦慮', '恐懼', '噩夢', '絕望'],
-    imageUrl: '/cards/swords/nine-swords.jpg'
+    imageUrl: '/cards/nine-swords.jpeg'
   },
   {
     id: 'ten-swords',
@@ -865,7 +865,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍十象徵痛苦的結束和新開始的可能。',
     keywords: ['結束', '背叛', '痛苦', '失敗'],
-    imageUrl: '/cards/swords/ten-swords.jpg'
+    imageUrl: '/cards/ten-swords.jpeg'
   },
   {
     id: 'page-swords',
@@ -879,7 +879,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍侍者代表新想法和求知的渴望。',
     keywords: ['好奇', '想法', '警覺', '溝通'],
-    imageUrl: '/cards/swords/page-swords.jpg'
+    imageUrl: '/cards/page-swords.jpeg'
   },
   {
     id: 'knight-swords',
@@ -893,7 +893,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍騎士象徵快速的行動和強烈的決心。',
     keywords: ['行動', '衝動', '雄心', '勇敢'],
-    imageUrl: '/cards/swords/knight-swords.jpg'
+    imageUrl: '/cards/knight-swords.jpeg'
   },
   {
     id: 'queen-swords',
@@ -907,7 +907,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍皇后代表智慧的判斷和清晰的溝通。',
     keywords: ['智慧', '獨立', '清晰', '公正'],
-    imageUrl: '/cards/swords/queen-swords.jpg'
+    imageUrl: '/cards/queen-swords.jpeg'
   },
   {
     id: 'king-swords',
@@ -921,7 +921,7 @@ const swords: TarotCard[] = [
     },
     description: '寶劍國王象徵理性的領導和智慧的權威。',
     keywords: ['權威', '智慧', '理性', '公正'],
-    imageUrl: '/cards/swords/king-swords.jpg'
+    imageUrl: '/cards/king-swords.jpeg'
   }
 ];
 
@@ -939,7 +939,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖一代表創意的火花和新專案的開始。',
     keywords: ['靈感', '專案', '成長', '潛力'],
-    imageUrl: '/cards/wands/ace-wands.jpg'
+    imageUrl: '/cards/ace-wands.jpeg'
   },
   {
     id: 'two-wands',
@@ -953,7 +953,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖二象徵個人力量和未來規劃的重要性。',
     keywords: ['規劃', '進步', '力量', '控制'],
-    imageUrl: '/cards/wands/two-wands.jpg'
+    imageUrl: '/cards/two-wands.jpeg'
   },
   {
     id: 'three-wands',
@@ -967,7 +967,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖三代表展望未來和等待機會的到來。',
     keywords: ['展望', '領導', '遠見', '機會'],
-    imageUrl: '/cards/wands/three-wands.jpg'
+    imageUrl: '/cards/three-wands.jpeg'
   },
   {
     id: 'four-wands',
@@ -981,7 +981,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖四象徵慶祝成就和家庭和諧。',
     keywords: ['慶祝', '和諧', '家庭', '穩定'],
-    imageUrl: '/cards/wands/four-wands.jpg'
+    imageUrl: '/cards/four-wands.jpeg'
   },
   {
     id: 'five-wands',
@@ -995,7 +995,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖五代表競爭和意見分歧帶來的挑戰。',
     keywords: ['競爭', '衝突', '挑戰', '緊張'],
-    imageUrl: '/cards/wands/five-wands.jpg'
+    imageUrl: '/cards/five-wands.jpeg'
   },
   {
     id: 'six-wands',
@@ -1009,7 +1009,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖六象徵勝利和公眾的認可。',
     keywords: ['勝利', '成功', '認可', '自信'],
-    imageUrl: '/cards/wands/six-wands.jpg'
+    imageUrl: '/cards/six-wands.jpeg'
   },
   {
     id: 'seven-wands',
@@ -1023,7 +1023,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖七代表面對挑戰時的堅持和防守。',
     keywords: ['防守', '挑戰', '毅力', '堅持'],
-    imageUrl: '/cards/wands/seven-wands.jpg'
+    imageUrl: '/cards/seven-wands.jpeg'
   },
   {
     id: 'eight-wands',
@@ -1037,7 +1037,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖八象徵快速的進展和變化。',
     keywords: ['快速', '進展', '變化', '溝通'],
-    imageUrl: '/cards/wands/eight-wands.jpg'
+    imageUrl: '/cards/eight-wands.jpeg'
   },
   {
     id: 'nine-wands',
@@ -1051,7 +1051,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖九代表在困難中堅持和最後的努力。',
     keywords: ['恢復', '毅力', '防守', '警覺'],
-    imageUrl: '/cards/wands/nine-wands.jpg'
+    imageUrl: '/cards/nine-wands.jpeg'
   },
   {
     id: 'ten-wands',
@@ -1065,7 +1065,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖十象徵承擔重責和即將完成的努力。',
     keywords: ['負擔', '責任', '努力', '完成'],
-    imageUrl: '/cards/wands/ten-wands.jpg'
+    imageUrl: '/cards/ten-wands.jpeg'
   },
   {
     id: 'page-wands',
@@ -1079,7 +1079,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖侍者代表新的靈感和探索的精神。',
     keywords: ['靈感', '發現', '自由', '探索'],
-    imageUrl: '/cards/wands/page-wands.jpg'
+    imageUrl: '/cards/page-wands.jpeg'
   },
   {
     id: 'knight-wands',
@@ -1093,7 +1093,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖騎士象徵充滿熱情的行動和冒險精神。',
     keywords: ['行動', '冒險', '熱情', '進步'],
-    imageUrl: '/cards/wands/knight-wands.jpg'
+    imageUrl: '/cards/knight-wands.jpeg'
   },
   {
     id: 'queen-wands',
@@ -1107,7 +1107,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖皇后代表自信的領導和充滿活力的性格。',
     keywords: ['自信', '活力', '獨立', '決心'],
-    imageUrl: '/cards/wands/queen-wands.jpg'
+    imageUrl: '/cards/queen-wands.jpeg'
   },
   {
     id: 'king-wands',
@@ -1121,7 +1121,7 @@ const wands: TarotCard[] = [
     },
     description: '權杖國王象徵創業精神和天生的領導能力。',
     keywords: ['領導', '遠見', '創業', '影響'],
-    imageUrl: '/cards/wands/king-wands.jpg'
+    imageUrl: '/cards/king-wands.jpeg'
   }
 ];
 

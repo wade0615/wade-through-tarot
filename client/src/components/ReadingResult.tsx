@@ -3,6 +3,7 @@
 import { TarotCardComponent } from './TarotCard';
 import { SpreadLayout } from './SpreadLayout';
 import { useTarotStore } from '@/store/tarotStore';
+import { TarotCard } from '@/data/tarotCards';
 import { spreadPositions, formatDate, cn } from '@/utils/helpers';
 
 interface ReadingResultProps {
@@ -218,7 +219,7 @@ export function ReadingResult({
  * @param spreadType - 牌陣類型
  * @returns 整體建議文字
  */
-function generateOverallAdvice(selectedCards: any[], spreadType: string): string {
+function generateOverallAdvice(selectedCards: Array<{card: TarotCard, isReversed: boolean}>, spreadType: string): string {
   if (selectedCards.length === 0) return '';
 
   const hasReversed = selectedCards.some(sc => sc.isReversed);

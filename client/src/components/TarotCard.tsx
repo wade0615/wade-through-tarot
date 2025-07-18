@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { TarotCard } from '@/data/tarotCards';
 import { cn } from '@/utils/helpers';
 
@@ -50,48 +51,59 @@ export function TarotCardComponent({
       </div>
     </div>
   ) : (
-    // 牌面
+    // 牌面 - 使用圖片
     <div className={cn(
-      'w-full h-full rounded-lg border-2',
-      'bg-gradient-to-br from-amber-50 to-orange-100',
-      'flex flex-col items-center justify-between p-2',
-      'shadow-lg relative',
-      isReversed && 'rotate-180',
-      card.suit === 'major' && 'border-gold-400 bg-gradient-to-br from-yellow-50 to-amber-100',
-      card.suit === 'cups' && 'border-blue-400 bg-gradient-to-br from-blue-50 to-cyan-100',
-      card.suit === 'pentacles' && 'border-green-400 bg-gradient-to-br from-green-50 to-emerald-100',
-      card.suit === 'swords' && 'border-gray-400 bg-gradient-to-br from-gray-50 to-slate-100',
-      card.suit === 'wands' && 'border-red-400 bg-gradient-to-br from-red-50 to-orange-100'
+      'w-full h-full rounded-lg border-2 border-gray-300',
+      'shadow-lg relative overflow-hidden',
+      isReversed && 'rotate-180'
     )}>
-      {/* 牌名 */}
-      <div className="text-center">
-        <div className="text-xs font-bold text-gray-800 leading-tight">
-          {card.name}
+      {/* 塔羅牌圖片 */}
+      <Image
+        src={card.imageUrl}
+        alt={`${card.name} (${card.nameEn})`}
+        fill
+        className="object-cover"
+        onError={() => {
+          // 如果圖片載入失敗，顯示備用的 emoji 版本
+          const fallback = document.querySelector('.fallback-content') as HTMLElement;
+          if (fallback) {
+            fallback.style.display = 'flex';
+          }
+        }}
+      />
+      
+      {/* 備用內容 - 當圖片載入失敗時顯示 */}
+      <div className="fallback-content hidden absolute inset-0 bg-gradient-to-br from-amber-50 to-orange-100 flex flex-col items-center justify-between p-2">
+        {/* 牌名 */}
+        <div className="text-center">
+          <div className="text-xs font-bold text-gray-800 leading-tight">
+            {card.name}
+          </div>
+          <div className="text-xs text-gray-600 leading-tight">
+            {card.nameEn}
+          </div>
         </div>
-        <div className="text-xs text-gray-600 leading-tight">
-          {card.nameEn}
-        </div>
-      </div>
 
-      {/* 牌面圖案 - 使用 emoji 作為臨時圖案 */}
-      <div className="flex-1 flex items-center justify-center">
-        <div className="text-3xl">
-          {card.suit === 'major' && getEmojiBySuit(card.name)}
-          {card.suit === 'cups' && '🏆'}
-          {card.suit === 'pentacles' && '🪙'}
-          {card.suit === 'swords' && '⚔️'}
-          {card.suit === 'wands' && '🪄'}
+        {/* 牌面圖案 - 使用 emoji 作為備用 */}
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-3xl">
+            {card.suit === 'major' && getEmojiBySuit(card.name)}
+            {card.suit === 'cups' && '🏆'}
+            {card.suit === 'pentacles' && '🪙'}
+            {card.suit === 'swords' && '⚔️'}
+            {card.suit === 'wands' && '🪄'}
+          </div>
         </div>
-      </div>
 
-      {/* 牌號或花色 */}
-      <div className="text-xs text-gray-600">
-        {card.number !== undefined ? card.number : card.suit}
+        {/* 牌號或花色 */}
+        <div className="text-xs text-gray-600">
+          {card.number !== undefined ? card.number : card.suit}
+        </div>
       </div>
 
       {/* 逆位指示器 */}
       {isReversed && (
-        <div className="absolute top-1 right-1 text-red-500 text-xs">
+        <div className="absolute top-1 right-1 text-red-500 text-xs bg-white bg-opacity-80 px-1 rounded">
           ↻
         </div>
       )}

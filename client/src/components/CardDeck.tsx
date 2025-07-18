@@ -61,9 +61,9 @@ export function CardDeck({
    * @param cardId - 牌卡ID
    * @returns 是否已被選擇
    */
-  const isCardSelected = (cardId: string) => {
-    return selectedCards.some(sc => sc.card.id === cardId);
-  };
+  // const isCardSelected = (cardId: string) => {
+  //   return selectedCards.some(sc => sc.card.id === cardId);
+  // };
 
   return (
     <div className={cn('space-y-4', className)}>
