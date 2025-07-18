@@ -19,7 +19,7 @@ export function CardDeck({
 }: CardDeckProps) {
   const [shuffledCards, setShuffledCards] = useState<TarotCard[]>([]);
   const [isShuffling, setIsShuffling] = useState(false);
-  const { selectedCards, canAddCard } = useTarotStore();
+  const { selectedCards, canAddCard, clearSelection } = useTarotStore();
 
   useEffect(() => {
     shuffleDeck();
@@ -28,6 +28,9 @@ export function CardDeck({
   const shuffleDeck = () => {
     setIsShuffling(true);
     setTimeout(() => {
+      // 清空已選擇的牌
+      clearSelection();
+      // 重新洗牌，包含所有牌
       setShuffledCards(shuffleArray(allTarotCards));
       setIsShuffling(false);
     }, 1000);
@@ -47,22 +50,6 @@ export function CardDeck({
 
   return (
     <div className={cn('space-y-4', className)}>
-      {/* 控制按鈕 */}
-      <div className="flex justify-center space-x-4">
-        <button
-          onClick={shuffleDeck}
-          disabled={isShuffling}
-          className={cn(
-            'px-6 py-2 rounded-lg font-medium transition-all shadow-lg',
-            'bg-blue-600 text-white hover:bg-blue-700',
-            'disabled:opacity-50 disabled:cursor-not-allowed',
-            isShuffling && 'animate-pulse'
-          )}
-        >
-          {isShuffling ? '洗牌中...' : '重新洗牌'}
-        </button>
-      </div>
-
       {/* 牌組展示 */}
       <div className="text-center text-blue-200 mb-[64]">
         已選擇 {selectedCards.length} / {maxSelection} 張牌
@@ -103,6 +90,22 @@ export function CardDeck({
         </div>
       </div>
 
+      {/* 控制按鈕 */}
+      <div className="flex justify-center space-x-4">
+        <button
+          onClick={shuffleDeck}
+          disabled={isShuffling}
+          className={cn(
+            'px-6 py-2 rounded-lg font-medium transition-all shadow-lg',
+            'bg-blue-600 text-white hover:bg-blue-700',
+            'disabled:opacity-50 disabled:cursor-not-allowed',
+            isShuffling && 'animate-pulse'
+          )}
+        >
+          {isShuffling ? '洗牌中...' : '重新洗牌'}
+        </button>
+      </div>
+
       {/* 抽牌說明 */}
       <div className="text-center text-blue-200 max-w-md mx-auto">
         <p className="text-sm">
@@ -112,28 +115,6 @@ export function CardDeck({
           }
         </p>
       </div>
-
-      {/* 可選：顯示部分牌面供選擇 */}
-      {/* <div className="mt-8">
-        <div className="text-center text-blue-100 font-medium mb-4">
-          或從下方選擇特定牌卡：
-        </div>
-        <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2 max-h-64 overflow-y-auto p-4 border border-slate-600 rounded-lg bg-slate-800/30 backdrop-blur-sm">
-          {shuffledCards.slice(0, 20).map((card) => (
-            <TarotCardComponent
-              key={card.id}
-              card={card}
-              size="sm"
-              isSelected={isCardSelected(card.id)}
-              onClick={() => canAddCard() && !isCardSelected(card.id) && handleCardClick(card)}
-              className={cn(
-                !canAddCard() && 'opacity-50 cursor-not-allowed',
-                isCardSelected(card.id) && 'opacity-50 cursor-not-allowed'
-              )}
-            />
-          ))}
-        </div>
-      </div> */}
     </div>
   );
 }

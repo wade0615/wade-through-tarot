@@ -124,9 +124,6 @@ export default function Home() {
         </p>
       </div>
 
-      {/* 牌陣佈局 */}
-      <SpreadLayout />
-
       {/* 選牌區域 */}
       {!isReadingComplete() && (
         <CardDeck

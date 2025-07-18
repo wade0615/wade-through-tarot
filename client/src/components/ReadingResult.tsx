@@ -1,6 +1,7 @@
 'use client';
 
 import { TarotCardComponent } from './TarotCard';
+import { SpreadLayout } from './SpreadLayout';
 import { useTarotStore } from '@/store/tarotStore';
 import { spreadPositions, formatDate, cn } from '@/utils/helpers';
 
@@ -71,6 +72,9 @@ export function ReadingResult({
           {formatDate(new Date())}
         </p>
       </div>
+
+      {/* 牌陣佈局 */}
+      <SpreadLayout />
 
       {/* 牌卡解釋 */}
       <div className="space-y-6">

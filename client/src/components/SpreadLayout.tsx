@@ -27,7 +27,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           card={getCardAtPosition(0)?.card}
           isReversed={getCardAtPosition(0)?.isReversed}
           size="lg"
-          onClick={() => getCardAtPosition(0) && removeCard(0)}
+          onClick={() => getCardAtPosition(0) }
           className={getCardAtPosition(0) ? 'cursor-pointer' : ''}
         />
         <div className="text-xs text-slate-400 max-w-32">
@@ -48,7 +48,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
             card={getCardAtPosition(index)?.card}
             isReversed={getCardAtPosition(index)?.isReversed}
             size="lg"
-            onClick={() => getCardAtPosition(index) && removeCard(index)}
+            onClick={() => getCardAtPosition(index)}
             className={getCardAtPosition(index) ? 'cursor-pointer' : ''}
           />
           <div className="text-xs text-slate-400 max-w-32">
@@ -69,7 +69,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           <TarotCardComponent
             card={getCardAtPosition(2)?.card}
             isReversed={getCardAtPosition(2)?.isReversed}
-            onClick={() => getCardAtPosition(2) && removeCard(2)}
+            onClick={() => getCardAtPosition(2) }
             className={getCardAtPosition(2) ? 'cursor-pointer' : ''}
           />
         </div>
@@ -80,7 +80,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           <TarotCardComponent
             card={getCardAtPosition(4)?.card}
             isReversed={getCardAtPosition(4)?.isReversed}
-            onClick={() => getCardAtPosition(4) && removeCard(4)}
+            onClick={() => getCardAtPosition(4) }
             className={getCardAtPosition(4) ? 'cursor-pointer' : ''}
           />
         </div>
@@ -91,7 +91,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           <TarotCardComponent
             card={getCardAtPosition(3)?.card}
             isReversed={getCardAtPosition(3)?.isReversed}
-            onClick={() => getCardAtPosition(3) && removeCard(3)}
+            onClick={() => getCardAtPosition(3) }
             className={getCardAtPosition(3) ? 'cursor-pointer' : ''}
           />
         </div>
@@ -102,7 +102,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           <TarotCardComponent
             card={getCardAtPosition(5)?.card}
             isReversed={getCardAtPosition(5)?.isReversed}
-            onClick={() => getCardAtPosition(5) && removeCard(5)}
+            onClick={() => getCardAtPosition(5) }
             className={getCardAtPosition(5) ? 'cursor-pointer' : ''}
           />
         </div>
@@ -113,7 +113,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           <TarotCardComponent
             card={getCardAtPosition(0)?.card}
             isReversed={getCardAtPosition(0)?.isReversed}
-            onClick={() => getCardAtPosition(0) && removeCard(0)}
+            onClick={() => getCardAtPosition(0) }
             className={getCardAtPosition(0) ? 'cursor-pointer' : ''}
           />
         </div>
@@ -124,7 +124,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           <TarotCardComponent
             card={getCardAtPosition(1)?.card}
             isReversed={getCardAtPosition(1)?.isReversed}
-            onClick={() => getCardAtPosition(1) && removeCard(1)}
+            onClick={() => getCardAtPosition(1) }
             className={cn(
               'opacity-90',
               getCardAtPosition(1) ? 'cursor-pointer' : ''
@@ -141,7 +141,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           <TarotCardComponent
             card={getCardAtPosition(9)?.card}
             isReversed={getCardAtPosition(9)?.isReversed}
-            onClick={() => getCardAtPosition(9) && removeCard(9)}
+            onClick={() => getCardAtPosition(9) }
             className={getCardAtPosition(9) ? 'cursor-pointer' : ''}
           />
         </div>
@@ -151,7 +151,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           <TarotCardComponent
             card={getCardAtPosition(8)?.card}
             isReversed={getCardAtPosition(8)?.isReversed}
-            onClick={() => getCardAtPosition(8) && removeCard(8)}
+            onClick={() => getCardAtPosition(8) }
             className={getCardAtPosition(8) ? 'cursor-pointer' : ''}
           />
         </div>
@@ -161,7 +161,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           <TarotCardComponent
             card={getCardAtPosition(7)?.card}
             isReversed={getCardAtPosition(7)?.isReversed}
-            onClick={() => getCardAtPosition(7) && removeCard(7)}
+            onClick={() => getCardAtPosition(7) }
             className={getCardAtPosition(7) ? 'cursor-pointer' : ''}
           />
         </div>
@@ -171,7 +171,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           <TarotCardComponent
             card={getCardAtPosition(6)?.card}
             isReversed={getCardAtPosition(6)?.isReversed}
-            onClick={() => getCardAtPosition(6) && removeCard(6)}
+            onClick={() => getCardAtPosition(6) }
             className={getCardAtPosition(6) ? 'cursor-pointer' : ''}
           />
         </div>
@@ -198,11 +198,6 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
         {spreadType === 'single' && renderSingleCardSpread()}
         {spreadType === 'three-card' && renderThreeCardSpread()}
         {spreadType === 'celtic-cross' && renderCelticCrossSpread()}
-      </div>
-
-      {/* 說明文字 */}
-      <div className="mt-6 text-center text-xs text-slate-400">
-        點擊已放置的牌可以移除
       </div>
     </div>
   );
