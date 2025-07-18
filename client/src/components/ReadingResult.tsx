@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { TarotCardComponent } from './TarotCard';
-import { SpreadLayout } from './SpreadLayout';
-import { useTarotStore } from '@/store/tarotStore';
-import { TarotCard } from '@/data/tarotCards';
-import { spreadPositions, formatDate, cn } from '@/utils/helpers';
+import { TarotCardComponent } from "./TarotCard";
+import { SpreadLayout } from "./SpreadLayout";
+import { useTarotStore } from "@/store/tarotStore";
+import { TarotCard } from "@/data/tarotCards";
+import { spreadPositions, formatDate, cn } from "@/utils/helpers";
 
 interface ReadingResultProps {
   onNewReading?: () => void;
@@ -16,17 +16,17 @@ interface ReadingResultProps {
  * 占卜結果組件 - 顯示完整的占卜結果和牌陣佈局
  * 包含牌卡解釋、位置說明和整體建議
  */
-export function ReadingResult({ 
-  onNewReading, 
+export function ReadingResult({
+  onNewReading,
   // onSaveReading,
-  className 
+  className,
 }: ReadingResultProps) {
-  const { 
-    selectedCards, 
-    currentQuestion, 
+  const {
+    selectedCards,
+    currentQuestion,
     spreadType,
     // saveReading,
-    clearSelection 
+    clearSelection,
   } = useTarotStore();
 
   const positions = spreadPositions[spreadType];
@@ -61,7 +61,7 @@ export function ReadingResult({
       card,
       isReversed,
       meanings,
-      position: position || { name: '位置', description: '' }
+      position: position || { name: "位置", description: "" },
     };
   };
 
@@ -70,24 +70,26 @@ export function ReadingResult({
   }
 
   return (
-    <div className={cn('space-y-6', className)}>
+    <div className={cn("space-y-6", className)}>
       {/* 標題和問題 */}
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-blue-100 mb-2">
-          占卜結果
-        </h2>
+        <h2 className="text-2xl font-bold text-blue-100 mb-2">占卜結果</h2>
         {currentQuestion && (
-          <p className="text-blue-200 italic">
-            「{currentQuestion}」
-          </p>
+          <p className="text-blue-200 italic">「{currentQuestion}」</p>
         )}
-        <p className="text-sm text-blue-300 mt-1">
-          {formatDate(new Date())}
-        </p>
+        <p className="text-sm text-blue-300 mt-1">{formatDate(new Date())}</p>
       </div>
 
       {/* 牌陣佈局 */}
       <SpreadLayout />
+
+      {/* 整體總結 */}
+      <div className="bg-gradient-to-r from-gray-800/80 to-blue-900/80 rounded-lg p-6 border border-blue-800/30">
+        <h3 className="text-lg font-semibold text-blue-100 mb-3">整體建議</h3>
+        <p className="text-blue-200 leading-relaxed">
+          {generateOverallAdvice(selectedCards, spreadType)}
+        </p>
+      </div>
 
       {/* 牌卡解釋 */}
       <div className="space-y-6">
@@ -96,7 +98,10 @@ export function ReadingResult({
           if (!interpretation) return null;
 
           return (
-            <div key={index} className="bg-gray-800/90 rounded-lg shadow-lg p-6 border border-blue-900/30">
+            <div
+              key={index}
+              className="bg-gray-800/90 rounded-lg shadow-lg p-6 border border-blue-900/30"
+            >
               <div className="flex flex-col md:flex-row gap-6">
                 {/* 牌卡 */}
                 <div className="flex-shrink-0 flex justify-center">
@@ -135,17 +140,17 @@ export function ReadingResult({
                   {/* 牌義 */}
                   <div>
                     <h4 className="font-medium text-blue-200 mb-2">
-                      {interpretation.isReversed ? '逆位含義：' : '正位含義：'}
+                      {interpretation.isReversed ? "逆位含義：" : "正位含義："}
                     </h4>
                     <div className="flex flex-wrap gap-2 mb-3">
                       {interpretation.meanings.map((meaning, idx) => (
                         <span
                           key={idx}
                           className={cn(
-                            'px-3 py-1 rounded-full text-sm',
+                            "px-3 py-1 rounded-full text-sm",
                             interpretation.isReversed
-                              ? 'bg-red-900/30 text-red-300 border border-red-800/50'
-                              : 'bg-green-900/30 text-green-300 border border-green-800/50'
+                              ? "bg-red-900/30 text-red-300 border border-red-800/50"
+                              : "bg-green-900/30 text-green-300 border border-green-800/50"
                           )}
                         >
                           {meaning}
@@ -156,7 +161,9 @@ export function ReadingResult({
 
                   {/* 牌卡描述 */}
                   <div>
-                    <h4 className="font-medium text-blue-200 mb-2">牌面解釋：</h4>
+                    <h4 className="font-medium text-blue-200 mb-2">
+                      牌面解釋：
+                    </h4>
                     <p className="text-blue-100 leading-relaxed">
                       {interpretation.card.description}
                     </p>
@@ -181,16 +188,6 @@ export function ReadingResult({
             </div>
           );
         })}
-      </div>
-
-      {/* 整體總結 */}
-      <div className="bg-gradient-to-r from-gray-800/80 to-blue-900/80 rounded-lg p-6 border border-blue-800/30">
-        <h3 className="text-lg font-semibold text-blue-100 mb-3">
-          整體建議
-        </h3>
-        <p className="text-blue-200 leading-relaxed">
-          {generateOverallAdvice(selectedCards, spreadType)}
-        </p>
       </div>
 
       {/* 操作按鈕 */}
@@ -219,41 +216,47 @@ export function ReadingResult({
  * @param spreadType - 牌陣類型
  * @returns 整體建議文字
  */
-function generateOverallAdvice(selectedCards: Array<{card: TarotCard, isReversed: boolean}>, spreadType: string): string {
-  if (selectedCards.length === 0) return '';
+function generateOverallAdvice(
+  selectedCards: Array<{ card: TarotCard; isReversed: boolean }>,
+  spreadType: string
+): string {
+  if (selectedCards.length === 0) return "";
 
-  const hasReversed = selectedCards.some(sc => sc.isReversed);
-  const majorCards = selectedCards.filter(sc => sc.card.suit === 'major').length;
+  const hasReversed = selectedCards.some((sc) => sc.isReversed);
+  const majorCards = selectedCards.filter(
+    (sc) => sc.card.suit === "major"
+  ).length;
 
-  let advice = '';
+  let advice = "";
 
   // 根據牌陣類型給出不同建議
-  if (spreadType === 'single') {
-    advice = '這張牌為您指出了當前最重要的指引方向。';
-  } else if (spreadType === 'three-card') {
-    advice = '從過去到未來的能量流動告訴我們，';
+  if (spreadType === "single") {
+    advice = "這張牌為您指出了當前最重要的指引方向。";
+  } else if (spreadType === "three-card") {
+    advice = "從過去到未來的能量流動告訴我們，";
     if (hasReversed) {
-      advice += '雖然有些阻礙需要克服，但這也是成長的機會。';
+      advice += "雖然有些阻礙需要克服，但這也是成長的機會。";
     } else {
-      advice += '整體能量流動順暢，是個好的發展趨勢。';
+      advice += "整體能量流動順暢，是個好的發展趨勢。";
     }
-  } else if (spreadType === 'celtic-cross') {
-    advice = '這個複雜的牌陣揭示了問題的多個面向。';
+  } else if (spreadType === "celtic-cross") {
+    advice = "這個複雜的牌陣揭示了問題的多個面向。";
   }
 
   // 根據大阿爾卡納牌的數量添加建議
   if (majorCards >= 2) {
-    advice += ' 出現多張大阿爾卡納牌意味著這個問題對您的人生有重要意義，需要認真對待。';
+    advice +=
+      " 出現多張大阿爾卡納牌意味著這個問題對您的人生有重要意義，需要認真對待。";
   } else if (majorCards === 1) {
-    advice += ' 大阿爾卡納牌的出現提醒您關注人生的重要課題。';
+    advice += " 大阿爾卡納牌的出現提醒您關注人生的重要課題。";
   }
 
   // 根據逆位牌的情況添加建議
   if (hasReversed) {
-    advice += ' 逆位牌提醒您需要反思內在，或者表示阻礙正在消散。';
+    advice += " 逆位牌提醒您需要反思內在，或者表示阻礙正在消散。";
   }
 
-  advice += ' 記住，塔羅牌是指引而非命運，最終的選擇權在您手中。';
+  advice += " 記住，塔羅牌是指引而非命運，最終的選擇權在您手中。";
 
   return advice;
 }
