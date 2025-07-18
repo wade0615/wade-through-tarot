@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useTarotStore } from '@/store/tarotStore';
-import { cn } from '@/utils/helpers';
+import { useTarotStore } from "@/store/tarotStore";
+import { cn } from "@/utils/helpers";
 
 interface SetupViewProps {
   onQuestionSubmit: () => void;
@@ -12,12 +12,8 @@ interface SetupViewProps {
  * 深色主題版本
  */
 export function SetupView({ onQuestionSubmit }: SetupViewProps) {
-  const {
-    currentQuestion,
-    setQuestion,
-    spreadType,
-    setSpreadType
-  } = useTarotStore();
+  const { currentQuestion, setQuestion, spreadType, setSpreadType } =
+    useTarotStore();
 
   /**
    * 處理表單提交事件
@@ -44,24 +40,41 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
         <h2 className="text-xl font-semibold text-blue-100">選擇牌陣</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
-            { type: 'single' as const, name: '單張牌', desc: '簡單問題或每日指引', cards: 1 },
-            { type: 'three-card' as const, name: '三張牌', desc: '過去現在未來', cards: 3 },
-            { type: 'celtic-cross' as const, name: '凱爾特十字', desc: '複雜問題深度分析', cards: 10 }
+            {
+              type: "single" as const,
+              name: "單張牌",
+              desc: "簡單問題或每日指引",
+              cards: 1,
+            },
+            {
+              type: "three-card" as const,
+              name: "三張牌",
+              desc: "過去現在未來",
+              cards: 3,
+            },
+            {
+              type: "celtic-cross" as const,
+              name: "凱爾特十字",
+              desc: "複雜問題深度分析",
+              cards: 10,
+            },
           ].map((spread) => (
             <button
               key={spread.type}
               onClick={() => setSpreadType(spread.type)}
               className={cn(
-                'p-4 rounded-lg border-2 transition-all',
-                'hover:shadow-md bg-slate-800/50 backdrop-blur-sm',
+                "p-4 rounded-lg border-2 transition-all",
+                "hover:shadow-md bg-slate-800/50 backdrop-blur-sm",
                 spreadType === spread.type
-                  ? 'border-blue-400 bg-blue-900/30 text-blue-200'
-                  : 'border-slate-600 hover:border-blue-500 text-slate-200'
+                  ? "border-blue-400 bg-blue-900/30 text-blue-200"
+                  : "border-slate-600 hover:border-blue-500 text-slate-200"
               )}
             >
               <div className="font-medium">{spread.name}</div>
               <div className="text-sm text-slate-400 mt-1">{spread.desc}</div>
-              <div className="text-xs text-slate-500 mt-1">{spread.cards} 張牌</div>
+              <div className="text-xs text-slate-500 mt-1">
+                {spread.cards} 張牌
+              </div>
             </button>
           ))}
         </div>
@@ -90,4 +103,4 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
       </form>
     </div>
   );
-} 
+}
