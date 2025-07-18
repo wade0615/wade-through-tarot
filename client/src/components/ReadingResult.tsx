@@ -156,15 +156,15 @@ export function ReadingResult({
 
                   {/* 牌卡描述 */}
                   <div>
-                    <h4 className="font-medium text-blue-200 mb-2">解釋：</h4>
+                    <h4 className="font-medium text-blue-200 mb-2">牌面解釋：</h4>
                     <p className="text-blue-100 leading-relaxed">
                       {interpretation.card.description}
                     </p>
                   </div>
 
                   {/* 關鍵詞 */}
-                  <div>
-                    <h4 className="font-medium text-blue-200 mb-2">關鍵詞：</h4>
+                  {/* <div>
+                    <h4 className="font-medium text-blue-200 mb-2">牌面關鍵詞：</h4>
                     <div className="flex flex-wrap gap-2">
                       {interpretation.card.keywords.map((keyword, idx) => (
                         <span
@@ -175,7 +175,7 @@ export function ReadingResult({
                         </span>
                       ))}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
