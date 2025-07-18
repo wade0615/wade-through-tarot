@@ -8,15 +8,27 @@ interface SpreadLayoutProps {
   className?: string;
 }
 
+/**
+ * 牌陣佈局組件 - 根據不同牌陣類型顯示牌卡佈局
+ * 支援單張牌、三張牌和凱爾特十字牌陣
+ */
 export function SpreadLayout({ className }: SpreadLayoutProps) {
   const { spreadType, selectedCards, removeCard } = useTarotStore();
   
   const positions = spreadPositions[spreadType];
 
+  /**
+   * 獲取指定位置的牌卡
+   * @param position - 牌卡位置
+   * @returns 該位置的牌卡對象
+   */
   const getCardAtPosition = (position: number) => {
     return selectedCards.find(sc => sc.position === position);
   };
 
+  /**
+   * 渲染單張牌牌陣佈局
+   */
   const renderSingleCardSpread = () => (
     <div className="flex justify-center">
       <div className="text-center space-y-2">
@@ -37,6 +49,9 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
     </div>
   );
 
+  /**
+   * 渲染三張牌牌陣佈局
+   */
   const renderThreeCardSpread = () => (
     <div className="flex justify-center space-x-8">
       {positions.map((pos, index) => (
@@ -59,6 +74,9 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
     </div>
   );
 
+  /**
+   * 渲染凱爾特十字牌陣佈局
+   */
   const renderCelticCrossSpread = () => (
     <div className="flex justify-center items-center max-w-4xl mx-auto">
       {/* 中央十字牌陣 */}

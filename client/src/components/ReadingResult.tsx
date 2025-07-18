@@ -11,6 +11,10 @@ interface ReadingResultProps {
   className?: string;
 }
 
+/**
+ * 占卜結果組件 - 顯示完整的占卜結果和牌陣佈局
+ * 包含牌卡解釋、位置說明和整體建議
+ */
 export function ReadingResult({ 
   onNewReading, 
   // onSaveReading,
@@ -26,6 +30,9 @@ export function ReadingResult({
 
   const positions = spreadPositions[spreadType];
 
+  /**
+   * 開始新的占卜
+   */
   const handleNewReading = () => {
     clearSelection();
     onNewReading?.();
@@ -36,6 +43,11 @@ export function ReadingResult({
   //   onSaveReading?.();
   // };
 
+  /**
+   * 獲取指定位置的牌卡解釋
+   * @param cardIndex - 牌卡位置索引
+   * @returns 牌卡解釋對象，包含牌卡、位置、含義等信息
+   */
   const getInterpretation = (cardIndex: number) => {
     const selectedCard = selectedCards[cardIndex];
     if (!selectedCard) return null;
@@ -199,7 +211,13 @@ export function ReadingResult({
   );
 }
 
-// 生成整體建議
+/**
+ * 生成整體占卜建議
+ * 根據牌陣類型、逆位牌數量和大阿爾卡納牌數量生成建議
+ * @param selectedCards - 已選擇的牌卡陣列
+ * @param spreadType - 牌陣類型
+ * @returns 整體建議文字
+ */
 function generateOverallAdvice(selectedCards: any[], spreadType: string): string {
   if (selectedCards.length === 0) return '';
 

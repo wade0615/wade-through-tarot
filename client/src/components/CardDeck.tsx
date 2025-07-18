@@ -12,6 +12,10 @@ interface CardDeckProps {
   className?: string;
 }
 
+/**
+ * 牌堆組件 - 顯示可選擇的塔羅牌堆
+ * 提供洗牌和選牌功能
+ */
 export function CardDeck({ 
   onCardSelect, 
   maxSelection = 3,
@@ -21,10 +25,14 @@ export function CardDeck({
   const [isShuffling, setIsShuffling] = useState(false);
   const { selectedCards, canAddCard, clearSelection } = useTarotStore();
 
+  // 組件初始化時洗牌
   useEffect(() => {
     shuffleDeck();
   }, []);
 
+  /**
+   * 洗牌功能 - 清空已選擇的牌並重新洗牌
+   */
   const shuffleDeck = () => {
     setIsShuffling(true);
     setTimeout(() => {
@@ -36,6 +44,10 @@ export function CardDeck({
     }, 1000);
   };
 
+  /**
+   * 處理牌卡點擊事件
+   * @param card - 被點擊的牌卡
+   */
   const handleCardClick = (card: TarotCard) => {
     if (!canAddCard()) return;
     const isReversed = getRandomReversed();
@@ -44,6 +56,11 @@ export function CardDeck({
     setShuffledCards(prev => prev.filter(c => c.id !== card.id));
   };
 
+  /**
+   * 檢查牌卡是否已被選擇
+   * @param cardId - 牌卡ID
+   * @returns 是否已被選擇
+   */
   const isCardSelected = (cardId: string) => {
     return selectedCards.some(sc => sc.card.id === cardId);
   };

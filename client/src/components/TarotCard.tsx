@@ -14,6 +14,10 @@ interface TarotCardComponentProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
+/**
+ * 塔羅牌組件 - 顯示單張塔羅牌
+ * 支援牌面/牌背顯示、正逆位、不同尺寸和互動效果
+ */
 export function TarotCardComponent({
   card,
   isReversed = false,
@@ -111,7 +115,11 @@ export function TarotCardComponent({
   );
 }
 
-// 根據大阿爾卡納牌名返回對應的 emoji
+/**
+ * 根據大阿爾卡納牌名返回對應的 emoji
+ * @param cardName - 牌卡名稱
+ * @returns 對應的 emoji 符號
+ */
 function getEmojiBySuit(cardName: string): string {
   const emojiMap: { [key: string]: string } = {
     '愚者': '🃏',
