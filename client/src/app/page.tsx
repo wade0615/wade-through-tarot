@@ -120,7 +120,7 @@ export default function Home() {
           </p>
         )}
         <p className="text-sm text-slate-400">
-          請選擇 {getMaxCards()} 張牌來完成您的占卜
+          請選擇 {getMaxCards()} 張牌來完成占卜
         </p>
       </div>
 

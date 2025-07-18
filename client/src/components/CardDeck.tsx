@@ -35,9 +35,10 @@ export function CardDeck({
 
   const handleCardClick = (card: TarotCard) => {
     if (!canAddCard()) return;
-    
     const isReversed = getRandomReversed();
     onCardSelect?.(card, isReversed);
+    // 從牌堆中移除已抽出的牌
+    setShuffledCards(prev => prev.filter(c => c.id !== card.id));
   };
 
   const isCardSelected = (cardId: string) => {
