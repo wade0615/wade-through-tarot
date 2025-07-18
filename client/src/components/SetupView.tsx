@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useTarotStore } from "@/store/tarotStore";
 import { cn } from "@/utils/helpers";
 
@@ -12,6 +13,7 @@ interface SetupViewProps {
  * 深色主題版本
  */
 export function SetupView({ onQuestionSubmit }: SetupViewProps) {
+  const router = useRouter();
   const { currentQuestion, setQuestion, spreadType, setSpreadType } =
     useTarotStore();
 
@@ -96,9 +98,16 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
         </div>
         <button
           type="submit"
-          className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-lg"
+          className="w-full py-6 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-lg"
         >
           開始占卜
+        </button>
+        <button
+          type="button"
+          onClick={() => router.push("/cards")}
+          className="w-full py-3 bg-purple-300 text-purple-900 rounded-lg font-medium hover:bg-purple-400 transition-colors shadow-lg"
+        >
+          查看所有牌面
         </button>
       </form>
     </div>
