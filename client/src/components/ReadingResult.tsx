@@ -13,14 +13,14 @@ interface ReadingResultProps {
 
 export function ReadingResult({ 
   onNewReading, 
-  onSaveReading,
+  // onSaveReading,
   className 
 }: ReadingResultProps) {
   const { 
     selectedCards, 
     currentQuestion, 
     spreadType,
-    saveReading,
+    // saveReading,
     clearSelection 
   } = useTarotStore();
 
@@ -31,10 +31,10 @@ export function ReadingResult({
     onNewReading?.();
   };
 
-  const handleSaveReading = () => {
-    saveReading();
-    onSaveReading?.();
-  };
+  // const handleSaveReading = () => {
+  //   saveReading();
+  //   onSaveReading?.();
+  // };
 
   const getInterpretation = (cardIndex: number) => {
     const selectedCard = selectedCards[cardIndex];
@@ -182,12 +182,12 @@ export function ReadingResult({
 
       {/* 操作按鈕 */}
       <div className="flex justify-center space-x-4">
-        <button
+        {/* <button
           onClick={handleSaveReading}
           className="px-6 py-3 bg-blue-900 text-white rounded-lg font-medium hover:bg-blue-800 transition-colors border border-blue-700"
         >
           保存這次占卜
-        </button>
+        </button> */}
         <button
           onClick={handleNewReading}
           className="px-6 py-3 bg-gray-700 text-blue-100 rounded-lg font-medium hover:bg-gray-600 transition-colors border border-gray-600"

@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useTarotStore } from '@/store/tarotStore';
 import { CardDeck } from '@/components/CardDeck';
-import { SpreadLayout } from '@/components/SpreadLayout';
 import { ReadingResult } from '@/components/ReadingResult';
 import { cn } from '@/utils/helpers';
 
@@ -138,7 +137,7 @@ export default function Home() {
           onClick={() => setCurrentView('setup')}
           className="px-6 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-colors"
         >
-          重新設置
+          重新選擇牌陣
         </button>
         {isReadingComplete() && (
           <button
