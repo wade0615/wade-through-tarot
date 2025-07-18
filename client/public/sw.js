@@ -2,7 +2,6 @@ const CACHE_NAME = "tarot-app-v1";
 const urlsToCache = [
   "/",
   "/manifest.json",
-  "/favicon.ico",
   "/icon-192x192.png",
   "/icon-512x512.png",
   "/apple-touch-icon.png",
