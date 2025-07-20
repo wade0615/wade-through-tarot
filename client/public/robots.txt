@@ -1,0 +1,28 @@
+User-agent: *
+Allow: /
+
+# 允許所有搜尋引擎爬取
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# 禁止爬取管理頁面（如果有的話）
+Disallow: /admin/
+Disallow: /api/
+
+# 允許爬取重要頁面
+Allow: /cards
+Allow: /about
+Allow: /privacy
+Allow: /terms
+
+# 網站地圖位置
+Sitemap: https://wade-through-tarot.vercel.app/sitemap.xml
+
+# 爬取延遲（秒）
+Crawl-delay: 1 

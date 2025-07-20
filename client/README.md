@@ -1,36 +1,172 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wade Through Tarot - 線上塔羅占卜平台
 
-## Getting Started
+一個專業的免費線上塔羅占卜應用，提供完整的 78 張偉特塔羅牌解析和多種牌陣選擇。
 
-First, run the development server:
+## 🌟 平台特色
+
+- **78 張完整塔羅牌**：包含 22 張大阿爾卡納和 56 張小阿爾卡納
+- **三種專業牌陣**：單張牌、三張牌、凱爾特十字
+- **AI 智能抽牌**：隨機且公平的抽牌系統
+- **正逆位解析**：每張牌都有詳細的正逆位解釋
+- **完全免費**：無需註冊，立即使用
+- **PWA 支援**：可安裝為桌面應用，支援離線使用
+- **響應式設計**：完美適配手機、平板、電腦
+
+## 🎯 SEO 優化特色
+
+### 關鍵字優化
+
+- **主要關鍵字**：塔羅占卜、線上塔羅、AI 塔羅、AI 抽牌
+- **長尾關鍵字**：凱爾特十字線上抽牌、偉特塔羅線上抽牌、免費塔羅占卜
+- **相關關鍵字**：塔羅牌解析、塔羅牌陣、塔羅牌圖鑑、塔羅牌意思
+
+### 技術 SEO
+
+- **結構化資料**：完整的 Schema.org 標記
+- **語義化 HTML**：使用適當的 HTML5 標籤
+- **Meta 標籤優化**：完整的 Open Graph 和 Twitter Cards
+- **網站地圖**：自動生成的 sitemap.xml
+- **頁面速度**：優化的圖片和資源載入
+
+### 內容 SEO
+
+- **豐富內容**：每張牌都有詳細的描述和解釋
+- **內部連結**：完善的頁面間導航
+- **URL 結構**：清晰且 SEO 友好的 URL
+- **圖片優化**：所有圖片都有適當的 alt 標籤
+
+## 🃏 牌陣介紹
+
+### 單張牌占卜
+
+- **適用場景**：日常問題、快速指引
+- **牌數**：1 張
+- **特點**：簡單直接，適合快速決策
+
+### 三張牌占卜
+
+- **適用場景**：時間軸分析、發展趨勢
+- **牌數**：3 張（過去、現在、未來）
+- **特點**：經典牌陣，適合了解事情發展脈絡
+
+### 凱爾特十字占卜
+
+- **適用場景**：複雜問題、深度解析
+- **牌數**：10 張
+- **特點**：最複雜的牌陣，提供最全面的分析
+
+## 🛠 技術架構
+
+### 前端技術
+
+- **框架**：Next.js 14 (App Router)
+- **語言**：TypeScript
+- **樣式**：Tailwind CSS
+- **狀態管理**：Zustand
+- **PWA**：Service Worker + Manifest
+
+### 部署
+
+- **平台**：Vercel
+- **域名**：wade-through-tarot.vercel.app
+- **CDN**：Vercel Edge Network
+
+## 📱 PWA 功能
+
+- **離線使用**：安裝後可離線使用
+- **桌面安裝**：可安裝為桌面應用
+- **推送通知**：支援推送通知功能
+- **背景同步**：支援背景數據同步
+
+## 🚀 快速開始
+
+### 本地開發
 
 ```bash
+# 克隆專案
+git clone https://github.com/your-username/wade-through-tarot.git
+
+# 進入專案目錄
+cd wade-through-tarot/client
+
+# 安裝依賴
+npm install
+
+# 啟動開發服務器
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 部署
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# 構建生產版本
+npm run build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 部署到 Vercel
+vercel --prod
+```
 
-## Learn More
+## 📊 SEO 績效指標
 
-To learn more about Next.js, take a look at the following resources:
+### 目標關鍵字排名
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 塔羅占卜：目標前 10 名
+- 線上塔羅：目標前 5 名
+- AI 塔羅：目標前 3 名
+- 凱爾特十字線上抽牌：目標前 1 名
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 技術指標
 
-## Deploy on Vercel
+- **Core Web Vitals**：目標全部綠色
+- **頁面載入速度**：目標 < 2 秒
+- **移動端友好性**：100%
+- **可訪問性**：WCAG 2.1 AA 標準
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📈 內容策略
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 主要內容類型
+
+1. **塔羅牌解析**：每張牌的詳細解釋
+2. **牌陣教學**：各種牌陣的使用方法
+3. **占卜技巧**：如何進行有效的塔羅占卜
+4. **塔羅歷史**：塔羅牌的歷史和文化背景
+
+### 內容更新計劃
+
+- 每週更新 2-3 篇塔羅相關文章
+- 每月新增 1-2 種牌陣
+- 定期更新塔羅牌解析內容
+
+## 🔍 搜尋引擎優化
+
+### 頁面優化
+
+- **標題標籤**：每頁都有獨特且描述性的標題
+- **Meta 描述**：吸引點擊的頁面描述
+- **標題層級**：正確使用 H1-H6 標籤
+- **內部連結**：完善的網站導航結構
+
+### 技術優化
+
+- **響應式設計**：適配所有設備
+- **頁面速度**：優化載入時間
+- **安全性**：HTTPS 加密
+- **可訪問性**：符合 WCAG 標準
+
+## 📞 聯絡資訊
+
+- **網站**：https://wade-through-tarot.vercel.app
+- **GitHub**：https://github.com/your-username/wade-through-tarot
+- **Email**：contact@wade-through-tarot.com
+
+## 📄 授權
+
+本專案採用 MIT 授權條款。詳見 [LICENSE](LICENSE) 文件。
+
+## 🤝 貢獻
+
+歡迎提交 Issue 和 Pull Request 來改善這個專案！
+
+---
+
+**Wade Through Tarot** - 讓牌面指引找到內心的答案 ✨
