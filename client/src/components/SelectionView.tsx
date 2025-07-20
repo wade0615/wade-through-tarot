@@ -32,12 +32,11 @@ export function SelectionView({
           請選擇 {getMaxCards()} 張牌來完成占卜
         </p>
       </div>
-
       {/* 選牌區域 */}
       {!isReadingComplete() && (
         <CardDeck onCardSelect={onCardSelect} maxSelection={getMaxCards()} />
       )}
-
+      這邊放入 google ads 欄位
       {/* 操作按鈕 */}
       <div className="flex justify-center space-x-4">
         <button
