@@ -34,13 +34,14 @@ export function SelectionView({
           請選擇 {getMaxCards()} 張牌來完成占卜
         </p>
       </div>
+
+      {/* Google Ads 廣告位置 */}
+      <ResponsiveAd adSlot={getAdSlot("RESPONSIVE_GENERAL")} />
+
       {/* 選牌區域 */}
       {!isReadingComplete() && (
         <CardDeck onCardSelect={onCardSelect} maxSelection={getMaxCards()} />
       )}
-
-      {/* Google Ads 廣告位置 */}
-      <ResponsiveAd adSlot={getAdSlot("RESPONSIVE_GENERAL")} />
 
       {/* 操作按鈕 */}
       <div className="flex justify-center space-x-4">
