@@ -5,8 +5,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { getTarotCardsBySuit, TarotCard } from "@/data/tarotCards";
 import CardModal from "../../components/CardModal";
-import { SidebarAd, ResponsiveAd } from "@/components/GoogleAds";
-import { getAdSlot } from "@/config/ads";
 
 const suitNames = {
   major: "大阿爾克納",
@@ -65,84 +63,65 @@ export default function CardsPage() {
           </div>
         </nav>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* 主要內容區域 */}
-          <div className="lg:col-span-3">
-            <div className="space-y-12">
-              {suitOrder.map((suit) => {
-                const cards = getTarotCardsBySuit(suit);
-                return (
-                  <section
-                    key={suit}
-                    id={suit}
-                    className="bg-white/10 backdrop-blur-sm rounded-lg p-6"
-                  >
-                    <h2 className="text-2xl font-semibold text-white mb-4 text-center">
-                      {suitNames[suit]}
-                    </h2>
-                    <p className="text-center text-gray-300 mb-6">
-                      {suit === "major"
-                        ? "22張大阿爾卡納牌，代表人生的重要階段和精神旅程"
-                        : `${cards.length}張${suitNames[suit]}牌，代表${
-                            suit === "cups"
-                              ? "情感和愛情"
-                              : suit === "pentacles"
-                              ? "物質和金錢"
-                              : suit === "swords"
-                              ? "思維和挑戰"
-                              : "行動和創造"
-                          }`}
-                    </p>
+        <div className="space-y-12">
+          {suitOrder.map((suit) => {
+            const cards = getTarotCardsBySuit(suit);
+            return (
+              <section
+                key={suit}
+                id={suit}
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6"
+              >
+                <h2 className="text-2xl font-semibold text-white mb-4 text-center">
+                  {suitNames[suit]}
+                </h2>
+                <p className="text-center text-gray-300 mb-6">
+                  {suit === "major"
+                    ? "22張大阿爾卡納牌，代表人生的重要階段和精神旅程"
+                    : `${cards.length}張${suitNames[suit]}牌，代表${
+                        suit === "cups"
+                          ? "情感和愛情"
+                          : suit === "pentacles"
+                          ? "物質和金錢"
+                          : suit === "swords"
+                          ? "思維和挑戰"
+                          : "行動和創造"
+                      }`}
+                </p>
 
-                    <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-                      {cards.map((card) => (
-                        <article
-                          key={card.id}
-                          id={card.id}
-                          onClick={() => handleCardClick(card)}
-                          className="bg-white/20 backdrop-blur-sm rounded-lg p-3 cursor-pointer transition-all duration-300 hover:bg-white/30 hover:scale-105 hover:shadow-lg"
-                        >
-                          <div className="aspect-[3/5] relative mb-3">
-                            <Image
-                              src={card.imageUrl}
-                              alt={`${card.name} (${card.nameEn}) - 塔羅牌`}
-                              fill
-                              className="object-cover rounded-lg"
-                            />
-                          </div>
-                          <div className="text-center">
-                            <h3 className="text-sm font-medium text-white mb-1">
-                              {card.name}
-                            </h3>
-                            <p className="text-xs text-gray-300">
-                              {card.nameEn}
-                            </p>
-                            {card.number !== undefined && (
-                              <p className="text-xs text-gray-400 mt-1">
-                                {card.number === 0 ? "0" : card.number}
-                              </p>
-                            )}
-                          </div>
-                        </article>
-                      ))}
-                    </div>
-                  </section>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* 側邊欄廣告 */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-4">
-              <SidebarAd adSlot={getAdSlot("CARDS_PAGE_SIDEBAR")} />
-            </div>
-          </div>
-        </div>
-
-        {/* 底部響應式廣告 */}
-        <div className="mt-12">
-          <ResponsiveAd adSlot={getAdSlot("RESPONSIVE_GENERAL")} />
+                <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                  {cards.map((card) => (
+                    <article
+                      key={card.id}
+                      id={card.id}
+                      onClick={() => handleCardClick(card)}
+                      className="bg-white/20 backdrop-blur-sm rounded-lg p-3 cursor-pointer transition-all duration-300 hover:bg-white/30 hover:scale-105 hover:shadow-lg"
+                    >
+                      <div className="aspect-[3/5] relative mb-3">
+                        <Image
+                          src={card.imageUrl}
+                          alt={`${card.name} (${card.nameEn}) - 塔羅牌`}
+                          fill
+                          className="object-cover rounded-lg"
+                        />
+                      </div>
+                      <div className="text-center">
+                        <h3 className="text-sm font-medium text-white mb-1">
+                          {card.name}
+                        </h3>
+                        <p className="text-xs text-gray-300">{card.nameEn}</p>
+                        {card.number !== undefined && (
+                          <p className="text-xs text-gray-400 mt-1">
+                            {card.number === 0 ? "0" : card.number}
+                          </p>
+                        )}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
         </div>
       </div>
 

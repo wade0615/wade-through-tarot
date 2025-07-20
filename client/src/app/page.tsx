@@ -8,8 +8,6 @@ import { SelectionView } from "@/components/SelectionView";
 import { ResultView } from "@/components/ResultView";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import OfflineIndicator from "@/components/OfflineIndicator";
-import { BannerAd, RectangleAd } from "@/components/GoogleAds";
-import { getAdSlot } from "@/config/ads";
 import {
   trackReadingStart,
   trackCardSelection,
@@ -108,11 +106,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-slate-900">
-      {/* 頂部廣告 */}
-      <div className="w-full">
-        <BannerAd adSlot={getAdSlot("HOME_TOP_BANNER")} />
-      </div>
-
       <div className="container mx-auto px-4 py-8">
         {currentView === "setup" && (
           <SetupView onQuestionSubmit={handleQuestionSubmit} />
@@ -125,21 +118,11 @@ export default function Home() {
           />
         )}
         {currentView === "result" && (
-          <div className="space-y-8">
-            {/* 結果頁面頂部廣告 */}
-            <RectangleAd adSlot={getAdSlot("RESULT_PAGE_RECTANGLE")} />
-
-            <ResultView
-              onNewReading={handleNewReading}
-              onSaveReading={handleSaveReading}
-            />
-          </div>
+          <ResultView
+            onNewReading={handleNewReading}
+            onSaveReading={handleSaveReading}
+          />
         )}
-      </div>
-
-      {/* 底部廣告 */}
-      <div className="w-full">
-        <BannerAd adSlot={getAdSlot("HOME_BOTTOM_BANNER")} />
       </div>
 
       <PWAInstallPrompt />

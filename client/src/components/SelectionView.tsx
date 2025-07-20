@@ -3,6 +3,8 @@
 import { CardDeck } from "./CardDeck";
 import { useTarotStore } from "@/store/tarotStore";
 import { TarotCard } from "@/data/tarotCards";
+import { ResponsiveAd } from "@/components/GoogleAds";
+import { getAdSlot } from "@/config/ads";
 
 interface SelectionViewProps {
   onCardSelect: (card: TarotCard, isReversed: boolean) => void;
@@ -32,11 +34,15 @@ export function SelectionView({
           請選擇 {getMaxCards()} 張牌來完成占卜
         </p>
       </div>
+
+      {/* Google Ads 廣告位置 */}
+      <ResponsiveAd adSlot={getAdSlot("RESPONSIVE_GENERAL")} />
+
       {/* 選牌區域 */}
       {!isReadingComplete() && (
         <CardDeck onCardSelect={onCardSelect} maxSelection={getMaxCards()} />
       )}
-      這邊放入 google ads 欄位
+
       {/* 操作按鈕 */}
       <div className="flex justify-center space-x-4">
         <button
