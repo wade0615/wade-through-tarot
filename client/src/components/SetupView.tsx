@@ -32,9 +32,7 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
         <h1 className="text-4xl font-bold text-white mb-2">
           Wade Through Tarot
         </h1>
-        <p className="text-lg text-blue-200">
-          說一就是一，說二還是一，讓直覺引導找到答案
-        </p>
+        <p className="text-lg text-blue-200">讓牌面指引找到內心的答案</p>
       </div>
 
       {/* 牌陣選擇 */}
@@ -86,12 +84,12 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
       <form onSubmit={handleQuestionSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-blue-200 mb-2">
-            想問什麼廢話？（可選）
+            想問什麼？（可選）
           </label>
           <textarea
             value={currentQuestion}
             onChange={(e) => setQuestion(e.target.value)}
-            placeholder="例如：哥布林跟女精靈是有未來的嗎？"
+            placeholder="例如：我該如何面對目前的挑戰？"
             className="w-full p-3 bg-slate-800/50 border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-white placeholder-slate-400 backdrop-blur-sm"
             rows={3}
           />
