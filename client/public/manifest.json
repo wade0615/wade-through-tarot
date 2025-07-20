@@ -1,7 +1,7 @@
 {
-  "name": "Wade Through Tarot",
-  "short_name": "Tarot",
-  "description": "A Tarot Reading App for spiritual guidance and self-reflection",
+  "name": "Wade Through Tarot - 線上塔羅占卜",
+  "short_name": "塔羅占卜",
+  "description": "免費線上塔羅占卜，提供單張牌、三張牌、凱爾特十字等多種牌陣。78張偉特塔羅牌完整解析，AI 智能抽牌系統，幫助您找到內心的答案。",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#1a1a1a",
@@ -23,5 +23,47 @@
       "purpose": "maskable any"
     }
   ],
-  "categories": ["lifestyle", "entertainment", "education"]
+  "categories": ["lifestyle", "entertainment", "education", "spirituality"],
+  "screenshots": [
+    {
+      "src": "/screenshot-1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "塔羅占卜主頁面"
+    },
+    {
+      "src": "/screenshot-2.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "塔羅牌選擇頁面"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "開始占卜",
+      "short_name": "占卜",
+      "description": "立即開始新的塔羅占卜",
+      "url": "/",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "塔羅牌圖鑑",
+      "short_name": "圖鑑",
+      "description": "查看所有78張塔羅牌",
+      "url": "/cards",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
 }

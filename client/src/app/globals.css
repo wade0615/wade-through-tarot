@@ -5,7 +5,7 @@
   --foreground: #171717;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -22,5 +22,99 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* 改善連結的可訪問性 */
+a:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  ring-offset: 2px;
+}
+
+/* 改善按鈕的可訪問性 */
+button:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  ring-offset: 2px;
+}
+
+/* 改善表單元素的可訪問性 */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  ring-offset: 2px;
+}
+
+/* 螢幕閱讀器支援 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 改善動畫的可訪問性 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 自定義動畫 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* 動畫類 */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.animate-pulse-slow {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
