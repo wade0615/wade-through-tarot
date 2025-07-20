@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTarotStore } from "@/store/tarotStore";
 import { TarotCard } from "@/data/tarotCards";
 import { SetupView } from "@/components/SetupView";
@@ -8,22 +8,31 @@ import { SelectionView } from "@/components/SelectionView";
 import { ResultView } from "@/components/ResultView";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import OfflineIndicator from "@/components/OfflineIndicator";
+import {
+  trackReadingStart,
+  trackCardSelection,
+  trackReadingComplete,
+  trackPageView,
+} from "@/components/GoogleAnalytics";
 
 type ViewState = "setup" | "selection" | "result";
 
 export default function Home() {
   const [currentView, setCurrentView] = useState<ViewState>("setup");
+  const [readingStartTime, setReadingStartTime] = useState<number>(0);
   const {
-    // currentQuestion,
-    // setQuestion,
-    // spreadType,
-    // setSpreadType,
+    currentQuestion,
+    spreadType,
     selectedCards,
     selectCard,
     clearSelection,
-    // isReadingComplete,
     getMaxCards,
   } = useTarotStore();
+
+  // 追蹤頁面瀏覽
+  useEffect(() => {
+    trackPageView("首頁");
+  }, []);
 
   /**
    * 處理牌卡選擇事件
@@ -34,10 +43,17 @@ export default function Home() {
     const nextPosition = selectedCards.length;
     selectCard(card, nextPosition, isReversed);
 
+    // 追蹤牌卡選擇事件
+    trackCardSelection(card.name, nextPosition, isReversed);
+
     // 如果達到最大牌數，自動切換到結果頁
     if (selectedCards.length + 1 >= getMaxCards()) {
       setTimeout(() => {
         setCurrentView("result");
+
+        // 追蹤占卜完成事件
+        const readingDuration = Date.now() - readingStartTime;
+        trackReadingComplete(spreadType, getMaxCards(), readingDuration);
       }, 500);
     }
   };
@@ -48,12 +64,16 @@ export default function Home() {
   const handleNewReading = () => {
     clearSelection();
     setCurrentView("setup");
+    setReadingStartTime(0);
   };
 
   /**
    * 處理問題提交，從設置頁面切換到選牌頁面
    */
   const handleQuestionSubmit = () => {
+    // 追蹤占卜開始事件
+    trackReadingStart(spreadType, currentQuestion);
+    setReadingStartTime(Date.now());
     setCurrentView("selection");
   };
 
@@ -62,6 +82,7 @@ export default function Home() {
    */
   const handleBackToSetup = () => {
     setCurrentView("setup");
+    setReadingStartTime(0);
   };
 
   /**
@@ -69,6 +90,10 @@ export default function Home() {
    */
   const handleViewResult = () => {
     setCurrentView("result");
+
+    // 追蹤占卜完成事件
+    const readingDuration = Date.now() - readingStartTime;
+    trackReadingComplete(spreadType, selectedCards.length, readingDuration);
   };
 
   /**
