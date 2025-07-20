@@ -196,6 +196,13 @@ export default function RootLayout({
             }),
           }}
         />
+
+        {/* Google AdSense 程式碼 */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4201768192395434"
+          crossOrigin="anonymous"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

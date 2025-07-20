@@ -146,6 +146,7 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
               輸入您的問題可以幫助您更好地理解牌面的含義
             </p>
           </div>
+          這邊放入 google ads 欄位
           <button
             type="submit"
             className="w-full py-6 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-lg"
