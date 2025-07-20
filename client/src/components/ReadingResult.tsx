@@ -6,6 +6,8 @@ import { useTarotStore } from "@/store/tarotStore";
 import { TarotCard } from "@/data/tarotCards";
 import { spreadPositions, formatDate, cn } from "@/utils/helpers";
 import { useState } from "react";
+import { ResponsiveAd } from "@/components/GoogleAds";
+import { getAdSlot } from "@/config/ads";
 
 interface ReadingResultProps {
   onNewReading?: () => void;
@@ -146,7 +148,10 @@ export function ReadingResult({
           </button>
         </div>
       </div>
-      這邊放入 google ads 欄位
+
+      {/* Google Ads 廣告位置 */}
+      <ResponsiveAd adSlot={getAdSlot("RESPONSIVE_GENERAL")} />
+
       {/* 牌卡解釋 */}
       <div className="space-y-6">
         {selectedCards.map((selectedCard, index) => {
