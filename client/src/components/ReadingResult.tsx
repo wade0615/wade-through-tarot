@@ -118,9 +118,11 @@ export function ReadingResult({
       {/* 牌陣佈局 */}
       <SpreadLayout />
 
-      {/* 整體總結 */}
+      {/* 複製內文給 GPT 解牌 */}
       <div className="bg-gradient-to-r from-gray-800/80 to-blue-900/80 rounded-lg p-6 border border-blue-800/30">
-        <h3 className="text-lg font-semibold text-blue-100 mb-3">整體建議</h3>
+        <h3 className="text-lg font-semibold text-blue-100 mb-3">
+          請 GPT 解牌
+        </h3>
         <p className="text-blue-200 leading-relaxed">
           {generateOverallAdvice(selectedCards, spreadType, currentQuestion)}
         </p>
