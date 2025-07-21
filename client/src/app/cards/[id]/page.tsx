@@ -4,18 +4,20 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { getTarotCardById, TarotCard } from "@/data/tarotCards";
 import Link from "next/link";
+import React from "react";
 
-export default function CardPage({ params }: { params: { id: string } }) {
+export default function CardPage({ params }: { params: any }) {
+  const { id } = React.use(params);
   const [card, setCard] = useState<TarotCard | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const foundCard = getTarotCardById(params.id);
+    const foundCard = getTarotCardById(id);
     if (foundCard) {
       setCard(foundCard);
     }
     setLoading(false);
-  }, [params.id]);
+  }, [id]);
 
   if (loading) {
     return (
