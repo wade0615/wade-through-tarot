@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { getTarotCardsBySuit, TarotCard } from "@/data/tarotCards";
-import CardModal from "../../components/CardModal";
+import Link from "next/link";
 
 const suitNames = {
   major: "大阿爾克納",
@@ -24,15 +23,6 @@ const suitOrder: TarotCard["suit"][] = [
 
 export default function CardsPage() {
   const router = useRouter();
-  const [selectedCard, setSelectedCard] = useState<TarotCard | null>(null);
-
-  const handleCardClick = (card: TarotCard) => {
-    setSelectedCard(card);
-  };
-
-  const closeModal = () => {
-    setSelectedCard(null);
-  };
 
   const handleGoBack = () => {
     router.back();
@@ -91,32 +81,36 @@ export default function CardsPage() {
 
                 <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                   {cards.map((card) => (
-                    <article
+                    <Link
                       key={card.id}
-                      id={card.id}
-                      onClick={() => handleCardClick(card)}
-                      className="bg-white/20 backdrop-blur-sm rounded-lg p-3 cursor-pointer transition-all duration-300 hover:bg-white/30 hover:scale-105 hover:shadow-lg"
+                      href={`/cards/${card.id}`}
+                      className="block"
                     >
-                      <div className="aspect-[3/5] relative mb-3">
-                        <Image
-                          src={card.imageUrl}
-                          alt={`${card.name} (${card.nameEn}) - 塔羅牌`}
-                          fill
-                          className="object-cover rounded-lg"
-                        />
-                      </div>
-                      <div className="text-center">
-                        <h3 className="text-sm font-medium text-white mb-1">
-                          {card.name}
-                        </h3>
-                        <p className="text-xs text-gray-300">{card.nameEn}</p>
-                        {card.number !== undefined && (
-                          <p className="text-xs text-gray-400 mt-1">
-                            {card.number === 0 ? "0" : card.number}
-                          </p>
-                        )}
-                      </div>
-                    </article>
+                      <article
+                        id={card.id}
+                        className="bg-white/20 backdrop-blur-sm rounded-lg p-3 cursor-pointer transition-all duration-300 hover:bg-white/30 hover:scale-105 hover:shadow-lg"
+                      >
+                        <div className="aspect-[3/5] relative mb-3">
+                          <Image
+                            src={card.imageUrl}
+                            alt={`${card.name} (${card.nameEn}) - 塔羅牌`}
+                            fill
+                            className="object-cover rounded-lg"
+                          />
+                        </div>
+                        <div className="text-center">
+                          <h3 className="text-sm font-medium text-white mb-1">
+                            {card.name}
+                          </h3>
+                          <p className="text-xs text-gray-300">{card.nameEn}</p>
+                          {card.number !== undefined && (
+                            <p className="text-xs text-gray-400 mt-1">
+                              {card.number === 0 ? "0" : card.number}
+                            </p>
+                          )}
+                        </div>
+                      </article>
+                    </Link>
                   ))}
                 </div>
               </section>
@@ -135,7 +129,6 @@ export default function CardsPage() {
         </button>
       </div>
 
-      {selectedCard && <CardModal card={selectedCard} onClose={closeModal} />}
     </div>
   );
 }
