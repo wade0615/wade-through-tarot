@@ -5,13 +5,7 @@ import Image from "next/image";
 import { getTarotCardById, TarotCard } from "@/data/tarotCards";
 import Link from "next/link";
 
-interface CardPageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default function CardPage({ params }: CardPageProps) {
+export default function CardPage({ params }: { params: { id: string } }) {
   const [card, setCard] = useState<TarotCard | null>(null);
   const [loading, setLoading] = useState(true);
 
