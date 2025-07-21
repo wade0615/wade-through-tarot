@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -207,7 +208,40 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* SEO 主選單 */}
+        <nav
+          className="w-full bg-slate-900/80 text-blue-100 py-3 px-4 flex flex-wrap gap-4 justify-center shadow-md"
+          aria-label="主選單"
+        >
+          <Link href="/" className="hover:underline font-semibold">
+            首頁
+          </Link>
+          <Link href="/cards" className="hover:underline">
+            塔羅牌圖鑑
+          </Link>
+          <Link href="/learn" className="hover:underline">
+            塔羅教學
+          </Link>
+          <Link href="/about" className="hover:underline">
+            關於我們
+          </Link>
+          <Link href="/privacy" className="hover:underline">
+            隱私權政策
+          </Link>
+        </nav>
         {children}
+        {/* SEO 頁腳 */}
+        <footer
+          className="w-full bg-slate-900/90 text-blue-200 text-center py-6 mt-12"
+          aria-label="網站頁腳"
+        >
+          <div>
+            © {new Date().getFullYear()} Wade Through Tarot 線上塔羅占卜 |{" "}
+            <Link href="/privacy" className="underline">
+              隱私權政策
+            </Link>
+          </div>
+        </footer>
 
         {/* Google Analytics - 只在生產環境和有 ID 時載入 */}
         {GA_MEASUREMENT_ID && (

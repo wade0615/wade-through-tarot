@@ -67,6 +67,7 @@ export function TarotCardComponent({
           src={card.imageUrl}
           alt={`${card.name} (${card.nameEn})`}
           fill
+          sizes="(max-width: 768px) 30vw, 96px"
           className="object-cover"
           onError={() => {
             // 如果圖片載入失敗，顯示備用的 emoji 版本
