@@ -6,8 +6,12 @@ import { getTarotCardById, TarotCard } from "@/data/tarotCards";
 import Link from "next/link";
 import React from "react";
 
-export default function CardPage({ params }: { params: any }) {
-  const { id } = React.use(params);
+export default function CardPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = React.use(params as Promise<{ id: string }>);
   const [card, setCard] = useState<TarotCard | null>(null);
   const [loading, setLoading] = useState(true);
 
