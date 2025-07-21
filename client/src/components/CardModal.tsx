@@ -66,6 +66,7 @@ export default function CardModal({ card, onClose }: CardModalProps) {
                   src={card.imageUrl}
                   alt={card.name}
                   fill
+                  sizes="(max-width: 768px) 80vw, 320px"
                   className="rounded-lg shadow-lg object-cover"
                 />
               </div>

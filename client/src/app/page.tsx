@@ -105,7 +105,23 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-slate-900">
+    <main className="min-h-screen min-h-[100dvh] bg-gradient-to-br from-gray-900 via-blue-900 to-slate-900">
+      {/* SEO 歡迎詞與服務介紹 */}
+      <section
+        className="bg-white/10 rounded-lg p-6 my-8 text-center"
+        aria-label="網站介紹"
+      >
+        <h1 className="text-3xl font-bold text-blue-200 mb-2">
+          歡迎來到 Wade Through Tarot 線上塔羅占卜
+        </h1>
+        <p className="text-blue-100 mb-2">
+          本站提供免費、即時的 AI
+          塔羅占卜服務，結合經典偉特塔羅牌與現代人工智慧，協助你探索內心、預見未來。
+        </p>
+        <p className="text-blue-100">
+          你可以選擇多種牌陣，獲得專業的牌義解析與個人化建議，無論是感情、事業、人生方向，都能找到屬於你的答案。
+        </p>
+      </section>
       <div className="container mx-auto px-4 py-8">
         {currentView === "setup" && (
           <SetupView onQuestionSubmit={handleQuestionSubmit} />

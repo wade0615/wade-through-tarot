@@ -31,6 +31,28 @@ export default function CardsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
       <div className="max-w-7xl mx-auto">
+        {/* SEO 塔羅牌圖鑑說明 */}
+        <section
+          className="bg-white/10 rounded-lg p-6 my-8"
+          aria-label="塔羅牌介紹"
+        >
+          <h2 className="text-xl font-bold text-blue-200 mb-2">
+            什麼是塔羅牌？
+          </h2>
+          <p className="text-blue-100 mb-2">
+            塔羅牌是一套源自歐洲的神秘工具，包含22張大阿爾卡納與56張小阿爾卡納，象徵人生各種階段與課題。每張牌都有獨特的圖像與深刻的象徵意義，能協助我們自我探索、預測未來、獲得指引。
+          </p>
+          <h3 className="text-lg font-semibold text-blue-100 mt-4">
+            塔羅牌的分類
+          </h3>
+          <ul className="list-disc list-inside text-blue-100">
+            <li>大阿爾卡納（Major Arcana）：代表人生重大轉折與靈性課題</li>
+            <li>
+              小阿爾卡納（Minor
+              Arcana）：細分為聖杯、權杖、寶劍、金幣四組，象徵日常生活的各種面向
+            </li>
+          </ul>
+        </section>
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-4">塔羅牌圖鑑</h1>
           <p className="text-lg text-blue-200 mb-2">78張偉特塔羅牌完整解析</p>
@@ -93,9 +115,10 @@ export default function CardsPage() {
                         <div className="aspect-[3/5] relative mb-3">
                           <Image
                             src={card.imageUrl}
-                            alt={`${card.name} (${card.nameEn}) - 塔羅牌`}
+                            alt={card.name}
                             fill
-                            className="object-cover rounded-lg"
+                            sizes="(max-width: 768px) 40vw, 180px"
+                            className="object-contain"
                           />
                         </div>
                         <div className="text-center">
@@ -128,7 +151,6 @@ export default function CardsPage() {
           返回上一頁
         </button>
       </div>
-
     </div>
   );
 }
