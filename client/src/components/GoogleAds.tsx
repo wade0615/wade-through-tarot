@@ -2,7 +2,12 @@
 
 import Script from "next/script";
 import { useEffect, useRef } from "react";
-import { getPublisherId, shouldShowAds } from "@/config/ads";
+import {
+  getPublisherId,
+  shouldShowAds,
+  shouldLoadAdSenseScript,
+  isReviewMode,
+} from "@/config/ads";
 
 interface GoogleAdsProps {
   adSlot: string;
@@ -15,6 +20,7 @@ interface GoogleAdsProps {
 /**
  * Google Ads 廣告組件
  * 支援多種廣告格式和響應式設計
+ * 審核期間會隱藏廣告但保留容器結構
  */
 export default function GoogleAds({
   adSlot,
@@ -26,8 +32,13 @@ export default function GoogleAds({
   const adRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // 確保 Google AdSense 已載入
-    if (typeof window !== "undefined" && window.adsbygoogle) {
+    // 只有在應該顯示廣告且不是審核模式時才觸發廣告載入
+    if (
+      typeof window !== "undefined" &&
+      window.adsbygoogle &&
+      shouldShowAds() &&
+      !isReviewMode()
+    ) {
       try {
         // 觸發廣告載入
         (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -37,7 +48,7 @@ export default function GoogleAds({
     }
   }, []);
 
-  // 如果不應該顯示廣告，返回空內容
+  // 如果不應該顯示廣告，返回隱形容器（保持佈局）
   if (!shouldShowAds()) {
     return (
       <div
@@ -46,15 +57,26 @@ export default function GoogleAds({
           display: "block",
           textAlign: "center",
           margin: "20px auto",
-          backgroundColor: "rgba(255, 255, 255, 0.1)",
+          backgroundColor: "transparent",
           borderRadius: "8px",
-          padding: "20px",
+          padding: "10px",
           minHeight: "100px",
-          color: "rgba(255, 255, 255, 0.6)",
+          border: "1px dashed rgba(255, 255, 255, 0.1)",
+          ...style,
         }}
+        data-ad-slot={adSlot}
+        data-ad-review-mode="true"
       >
-        <p>廣告位置</p>
-        <small>開發環境中不顯示廣告</small>
+        {isReviewMode() ? (
+          <div style={{ color: "rgba(255, 255, 255, 0.3)", fontSize: "12px" }}>
+            AdSense 審核中...
+          </div>
+        ) : (
+          <div style={{ color: "rgba(255, 255, 255, 0.6)" }}>
+            <p>廣告位置</p>
+            <small>開發環境中不顯示廣告</small>
+          </div>
+        )}
       </div>
     );
   }
@@ -87,13 +109,15 @@ export default function GoogleAds({
 
   return (
     <>
-      {/* Google AdSense 腳本 */}
-      <Script
-        async
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${getPublisherId()}`}
-        crossOrigin="anonymous"
-        strategy="afterInteractive"
-      />
+      {/* Google AdSense 腳本 - 審核期間也要載入 */}
+      {shouldLoadAdSenseScript() && (
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${getPublisherId()}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      )}
 
       {/* 廣告容器 */}
       <div
