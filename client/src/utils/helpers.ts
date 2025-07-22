@@ -44,9 +44,9 @@ export const spreadPositions = {
   'celtic-cross': [
     { position: 0, name: '當前狀況', description: '問題的核心或目前狀況' },
     { position: 1, name: '挑戰', description: '面臨的阻礙或挑戰' },
-    { position: 2, name: '遠程過去', description: '深層的過去影響' },
+    { position: 2, name: '顯意識', description: '有認知到的想法' },
     { position: 3, name: '近期過去', description: '最近的過去事件' },
-    { position: 4, name: '可能的未來', description: '可能的發展' },
+    { position: 4, name: '淺意識', description: '沒認知到但在影響你的想法' },
     { position: 5, name: '近期未來', description: '即將發生的事' },
     { position: 6, name: '你的方法', description: '你處理問題的方式' },
     { position: 7, name: '外在影響', description: '周圍環境的影響' },

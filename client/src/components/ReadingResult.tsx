@@ -152,6 +152,22 @@ export function ReadingResult({
       {/* Google Ads 廣告位置 */}
       <ResponsiveAd adSlot={getAdSlot("RESPONSIVE_GENERAL")} />
 
+      {/* 操作按鈕 */}
+      <div className="flex justify-center space-x-4">
+        {/* <button
+          onClick={handleSaveReading}
+          className="px-6 py-3 bg-blue-900 text-white rounded-lg font-medium hover:bg-blue-800 transition-colors border border-blue-700"
+        >
+          保存這次占卜
+        </button> */}
+        <button
+          onClick={handleNewReading}
+          className="px-6 py-3 bg-gray-700 text-blue-100 rounded-lg font-medium hover:bg-gray-600 transition-colors border border-gray-600"
+        >
+          開始新的占卜
+        </button>
+      </div>
+
       {/* 牌卡解釋 */}
       <div className="space-y-6">
         {selectedCards.map((selectedCard, index) => {
@@ -250,21 +266,6 @@ export function ReadingResult({
           );
         })}
       </div>
-      {/* 操作按鈕 */}
-      <div className="flex justify-center space-x-4">
-        {/* <button
-          onClick={handleSaveReading}
-          className="px-6 py-3 bg-blue-900 text-white rounded-lg font-medium hover:bg-blue-800 transition-colors border border-blue-700"
-        >
-          保存這次占卜
-        </button> */}
-        <button
-          onClick={handleNewReading}
-          className="px-6 py-3 bg-gray-700 text-blue-100 rounded-lg font-medium hover:bg-gray-600 transition-colors border border-gray-600"
-        >
-          開始新的占卜
-        </button>
-      </div>
     </div>
   );
 }
@@ -291,7 +292,7 @@ function generateOverallAdvice(
     spreadName = "三牌陣-過去,現在,未來";
   } else if (spreadType === "celtic-cross") {
     spreadName =
-      "凱爾特十字牌陣-過去,現況,未來,挑戰阻力,淺意識,顯意識,態度,環境,希望恐懼,結果";
+      "凱爾特十字牌陣-現況,挑戰阻力,淺意識,過去,顯意識,未來,態度,環境,希望恐懼,結果";
   }
 
   // 生成抽牌結果
