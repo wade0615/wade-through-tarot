@@ -87,6 +87,14 @@ export function isDevelopment(): boolean {
 }
 
 /**
+ * 檢查是否為審核模式
+ * 審核期間設為 true，通過後設為 false
+ */
+export function isReviewMode(): boolean {
+  return process.env.NEXT_PUBLIC_ADS_ENABLED === "false";
+}
+
+/**
  * 檢查是否應該顯示廣告
  */
 export function shouldShowAds(): boolean {
@@ -95,9 +103,28 @@ export function shouldShowAds(): boolean {
     return false;
   }
 
+  // 在審核模式中不顯示實際廣告（但保留容器）
+  if (isReviewMode()) {
+    return false;
+  }
+
   // 檢查是否有有效的 Publisher ID
   return (
     ADS_CONFIG.PUBLISHER_ID !== "ca-pub-4201768192395434" ||
     process.env.NODE_ENV === "production"
   );
+}
+
+/**
+ * 檢查是否應該載入 AdSense 腳本
+ * 審核期間也要載入腳本，確保審核通過
+ */
+export function shouldLoadAdSenseScript(): boolean {
+  // 開發環境不載入
+  if (isDevelopment()) {
+    return false;
+  }
+
+  // 生產環境都要載入（包括審核期間）
+  return process.env.NODE_ENV === "production";
 }
