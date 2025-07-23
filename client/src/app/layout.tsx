@@ -210,7 +210,7 @@ export default function RootLayout({
       >
         {/* SEO 主選單 */}
         <nav
-          className="w-full bg-slate-900/80 text-blue-100 py-3 px-4 flex flex-wrap gap-4 justify-center shadow-md"
+          className="w-full fixed top-0 left-0 z-50 bg-slate-900/80 text-blue-100 py-3 px-4 flex flex-wrap gap-4 justify-center shadow-md"
           aria-label="主選單"
         >
           <Link href="/" className="hover:underline font-semibold">
@@ -229,10 +229,14 @@ export default function RootLayout({
             隱私權政策
           </Link>
         </nav>
-        {children}
+        {/* 增加 padding-top 以避免內容被 nav 遮擋，高度與 nav 相同 */}
+        <div className="pt-[60px]">
+          {/* nav 約 48~60px 高 */}
+          {children}
+        </div>
         {/* SEO 頁腳 */}
         <footer
-          className="w-full bg-slate-900/90 text-blue-200 text-center py-6 mt-12"
+          className="w-full bg-slate-900/90 text-blue-200 text-center py-6"
           aria-label="網站頁腳"
         >
           <div>

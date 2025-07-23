@@ -108,7 +108,7 @@ export default function Home() {
     <main className="min-h-screen min-h-[100dvh] bg-gradient-to-br from-gray-900 via-blue-900 to-slate-900">
       {/* SEO 歡迎詞與服務介紹 */}
       <section
-        className="bg-white/10 rounded-lg p-6 my-8 text-center"
+        className="bg-white/10 rounded-lg p-6 mb-8 text-center"
         aria-label="網站介紹"
       >
         <h1 className="text-3xl font-bold text-blue-200 mb-2">
