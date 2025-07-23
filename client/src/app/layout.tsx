@@ -232,7 +232,7 @@ export default function RootLayout({
         {children}
         {/* SEO 頁腳 */}
         <footer
-          className="w-full bg-slate-900/90 text-blue-200 text-center py-6 mt-12"
+          className="w-full bg-slate-900/90 text-blue-200 text-center py-6"
           aria-label="網站頁腳"
         >
           <div>

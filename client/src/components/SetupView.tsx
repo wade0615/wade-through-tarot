@@ -30,7 +30,7 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
 
   return (
     <div className="max-w-2xl mx-auto text-center space-y-8">
-      <header className="space-y-4">
+      {/* <header className="space-y-4">
         <h1 className="text-4xl font-bold text-white mb-2">
           Wade Through Tarot
         </h1>
@@ -38,7 +38,7 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
         <p className="text-sm text-gray-300">
           免費線上塔羅占卜，提供專業的塔羅牌解析和靈性指引
         </p>
-      </header>
+      </header> */}
 
       {/* 功能特色 */}
       <section className="bg-white/5 backdrop-blur-sm rounded-lg p-6">
@@ -162,7 +162,7 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
       </section>
 
       {/* 額外功能 */}
-      <section className="space-y-4">
+      <section className="space-y-4 mb-12">
         <button
           type="button"
           onClick={() => router.push("/cards")}
