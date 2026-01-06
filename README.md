@@ -117,7 +117,27 @@ wade-through-tarot/
    yarn install
    ```
 
-4. **啟動開發服務器**
+4. **設定環境變數**
+
+   ```bash
+   # 複製環境變數範例檔案
+   cp .env.example .env.local
+
+   # 使用編輯器開啟 .env.local 並填入實際值
+   # 必填：
+   # - NEXT_PUBLIC_ADSENSE_ID (Google AdSense Publisher ID)
+   # - NEXT_PUBLIC_SITE_URL (網站 URL)
+   #
+   # 選填：
+   # - NEXT_PUBLIC_GA_MEASUREMENT_ID (Google Analytics ID)
+   ```
+
+   **重要環境變數說明**：
+   - `NEXT_PUBLIC_GA_MEASUREMENT_ID`: 從 [Google Analytics](https://analytics.google.com/) 取得
+   - `NEXT_PUBLIC_ADSENSE_ID`: 從 [Google AdSense](https://www.google.com/adsense/) 取得
+   - `NEXT_PUBLIC_DEV_MODE`: 本地開發建議設為 `true` 以關閉廣告
+
+5. **啟動開發服務器**
 
    ```bash
    npm run dev
@@ -125,7 +145,7 @@ wade-through-tarot/
    yarn dev
    ```
 
-5. **打開瀏覽器**
+6. **打開瀏覽器**
    訪問 `http://localhost:3000` 開始使用
 
 ### 構建生產版本

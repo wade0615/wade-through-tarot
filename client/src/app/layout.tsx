@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 // 從環境變數獲取 Google Analytics Measurement ID
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
+// 從環境變數獲取 Google AdSense Publisher ID
+const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID;
+
 export const metadata: Metadata = {
   title: "Wade Through Tarot - 線上塔羅占卜 | AI 塔羅抽牌 | 凱爾特十字占卜",
   description:
@@ -198,12 +201,14 @@ export default function RootLayout({
           }}
         />
 
-        {/* Google AdSense 程式碼 */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4201768192395434"
-          crossOrigin="anonymous"
-        />
+        {/* Google AdSense 程式碼 - 只在有 Publisher ID 時載入 */}
+        {ADSENSE_ID && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ID}`}
+            crossOrigin="anonymous"
+          />
+        )}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

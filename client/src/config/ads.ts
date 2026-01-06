@@ -1,12 +1,12 @@
 /**
  * Google Ads 配置
- * 請將 ca-pub-XXXXXXXXXX 替換為您的實際 Publisher ID
- * 請將 ad-slot-XXXXXX 替換為您的實際廣告單元 ID
+ * Publisher ID 從環境變數讀取
+ * 請在 .env.local 中設定 NEXT_PUBLIC_ADSENSE_ID
  */
 
 export const ADS_CONFIG = {
-  // Publisher ID - 請替換為您的實際 ID
-  PUBLISHER_ID: "ca-pub-4201768192395434",
+  // Publisher ID - 從環境變數讀取
+  PUBLISHER_ID: process.env.NEXT_PUBLIC_ADSENSE_ID || "",
 
   // 廣告單元配置
   AD_SLOTS: {
@@ -103,16 +103,18 @@ export function shouldShowAds(): boolean {
     return false;
   }
 
+  // 如果設定為開發模式，不顯示廣告
+  if (process.env.NEXT_PUBLIC_DEV_MODE === "true") {
+    return false;
+  }
+
   // 在審核模式中不顯示實際廣告（但保留容器）
   if (isReviewMode()) {
     return false;
   }
 
   // 檢查是否有有效的 Publisher ID
-  return (
-    ADS_CONFIG.PUBLISHER_ID !== "ca-pub-4201768192395434" ||
-    process.env.NODE_ENV === "production"
-  );
+  return !!ADS_CONFIG.PUBLISHER_ID && ADS_CONFIG.PUBLISHER_ID.startsWith("ca-pub-");
 }
 
 /**
