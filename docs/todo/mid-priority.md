@@ -19,10 +19,28 @@
 
 ## 項目 1：畫面整理 - UI/UX 改善與優化
 
+### 📚 相關文件
+
+本項目已完成深度 UI/UX 分析，詳細的檢查結果與實作計劃請參閱：
+
+- **[UI/UX 審查報告](./ui-ux-audit-report.md)** - 完整的問題清單、優先級分析與程式碼範例
+  - 涵蓋 13 個主要問題領域
+  - 100+ 具體問題與修復建議
+  - 按優先級（高/中/低）分類
+  - 包含 WCAG 2.1 AA 無障礙標準檢查
+
+- **[UI/UX 改善實作計劃](./ui-ux-improvement-plan.md)** - 詳細的三階段實作步驟
+  - Phase 1 (高優先): Toast 系統、Skeleton、按鈕尺寸、色彩對比、Error Boundary、響應式佈局
+  - Phase 2 (中優先): 進度指示器、表單驗證、無障礙標籤
+  - Phase 3 (低優先): 設計系統、動畫、效能優化
+  - 包含完整的測試檢查清單與驗收標準
+
 ### 📝 目標
+
 優先檢查排版與互動體驗，提出並實施 UI/UX 改善方案，提升使用者體驗與轉換率
 
 ### 🎯 成功標準
+
 - [ ] 完成 UI/UX 現況檢查報告
 - [ ] 實施至少 80% 的改善項目
 - [ ] 行動裝置體驗最佳化
@@ -46,6 +64,7 @@ npm run dev
 **需檢查的頁面與項目**：
 
 1. **首頁占卜流程** (`/`)
+
    - [ ] SetupView（設定問題與牌陣）
      - 問題輸入框是否清晰易用？
      - 牌陣選擇是否直觀？
@@ -60,12 +79,14 @@ npm run dev
      - 分享/儲存功能是否方便？
 
 2. **塔羅牌圖鑑** (`/cards`)
+
    - [ ] 卡牌網格排列是否整齊？
    - [ ] 分類導航是否清晰？
    - [ ] 響應式設計是否完善？
    - [ ] 載入效能如何？
 
 3. **單張卡牌頁面** (`/cards/[id]`)
+
    - [ ] 卡牌圖片是否清晰？
    - [ ] 資訊層級是否清楚？
    - [ ] 導航是否方便？
@@ -216,19 +237,21 @@ function CardSkeleton() {
       <div className="bg-gray-300 h-48 rounded-lg" />
       <div className="mt-2 bg-gray-200 h-4 rounded w-3/4" />
     </div>
-  )
+  );
 }
 
 // 使用
-{loading ? (
-  <div className="grid grid-cols-3 gap-4">
-    {Array.from({ length: 6 }).map((_, i) => (
-      <CardSkeleton key={i} />
-    ))}
-  </div>
-) : (
-  <CardGrid cards={cards} />
-)}
+{
+  loading ? (
+    <div className="grid grid-cols-3 gap-4">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <CardSkeleton key={i} />
+      ))}
+    </div>
+  ) : (
+    <CardGrid cards={cards} />
+  );
+}
 ```
 
 4. **增強錯誤處理**
@@ -236,54 +259,60 @@ function CardSkeleton() {
 ```typescript
 // src/components/ErrorBoundary.tsx 新增
 
-"use client"
+"use client";
 
-import { Component, ReactNode } from 'react'
+import { Component, ReactNode } from "react";
 
 interface Props {
-  children: ReactNode
-  fallback?: ReactNode
+  children: ReactNode;
+  fallback?: ReactNode;
 }
 
 interface State {
-  hasError: boolean
-  error?: Error
+  hasError: boolean;
+  error?: Error;
 }
 
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
-    super(props)
-    this.state = { hasError: false }
+    super(props);
+    this.state = { hasError: false };
   }
 
   static getDerivedStateFromError(error: Error) {
-    return { hasError: true, error }
+    return { hasError: true, error };
   }
 
   render() {
     if (this.state.hasError) {
-      return this.props.fallback || (
-        <div className="min-h-screen flex items-center justify-center
-                        bg-gradient-to-br from-purple-900 to-blue-900">
-          <div className="text-center text-white p-8 bg-white/10
-                          backdrop-blur-sm rounded-lg max-w-md">
-            <h2 className="text-2xl font-bold mb-4">😔 發生錯誤</h2>
-            <p className="text-blue-200 mb-4">
-              很抱歉，系統遇到了一些問題。請重新整理頁面再試一次。
-            </p>
-            <button
-              onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-blue-500 hover:bg-blue-600
-                         rounded-lg font-medium transition-colors"
+      return (
+        this.props.fallback || (
+          <div
+            className="min-h-screen flex items-center justify-center
+                        bg-gradient-to-br from-purple-900 to-blue-900"
+          >
+            <div
+              className="text-center text-white p-8 bg-white/10
+                          backdrop-blur-sm rounded-lg max-w-md"
             >
-              重新整理頁面
-            </button>
+              <h2 className="text-2xl font-bold mb-4">😔 發生錯誤</h2>
+              <p className="text-blue-200 mb-4">
+                很抱歉，系統遇到了一些問題。請重新整理頁面再試一次。
+              </p>
+              <button
+                onClick={() => window.location.reload()}
+                className="px-6 py-3 bg-blue-500 hover:bg-blue-600
+                         rounded-lg font-medium transition-colors"
+              >
+                重新整理頁面
+              </button>
+            </div>
           </div>
-        </div>
-      )
+        )
+      );
     }
 
-    return this.props.children
+    return this.props.children;
   }
 }
 ```
@@ -442,6 +471,7 @@ npm start
 ```
 
 ### ✅ 驗證清單
+
 - [ ] UI/UX 檢查報告已完成
 - [ ] 高優先改善項目已實施
 - [ ] 行動裝置體驗已優化
@@ -455,9 +485,11 @@ npm start
 ## 項目 2：畫面整理 - 卡牌 SEO 優化
 
 ### 📝 目標
+
 優化每張塔羅牌的獨立頁面，提升搜尋引擎可見度與索引效果
 
 ### 🎯 成功標準
+
 - [ ] 所有 78 張卡牌都有 SEO 優化的獨立頁面
 - [ ] 動態 meta tags 設定完成
 - [ ] 結構化資料（Schema.org）實作完成
@@ -475,54 +507,56 @@ npm start
 ```typescript
 // src/app/cards/[id]/page.tsx
 
-import { Metadata } from 'next'
-import { getTarotCardById, getAllTarotCards } from '@/data/tarotCards'
-import { notFound } from 'next/navigation'
-import CardDetailClient from './CardDetailClient'
+import { Metadata } from "next";
+import { getTarotCardById, getAllTarotCards } from "@/data/tarotCards";
+import { notFound } from "next/navigation";
+import CardDetailClient from "./CardDetailClient";
 
 // 生成所有卡牌的靜態路徑
 export async function generateStaticParams() {
-  const allCards = getAllTarotCards()
+  const allCards = getAllTarotCards();
 
   return allCards.map((card) => ({
     id: card.id,
-  }))
+  }));
 }
 
 // 動態生成 meta tags
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const { id } = await params
-  const card = getTarotCardById(id)
+  const { id } = await params;
+  const card = getTarotCardById(id);
 
   if (!card) {
     return {
-      title: '找不到卡牌',
-    }
+      title: "找不到卡牌",
+    };
   }
 
   const suitNames = {
-    major: '大阿爾克納',
-    cups: '聖杯',
-    pentacles: '金幣',
-    swords: '寶劍',
-    wands: '權杖',
-  }
+    major: "大阿爾克納",
+    cups: "聖杯",
+    pentacles: "金幣",
+    swords: "寶劍",
+    wands: "權杖",
+  };
 
-  const title = `${card.name} (${card.nameEn}) | ${suitNames[card.suit]} | Wade Through Tarot`
-  const description = `${card.description} 了解 ${card.name} 的正位與逆位含義、關鍵詞、象徵意義，以及在愛情、事業、健康方面的解讀。`
+  const title = `${card.name} (${card.nameEn}) | ${
+    suitNames[card.suit]
+  } | Wade Through Tarot`;
+  const description = `${card.description} 了解 ${card.name} 的正位與逆位含義、關鍵詞、象徵意義，以及在愛情、事業、健康方面的解讀。`;
   const keywords = [
     card.name,
     card.nameEn,
-    '塔羅牌',
+    "塔羅牌",
     suitNames[card.suit],
-    '塔羅占卜',
-    '塔羅解析',
+    "塔羅占卜",
+    "塔羅解析",
     ...card.keywords,
-  ].join(', ')
+  ].join(", ");
 
   return {
     title,
@@ -531,7 +565,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      type: 'article',
+      type: "article",
       images: [
         {
           url: card.imageUrl,
@@ -540,10 +574,10 @@ export async function generateMetadata({
           alt: `${card.name} 塔羅牌`,
         },
       ],
-      siteName: 'Wade Through Tarot',
+      siteName: "Wade Through Tarot",
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title,
       description,
       images: [card.imageUrl],
@@ -551,23 +585,23 @@ export async function generateMetadata({
     alternates: {
       canonical: `/cards/${card.id}`,
     },
-  }
+  };
 }
 
 // Server Component
 export default async function CardPage({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = await params
-  const card = getTarotCardById(id)
+  const { id } = await params;
+  const card = getTarotCardById(id);
 
   if (!card) {
-    notFound()
+    notFound();
   }
 
-  return <CardDetailClient card={card} />
+  return <CardDetailClient card={card} />;
 }
 ```
 
@@ -612,49 +646,49 @@ EOF
 export default async function CardPage({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = await params
-  const card = getTarotCardById(id)
+  const { id } = await params;
+  const card = getTarotCardById(id);
 
   if (!card) {
-    notFound()
+    notFound();
   }
 
   const suitNames = {
-    major: '大阿爾克納',
-    cups: '聖杯',
-    pentacles: '金幣',
-    swords: '寶劍',
-    wands: '權杖',
-  }
+    major: "大阿爾克納",
+    cups: "聖杯",
+    pentacles: "金幣",
+    swords: "寶劍",
+    wands: "權杖",
+  };
 
   // 結構化資料
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
+    "@context": "https://schema.org",
+    "@type": "Article",
     headline: `${card.name} (${card.nameEn})`,
     image: card.imageUrl,
     description: card.description,
     author: {
-      '@type': 'Organization',
-      name: 'Wade Through Tarot',
+      "@type": "Organization",
+      name: "Wade Through Tarot",
     },
     publisher: {
-      '@type': 'Organization',
-      name: 'Wade Through Tarot',
+      "@type": "Organization",
+      name: "Wade Through Tarot",
       logo: {
-        '@type': 'ImageObject',
-        url: '/logo.png',
+        "@type": "ImageObject",
+        url: "/logo.png",
       },
     },
     mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://wade-through-tarot.vercel.app/cards/${card.id}`,
+      "@type": "WebPage",
+      "@id": `https://wade-through-tarot.vercel.app/cards/${card.id}`,
     },
-    keywords: card.keywords.join(', '),
+    keywords: card.keywords.join(", "),
     articleSection: suitNames[card.suit],
-  }
+  };
 
   return (
     <>
@@ -665,7 +699,7 @@ export default async function CardPage({
       />
       <CardDetailClient card={card} />
     </>
-  )
+  );
 }
 ```
 
@@ -674,15 +708,15 @@ export default async function CardPage({
 ```typescript
 // src/components/Breadcrumb.tsx
 
-import Link from 'next/link'
+import Link from "next/link";
 
 interface BreadcrumbItem {
-  label: string
-  href: string
+  label: string;
+  href: string;
 }
 
 interface Props {
-  items: BreadcrumbItem[]
+  items: BreadcrumbItem[];
 }
 
 export function Breadcrumb({ items }: Props) {
@@ -714,17 +748,17 @@ export function Breadcrumb({ items }: Props) {
         ))}
       </ol>
     </nav>
-  )
+  );
 }
 
 // 在卡牌頁面中使用
 <Breadcrumb
   items={[
-    { label: '塔羅牌圖鑑', href: '/cards' },
+    { label: "塔羅牌圖鑑", href: "/cards" },
     { label: suitNames[card.suit], href: `/cards#${card.suit}` },
     { label: card.name, href: `/cards/${card.id}` },
   ]}
-/>
+/>;
 ```
 
 #### Step 2.5：增加相關卡牌推薦
@@ -785,47 +819,47 @@ const relatedCards = getRelatedCards(card.id)
 ```typescript
 // src/app/sitemap.ts
 
-import { MetadataRoute } from 'next'
-import { getAllTarotCards } from '@/data/tarotCards'
+import { MetadataRoute } from "next";
+import { getAllTarotCards } from "@/data/tarotCards";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://wade-through-tarot.vercel.app'
-  const allCards = getAllTarotCards()
+  const baseUrl = "https://wade-through-tarot.vercel.app";
+  const allCards = getAllTarotCards();
 
   const cardUrls = allCards.map((card) => ({
     url: `${baseUrl}/cards/${card.id}`,
     lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
+    changeFrequency: "monthly" as const,
     priority: 0.8,
-  }))
+  }));
 
   return [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: "daily",
       priority: 1,
     },
     {
       url: `${baseUrl}/cards`,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: "weekly",
       priority: 0.9,
     },
     ...cardUrls,
     {
       url: `${baseUrl}/learn`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/about`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: "monthly",
       priority: 0.5,
     },
-  ]
+  ];
 }
 ```
 
@@ -834,21 +868,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
 ```typescript
 // src/app/robots.ts
 
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/api/', '/admin/'],
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/api/", "/admin/"],
     },
-    sitemap: 'https://wade-through-tarot.vercel.app/sitemap.xml',
-  }
+    sitemap: "https://wade-through-tarot.vercel.app/sitemap.xml",
+  };
 }
 ```
 
 ### ✅ 驗證清單
+
 - [ ] 所有卡牌頁面已改為 SSG
 - [ ] Meta tags 動態生成正常
 - [ ] JSON-LD 結構化資料正確
@@ -863,9 +898,11 @@ export default function robots(): MetadataRoute.Robots {
 ## 項目 3：畫面整理 - 頁面整併
 
 ### 📝 目標
+
 合併「關於我們」與「隱私權政策」兩頁成一頁，簡化網站結構
 
 ### 🎯 成功標準
+
 - [ ] 新增統一的「關於與隱私」頁面
 - [ ] 內容完整整合
 - [ ] 舊路由設定重導向
@@ -1092,18 +1129,18 @@ EOF
 ```typescript
 // src/app/about/page.tsx - 改為重導向
 
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 
 export default function AboutPage() {
-  redirect('/info')
+  redirect("/info");
 }
 
 // src/app/privacy/page.tsx - 改為重導向
 
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 
 export default function PrivacyPage() {
-  redirect('/info')
+  redirect("/info");
 }
 ```
 
@@ -1130,15 +1167,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/info`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: "monthly",
       priority: 0.5,
     },
     // 移除 /about 和 /privacy
-  ]
+  ];
 }
 ```
 
 ### ✅ 驗證清單
+
 - [ ] 新的 /info 頁面已建立
 - [ ] Tab 切換功能正常
 - [ ] /about 重導向至 /info
@@ -1152,9 +1190,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 ## 項目 4：資料持久化
 
 ### 📝 目標
+
 實作使用者資料的本地儲存，包含占卜歷史、偏好設定等
 
 ### 🎯 成功標準
+
 - [ ] 占卜歷史可保存與查看
 - [ ] 使用者偏好設定可保存
 - [ ] 資料匯出/匯入功能完成
@@ -1168,28 +1208,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
 // src/types/storage.ts
 
 export interface StoredReading {
-  id: string
-  timestamp: number
-  question: string
-  spreadType: 'single' | 'three-card' | 'celtic-cross'
+  id: string;
+  timestamp: number;
+  question: string;
+  spreadType: "single" | "three-card" | "celtic-cross";
   cards: Array<{
-    cardId: string
-    position: number
-    isReversed: boolean
-  }>
+    cardId: string;
+    position: number;
+    isReversed: boolean;
+  }>;
 }
 
 export interface UserPreferences {
-  theme?: 'light' | 'dark' | 'auto'
-  language?: 'zh-TW' | 'en'
-  notifications?: boolean
-  defaultSpreadType?: 'single' | 'three-card' | 'celtic-cross'
+  theme?: "light" | "dark" | "auto";
+  language?: "zh-TW" | "en";
+  notifications?: boolean;
+  defaultSpreadType?: "single" | "three-card" | "celtic-cross";
 }
 
 export interface AppStorage {
-  readings: StoredReading[]
-  preferences: UserPreferences
-  version: string
+  readings: StoredReading[];
+  preferences: UserPreferences;
+  version: string;
 }
 ```
 
@@ -1343,43 +1383,43 @@ EOF
 ```typescript
 // src/store/tarotStore.ts - 更新
 
-import { storageService } from '@/services/storage'
+import { storageService } from "@/services/storage";
 
 export const useTarotStore = create<TarotStore>((set, get) => ({
   // ... 現有狀態
 
   saveReading: () => {
-    const { currentQuestion, selectedCards, spreadType } = get()
+    const { currentQuestion, selectedCards, spreadType } = get();
 
-    if (selectedCards.length === 0) return
+    if (selectedCards.length === 0) return;
 
     const newReading = {
       id: `reading-${Date.now()}`,
       timestamp: Date.now(),
       question: currentQuestion,
       spreadType,
-      cards: selectedCards.map(sc => ({
+      cards: selectedCards.map((sc) => ({
         cardId: sc.card.id,
         position: sc.position,
         isReversed: sc.isReversed,
       })),
-    }
+    };
 
     // 保存到 localStorage
-    storageService.saveReading(newReading)
+    storageService.saveReading(newReading);
 
     // 也保存到 store 的 readingHistory
     set({
       readingHistory: [newReading, ...get().readingHistory],
-    })
+    });
   },
 
   // 載入歷史記錄
   loadReadingHistory: () => {
-    const readings = storageService.getAllReadings()
-    set({ readingHistory: readings })
+    const readings = storageService.getAllReadings();
+    set({ readingHistory: readings });
   },
-}))
+}));
 ```
 
 #### Step 4.4：建立歷史記錄頁面
@@ -1672,6 +1712,7 @@ EOF
 ```
 
 ### ✅ 驗證清單
+
 - [ ] Storage Service 實作完成
 - [ ] 占卜記錄可正確保存
 - [ ] 歷史記錄頁面正常運作
@@ -1685,9 +1726,11 @@ EOF
 ## 項目 5：SEO 優化
 
 ### 📝 目標
+
 全面優化網站 SEO，提升搜尋引擎排名與流量
 
 ### 🎯 成功標準
+
 - [ ] Lighthouse SEO 分數 > 95
 - [ ] 所有頁面都有適當的 meta tags
 - [ ] 結構化資料正確實作
@@ -1701,60 +1744,60 @@ EOF
 ```typescript
 // src/app/layout.tsx
 
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://wade-through-tarot.vercel.app'),
+  metadataBase: new URL("https://wade-through-tarot.vercel.app"),
   title: {
-    default: 'Wade Through Tarot - 免費線上塔羅占卜 | 78張塔羅牌完整解析',
-    template: '%s | Wade Through Tarot',
+    default: "Wade Through Tarot - 免費線上塔羅占卜 | 78張塔羅牌完整解析",
+    template: "%s | Wade Through Tarot",
   },
   description:
-    '提供免費、專業的線上塔羅占卜服務。包含78張完整偉特塔羅牌、多種牌陣選擇、詳細的正逆位解析。隨時隨地獲得塔羅指引，探索內心、預見未來。',
+    "提供免費、專業的線上塔羅占卜服務。包含78張完整偉特塔羅牌、多種牌陣選擇、詳細的正逆位解析。隨時隨地獲得塔羅指引，探索內心、預見未來。",
   keywords: [
-    '塔羅牌',
-    '塔羅占卜',
-    '線上占卜',
-    '免費占卜',
-    '偉特塔羅',
-    '塔羅解析',
-    '塔羅牌意義',
-    '三張牌',
-    '塞爾特十字',
-    'tarot',
-    'tarot reading',
+    "塔羅牌",
+    "塔羅占卜",
+    "線上占卜",
+    "免費占卜",
+    "偉特塔羅",
+    "塔羅解析",
+    "塔羅牌意義",
+    "三張牌",
+    "塞爾特十字",
+    "tarot",
+    "tarot reading",
   ],
-  authors: [{ name: 'Wade Through Tarot' }],
-  creator: 'Wade Through Tarot',
-  publisher: 'Wade Through Tarot',
+  authors: [{ name: "Wade Through Tarot" }],
+  creator: "Wade Through Tarot",
+  publisher: "Wade Through Tarot",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   openGraph: {
-    type: 'website',
-    locale: 'zh_TW',
-    url: 'https://wade-through-tarot.vercel.app',
-    title: 'Wade Through Tarot - 免費線上塔羅占卜',
+    type: "website",
+    locale: "zh_TW",
+    url: "https://wade-through-tarot.vercel.app",
+    title: "Wade Through Tarot - 免費線上塔羅占卜",
     description:
-      '提供免費、專業的線上塔羅占卜服務。包含78張完整偉特塔羅牌、多種牌陣選擇、詳細的正逆位解析。',
-    siteName: 'Wade Through Tarot',
+      "提供免費、專業的線上塔羅占卜服務。包含78張完整偉特塔羅牌、多種牌陣選擇、詳細的正逆位解析。",
+    siteName: "Wade Through Tarot",
     images: [
       {
-        url: '/og-image.png', // 需要建立
+        url: "/og-image.png", // 需要建立
         width: 1200,
         height: 630,
-        alt: 'Wade Through Tarot',
+        alt: "Wade Through Tarot",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Wade Through Tarot - 免費線上塔羅占卜',
+    card: "summary_large_image",
+    title: "Wade Through Tarot - 免費線上塔羅占卜",
     description:
-      '提供免費、專業的線上塔羅占卜服務。包含78張完整偉特塔羅牌、多種牌陣選擇、詳細的正逆位解析。',
-    images: ['/og-image.png'],
+      "提供免費、專業的線上塔羅占卜服務。包含78張完整偉特塔羅牌、多種牌陣選擇、詳細的正逆位解析。",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -1762,15 +1805,15 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
-    google: 'your-google-verification-code', // 需要從 Google Search Console 獲取
+    google: "your-google-verification-code", // 需要從 Google Search Console 獲取
   },
-}
+};
 ```
 
 #### Step 5.2：建立 OG Image
@@ -1788,23 +1831,23 @@ export const metadata: Metadata = {
 // src/app/cards/page.tsx
 
 export const metadata: Metadata = {
-  title: '塔羅牌圖鑑 - 78張偉特塔羅牌完整解析',
+  title: "塔羅牌圖鑑 - 78張偉特塔羅牌完整解析",
   description:
-    '瀏覽完整的78張偉特塔羅牌圖鑑，包含22張大阿爾克納和56張小阿爾克納。每張牌都有詳細的正逆位解釋、關鍵詞、象徵意義和實用建議。',
+    "瀏覽完整的78張偉特塔羅牌圖鑑，包含22張大阿爾克納和56張小阿爾克納。每張牌都有詳細的正逆位解釋、關鍵詞、象徵意義和實用建議。",
   openGraph: {
-    title: '塔羅牌圖鑑 - 78張偉特塔羅牌完整解析',
+    title: "塔羅牌圖鑑 - 78張偉特塔羅牌完整解析",
     description:
-      '瀏覽完整的78張偉特塔羅牌圖鑑，包含22張大阿爾克納和56張小阿爾克納。',
+      "瀏覽完整的78張偉特塔羅牌圖鑑，包含22張大阿爾克納和56張小阿爾克納。",
   },
-}
+};
 
 // src/app/learn/page.tsx
 
 export const metadata: Metadata = {
-  title: '塔羅學習 - 塔羅牌入門指南',
+  title: "塔羅學習 - 塔羅牌入門指南",
   description:
-    '學習塔羅牌的基礎知識，包含塔羅牌歷史、牌陣介紹、解牌技巧等。適合初學者入門的完整塔羅教學。',
-}
+    "學習塔羅牌的基礎知識，包含塔羅牌歷史、牌陣介紹、解牌技巧等。適合初學者入門的完整塔羅教學。",
+};
 ```
 
 #### Step 5.4：增加 FAQ 結構化資料
@@ -1931,6 +1974,7 @@ https://wade-through-tarot.vercel.app/sitemap.xml
 ```
 
 ### ✅ 驗證清單
+
 - [ ] 所有頁面 meta tags 完整
 - [ ] OG Image 已建立
 - [ ] 結構化資料正確
@@ -1944,9 +1988,11 @@ https://wade-through-tarot.vercel.app/sitemap.xml
 ## 項目 6：程式碼品質提升
 
 ### 📝 目標
+
 提升程式碼品質、可維護性與開發體驗
 
 ### 🎯 成功標準
+
 - [ ] ESLint 無警告
 - [ ] TypeScript strict mode 啟用
 - [ ] 測試覆蓋率維持 > 80%
@@ -2020,13 +2066,8 @@ chmod +x .husky/pre-commit
 
 {
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md}": [
-      "prettier --write"
-    ]
+    "*.{ts,tsx}": ["eslint --fix", "prettier --write"],
+    "*.{json,md}": ["prettier --write"]
   }
 }
 ```
@@ -2060,7 +2101,7 @@ EOF
 
 #### Step 6.6：增加程式碼文件
 
-```bash
+````bash
 # 建立 CONTRIBUTING.md
 cat > CONTRIBUTING.md << 'EOF'
 # 貢獻指南
@@ -2097,7 +2138,7 @@ cat > CONTRIBUTING.md << 'EOF'
 npm test              # 單元測試
 npm run test:e2e      # E2E 測試
 npm run test:coverage # 覆蓋率報告
-```
+````
 
 ## 建置
 
@@ -2105,8 +2146,10 @@ npm run test:coverage # 覆蓋率報告
 npm run build
 npm start
 ```
+
 EOF
-```
+
+````
 
 #### Step 6.7：增加 JSDoc 註解
 
@@ -2147,9 +2190,10 @@ export function shuffleArray<T>(array: T[]): T[] {
   }
   return shuffled
 }
-```
+````
 
 ### ✅ 驗證清單
+
 - [ ] TypeScript strict mode 已啟用
 - [ ] 所有 TypeScript 錯誤已修復
 - [ ] Husky Git hooks 已設定
@@ -2167,6 +2211,7 @@ export function shuffleArray<T>(array: T[]): T[] {
 完成所有中優先級項目後，請確認：
 
 ### 功能完整性
+
 - [ ] UI/UX 改善已實施
 - [ ] 所有卡牌頁面 SEO 優化完成
 - [ ] 頁面整併完成
@@ -2175,6 +2220,7 @@ export function shuffleArray<T>(array: T[]): T[] {
 - [ ] 程式碼品質提升完成
 
 ### 效能與品質
+
 - [ ] Lighthouse Performance > 85
 - [ ] Lighthouse SEO > 95
 - [ ] Lighthouse Accessibility > 90
@@ -2183,6 +2229,7 @@ export function shuffleArray<T>(array: T[]): T[] {
 - [ ] npm run build 成功
 
 ### 文件與部署
+
 - [ ] 所有文件已更新
 - [ ] CONTRIBUTING.md 完整
 - [ ] README 已更新
@@ -2206,8 +2253,8 @@ export function shuffleArray<T>(array: T[]): T[] {
 
 ---
 
-**開始日期**：____________
-**完成日期**：____________
-**實際耗時**：____________
+**開始日期**：\***\*\_\_\_\_\*\***
+**完成日期**：\***\*\_\_\_\_\*\***
+**實際耗時**：\***\*\_\_\_\_\*\***
 
 祝你實作順利！有任何問題歡迎隨時詢問。✨
