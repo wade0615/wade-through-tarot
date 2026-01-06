@@ -6,7 +6,7 @@ import { mockTarotCard } from '@/test/utils'
 describe('TarotCardComponent', () => {
   describe('Card Back Display', () => {
     it('should show card back when showBack is true', () => {
-      const { container } = render(
+      render(
         <TarotCardComponent card={mockTarotCard} showBack={true} />
       )
 
@@ -15,7 +15,7 @@ describe('TarotCardComponent', () => {
     })
 
     it('should show card back when card is undefined', () => {
-      const { container } = render(<TarotCardComponent />)
+      render(<TarotCardComponent />)
 
       expect(screen.getByText('TAROT')).toBeInTheDocument()
       expect(screen.getByText('✨')).toBeInTheDocument()

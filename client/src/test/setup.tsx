@@ -12,6 +12,7 @@ afterEach(() => {
 
 // Mock Next.js Image component
 vi.mock('next/image', () => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   default: (props: any) => {
     // eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element
     return <img {...props} />
@@ -20,6 +21,7 @@ vi.mock('next/image', () => ({
 
 // Mock Next.js Link component
 vi.mock('next/link', () => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   default: ({ children, href }: any) => {
     return <a href={href}>{children}</a>
   },
