@@ -5,6 +5,7 @@ import Image from "next/image";
 import { getTarotCardById, TarotCard } from "@/data/tarotCards";
 import Link from "next/link";
 import React from "react";
+import { CardDetailSkeleton } from "@/components/ui/CardDetailSkeleton";
 
 export default function CardPage({
   params,
@@ -25,8 +26,8 @@ export default function CardPage({
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
-        <div className="text-white text-xl">載入中...</div>
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+        <CardDetailSkeleton />
       </div>
     );
   }
