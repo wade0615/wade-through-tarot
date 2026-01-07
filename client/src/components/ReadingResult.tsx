@@ -204,7 +204,7 @@ export function ReadingResult({
                         ({interpretation.card.nameEn})
                       </span>
                       {interpretation.isReversed && (
-                        <span className="text-xs bg-red-900/30 text-red-300 px-2 py-1 rounded border border-red-800/50">
+                        <span className="text-xs bg-red-900 text-red-50 px-2 py-1 rounded border border-red-600">
                           逆位
                         </span>
                       )}

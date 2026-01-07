@@ -117,7 +117,7 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
               >
                 <h3 className="font-medium text-lg">{spread.name}</h3>
                 <p className="text-sm text-slate-400 mt-1">{spread.desc}</p>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-slate-300 mt-1">
                   {spread.cards} 張牌
                 </p>
                 <p className="text-xs text-blue-300 mt-2">
@@ -144,7 +144,7 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
               rows={3}
               aria-describedby="question-help"
             />
-            <p id="question-help" className="text-xs text-gray-400 mt-1">
+            <p id="question-help" className="text-xs text-slate-300 mt-1">
               輸入您的問題可以幫助您更好地理解牌面的含義
             </p>
           </div>
