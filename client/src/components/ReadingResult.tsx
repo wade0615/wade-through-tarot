@@ -181,7 +181,7 @@ export function ReadingResult({
 
       {/* 牌卡解釋 */}
       <div className="space-y-6">
-        {selectedCards.map((selectedCard, index) => {
+        {selectedCards.map((_selectedCard, index) => {
           const interpretation = getInterpretation(index);
           if (!interpretation) return null;
 

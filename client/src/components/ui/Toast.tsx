@@ -33,6 +33,7 @@ export function Toast({ id, type, message, duration = 3000, onClose }: ToastProp
       const timer = setTimeout(() => onClose(id), duration)
       return () => clearTimeout(timer)
     }
+    return undefined
   }, [id, duration, onClose])
 
   return (
