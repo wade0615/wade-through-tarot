@@ -228,11 +228,8 @@ export default function RootLayout({
           <Link href="/learn" className="hover:underline">
             塔羅教學
           </Link>
-          <Link href="/about" className="hover:underline">
-            關於我們
-          </Link>
-          <Link href="/privacy" className="hover:underline">
-            隱私權政策
+          <Link href="/info" className="hover:underline">
+            關於與隱私
           </Link>
         </nav>
         {/* 增加 padding-top 以避免內容被 nav 遮擋，高度與 nav 相同 */}
@@ -247,8 +244,8 @@ export default function RootLayout({
         >
           <div>
             © {new Date().getFullYear()} Wade Through Tarot 線上塔羅占卜 |{" "}
-            <Link href="/privacy" className="underline">
-              隱私權政策
+            <Link href="/info" className="underline">
+              關於與隱私
             </Link>
           </div>
         </footer>
