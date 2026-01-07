@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { TarotCard, allTarotCards } from "@/data/tarotCards";
 import { TarotCardComponent } from "./TarotCard";
 import { useTarotStore } from "@/store/tarotStore";
@@ -25,15 +25,10 @@ export function CardDeck({
   const [isShuffling, setIsShuffling] = useState(false);
   const { selectedCards, canAddCard, clearSelection } = useTarotStore();
 
-  // 組件初始化時洗牌
-  useEffect(() => {
-    shuffleDeck();
-  }, []);
-
   /**
    * 洗牌功能 - 清空已選擇的牌並重新洗牌
    */
-  const shuffleDeck = () => {
+  const shuffleDeck = useCallback(() => {
     setIsShuffling(true);
     setTimeout(() => {
       // 清空已選擇的牌
@@ -42,7 +37,12 @@ export function CardDeck({
       setShuffledCards(shuffleArray(allTarotCards));
       setIsShuffling(false);
     }, 1000);
-  };
+  }, [clearSelection]);
+
+  // 組件初始化時洗牌
+  useEffect(() => {
+    shuffleDeck();
+  }, [shuffleDeck]);
 
   /**
    * 處理牌卡點擊事件

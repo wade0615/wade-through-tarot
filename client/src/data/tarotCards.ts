@@ -2009,3 +2009,22 @@ export const getTarotCardById = (id: string): TarotCard | undefined => {
 export const getTarotCardsBySuit = (suit: TarotCard["suit"]): TarotCard[] => {
   return allTarotCards.filter((card) => card.suit === suit);
 };
+
+export const getRelatedCards = (cardId: string, limit: number = 3): TarotCard[] => {
+  const card = getTarotCardById(cardId);
+  if (!card) return [];
+
+  // 優先推薦同花色的卡牌
+  const sameSuit = allTarotCards.filter(
+    (c) => c.id !== cardId && c.suit === card.suit
+  );
+
+  // 隨機選擇
+  return sameSuit
+    .sort(() => Math.random() - 0.5)
+    .slice(0, limit);
+};
+
+export const getAllTarotCards = (): TarotCard[] => {
+  return allTarotCards;
+};

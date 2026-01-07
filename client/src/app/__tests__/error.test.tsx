@@ -5,10 +5,23 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import NotFound from '../not-found'
+import { ReactNode } from 'react'
+
+interface LinkProps {
+  children: ReactNode
+  href: string
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void
+  [key: string]: unknown
+}
+
+interface IconProps {
+  className?: string
+  [key: string]: unknown
+}
 
 // Mock next/link
 vi.mock('next/link', () => ({
-  default: ({ children, href, onClick, ...props }: any) => (
+  default: ({ children, href, onClick, ...props }: LinkProps) => (
     <a href={href} onClick={onClick} {...props}>
       {children}
     </a>
@@ -17,10 +30,10 @@ vi.mock('next/link', () => ({
 
 // Mock lucide-react icons with aria-hidden
 vi.mock('lucide-react', () => ({
-  Home: (props: any) => <svg data-testid="home-icon" aria-hidden="true" {...props} />,
-  ArrowLeft: (props: any) => <svg data-testid="arrow-left-icon" aria-hidden="true" {...props} />,
-  AlertTriangle: (props: any) => <svg data-testid="alert-triangle-icon" aria-hidden="true" {...props} />,
-  RefreshCw: (props: any) => <svg data-testid="refresh-icon" aria-hidden="true" {...props} />,
+  Home: (props: IconProps) => <svg data-testid="home-icon" aria-hidden="true" {...props} />,
+  ArrowLeft: (props: IconProps) => <svg data-testid="arrow-left-icon" aria-hidden="true" {...props} />,
+  AlertTriangle: (props: IconProps) => <svg data-testid="alert-triangle-icon" aria-hidden="true" {...props} />,
+  RefreshCw: (props: IconProps) => <svg data-testid="refresh-icon" aria-hidden="true" {...props} />,
 }))
 
 describe('Error Boundary', () => {

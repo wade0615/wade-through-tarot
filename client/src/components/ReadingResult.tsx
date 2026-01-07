@@ -5,7 +5,6 @@ import { SpreadLayout } from "./SpreadLayout";
 import { useTarotStore } from "@/store/tarotStore";
 import { TarotCard } from "@/data/tarotCards";
 import { spreadPositions, formatDate, cn } from "@/utils/helpers";
-import { useState } from "react";
 import { ResponsiveAd } from "@/components/GoogleAds";
 import { getAdSlot } from "@/config/ads";
 import { useToast } from "@/hooks/useToast";

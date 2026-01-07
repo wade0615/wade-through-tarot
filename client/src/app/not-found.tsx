@@ -1,3 +1,5 @@
+"use client"
+
 import Link from 'next/link'
 import { Home, ArrowLeft } from 'lucide-react'
 
@@ -23,18 +25,15 @@ export default function NotFound() {
             返回首頁
           </Link>
 
-          <Link
-            href="javascript:history.back()"
+          <button
+            type="button"
             className="px-6 py-3 min-h-[44px] bg-slate-700 text-white hover:bg-slate-600 rounded-lg transition-colors flex items-center justify-center gap-2 font-medium"
-            onClick={(e) => {
-              e.preventDefault()
-              window.history.back()
-            }}
+            onClick={() => window.history.back()}
             aria-label="返回上一頁"
           >
             <ArrowLeft className="w-4 h-4" aria-hidden="true" />
             返回上一頁
-          </Link>
+          </button>
         </div>
       </div>
     </div>

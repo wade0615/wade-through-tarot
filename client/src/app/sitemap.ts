@@ -1,32 +1,48 @@
-import { MetadataRoute } from 'next';
-import { allTarotCards, TarotCard } from '@/data/tarotCards';
+import { MetadataRoute } from "next"
+import { getAllTarotCards } from "@/data/tarotCards"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://your-domain.com'; // 請替換為您的實際域名
-  
-  // 靜態頁面
-  const staticPages = [
+  const baseUrl = "https://wade-through-tarot.vercel.app"
+  const allCards = getAllTarotCards()
+
+  const cardUrls = allCards.map((card) => ({
+    url: `${baseUrl}/cards/${card.id}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }))
+
+  return [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'daily' as const,
+      changeFrequency: "daily",
       priority: 1,
     },
     {
       url: `${baseUrl}/cards`,
       lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
+      changeFrequency: "weekly",
       priority: 0.9,
     },
-  ];
-
-  // 動態生成每張塔羅牌的頁面
-  const cardPages = allTarotCards.map((card: TarotCard) => ({
-    url: `${baseUrl}/cards/${card.id}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
-  }));
-
-  return [...staticPages, ...cardPages];
+    ...cardUrls,
+    {
+      url: `${baseUrl}/learn`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/privacy`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+  ]
 } 

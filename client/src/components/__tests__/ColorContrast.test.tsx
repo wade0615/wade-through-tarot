@@ -14,10 +14,11 @@
  */
 
 import { describe, it, expect, beforeEach } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { SetupView } from '../SetupView'
 import { ReadingResult } from '../ReadingResult'
 import { SpreadLayout } from '../SpreadLayout'
+import { SelectedCard } from '@/store/tarotStore'
 
 // Mock dependencies
 vi.mock('next/navigation', () => ({
@@ -31,7 +32,7 @@ const mockStore = {
   setQuestion: vi.fn(),
   spreadType: 'single' as const,
   setSpreadType: vi.fn(),
-  selectedCards: [] as any[],
+  selectedCards: [] as SelectedCard[],
   isReadingComplete: () => false,
   getMaxCards: () => 1,
   canAddCard: () => true,
