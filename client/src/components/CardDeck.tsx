@@ -128,11 +128,13 @@ export function CardDeck({
           onClick={shuffleDeck}
           disabled={isShuffling}
           className={cn(
-            "px-6 py-2 rounded-lg font-medium transition-all shadow-lg",
+            "px-6 py-3 min-h-[44px] rounded-lg font-medium transition-all shadow-lg",
             "bg-blue-600 text-white hover:bg-blue-700",
             "disabled:opacity-50 disabled:cursor-not-allowed",
             isShuffling && "animate-pulse"
           )}
+          aria-label={isShuffling ? "洗牌中" : "重新洗牌"}
+          aria-busy={isShuffling}
         >
           {isShuffling ? "洗牌中..." : "重新洗牌"}
         </button>

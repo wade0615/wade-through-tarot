@@ -154,7 +154,8 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
 
           <button
             type="submit"
-            className="w-full py-6 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-lg"
+            className="w-full py-4 min-h-[48px] bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-lg"
+            aria-label="開始塔羅占卜"
           >
             開始占卜
           </button>
@@ -166,7 +167,8 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
         <button
           type="button"
           onClick={() => router.push("/cards")}
-          className="w-full py-3 bg-purple-300 text-purple-900 rounded-lg font-medium hover:bg-purple-400 transition-colors shadow-lg"
+          className="w-full py-3 min-h-[44px] bg-purple-300 text-purple-900 rounded-lg font-medium hover:bg-purple-400 transition-colors shadow-lg"
+          aria-label="查看全部78張塔羅牌面"
         >
           查看所有牌面
         </button>

@@ -8,6 +8,7 @@ import { spreadPositions, formatDate, cn } from "@/utils/helpers";
 import { useState } from "react";
 import { ResponsiveAd } from "@/components/GoogleAds";
 import { getAdSlot } from "@/config/ads";
+import { useToast } from "@/hooks/useToast";
 
 interface ReadingResultProps {
   onNewReading?: () => void;
@@ -32,8 +33,7 @@ export function ReadingResult({
     clearSelection,
   } = useTarotStore();
 
-  const [copySuccess, setCopySuccess] = useState(false);
-
+  const toast = useToast();
   const positions = spreadPositions[spreadType];
 
   /**
@@ -55,10 +55,10 @@ export function ReadingResult({
     );
     try {
       await navigator.clipboard.writeText(content);
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
+      toast.success("已成功複製到剪貼簿！", 3000);
     } catch (err) {
       console.error("複製失敗:", err);
+      toast.error("複製失敗，請手動選取複製", 4000);
     }
   };
 
@@ -131,18 +131,15 @@ export function ReadingResult({
         <div className="flex flex-col sm:flex-row gap-3 mt-4 justify-end">
           <button
             onClick={handleCopyContent}
-            className={cn(
-              "px-4 py-2 rounded-lg font-medium transition-colors border",
-              copySuccess
-                ? "bg-green-600 text-white border-green-500"
-                : "bg-blue-600 text-white hover:bg-blue-700 border-blue-500"
-            )}
+            className="px-4 py-3 min-h-[44px] rounded-lg font-medium transition-colors border bg-blue-600 text-white hover:bg-blue-700 border-blue-500"
+            aria-label="複製占卜結果到剪貼簿"
           >
-            {copySuccess ? "✓ 已複製" : "📋 複製內容"}
+            📋 複製內容
           </button>
           <button
             onClick={handleGoToChatGPT}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors border border-green-500"
+            className="px-4 py-3 min-h-[44px] bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors border border-green-500"
+            aria-label="開啟 ChatGPT 進行深度分析"
           >
             🤖 前往 ChatGPT 詢問
           </button>
