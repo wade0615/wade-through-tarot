@@ -1207,10 +1207,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
 ### 🎯 成功標準
 
-- [ ] 占卜歷史可保存與查看
-- [ ] 使用者偏好設定可保存
-- [ ] 資料匯出/匯入功能完成
-- [ ] 資料清除功能完成
+- [x] 占卜歷史可保存與查看
+- [x] 使用者偏好設定可保存
+- [x] 資料匯出/匯入功能完成
+- [x] 資料清除功能完成
 
 ### 📋 實作步驟
 
@@ -1311,9 +1311,9 @@ class StorageService {
     const storage = this.getStorage()
     storage.readings.unshift(reading) // 新的記錄放在最前面
 
-    // 限制最多保存 100 筆
-    if (storage.readings.length > 100) {
-      storage.readings = storage.readings.slice(0, 100)
+    // 限制最多保存 10 筆
+    if (storage.readings.length > 10) {
+      storage.readings = storage.readings.slice(0, 10)
     }
 
     this.setStorage(storage)
@@ -1725,13 +1725,13 @@ EOF
 
 ### ✅ 驗證清單
 
-- [ ] Storage Service 實作完成
-- [ ] 占卜記錄可正確保存
-- [ ] 歷史記錄頁面正常運作
-- [ ] 資料匯出功能正常
-- [ ] 資料匯入功能正常
-- [ ] 設定頁面正常運作
-- [ ] 在無痕模式下不會報錯
+- [x] Storage Service 實作完成（限制改為 10 筆記錄）
+- [x] 占卜記錄可正確保存
+- [x] 歷史記錄頁面正常運作
+- [x] 資料匯出功能正常
+- [x] 資料匯入功能正常
+- [x] 設定頁面正常運作
+- [x] 在無痕模式下不會報錯
 
 ---
 

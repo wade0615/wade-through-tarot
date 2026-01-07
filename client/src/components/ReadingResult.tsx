@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { TarotCardComponent } from "./TarotCard";
 import { SpreadLayout } from "./SpreadLayout";
 import { useTarotStore } from "@/store/tarotStore";
@@ -21,19 +22,33 @@ interface ReadingResultProps {
  */
 export function ReadingResult({
   onNewReading,
-  // onSaveReading,
+  onSaveReading,
   className,
 }: ReadingResultProps) {
   const {
     selectedCards,
     currentQuestion,
     spreadType,
-    // saveReading,
+    saveReading,
     clearSelection,
   } = useTarotStore();
 
   const toast = useToast();
   const positions = spreadPositions[spreadType];
+  const hasSaved = useRef(false); // 追蹤是否已經儲存過
+
+  /**
+   * 自動儲存占卜記錄（當組件掛載時）
+   * 使用 useRef 防止重複儲存（React Strict Mode 會導致 useEffect 執行兩次）
+   */
+  useEffect(() => {
+    if (selectedCards.length > 0 && !hasSaved.current) {
+      hasSaved.current = true; // 標記為已儲存
+      saveReading();
+      onSaveReading?.();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // 只在組件掛載時執行一次
 
   /**
    * 開始新的占卜

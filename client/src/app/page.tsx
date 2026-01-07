@@ -27,6 +27,7 @@ export default function Home() {
     selectCard,
     clearSelection,
     getMaxCards,
+    saveReading,
   } = useTarotStore();
 
   // 追蹤頁面瀏覽
@@ -98,10 +99,10 @@ export default function Home() {
 
   /**
    * 處理保存占卜結果
+   * 注意：結果頁面會自動儲存，此函數作為備用
    */
   const handleSaveReading = () => {
-    // 可以添加保存成功的提示
-    alert("占卜結果已保存！");
+    saveReading();
   };
 
   return (

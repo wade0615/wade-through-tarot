@@ -1,5 +1,9 @@
 import { create } from "zustand";
 import { TarotCard } from "@/data/tarotCards";
+import { storageService } from "@/services/storage";
+import { StoredReading } from "@/types/storage";
+
+export type SpreadType = "single" | "three-card" | "celtic-cross";
 
 export interface SelectedCard {
   card: TarotCard;
@@ -12,7 +16,7 @@ export interface TarotReading {
   date: Date;
   question: string;
   selectedCards: SelectedCard[];
-  spreadType: "single" | "three-card" | "celtic-cross";
+  spreadType: SpreadType;
 }
 
 interface TarotStore {
@@ -21,20 +25,21 @@ interface TarotStore {
   selectedCards: SelectedCard[];
   availableCards: TarotCard[];
   isReading: boolean;
-  spreadType: "single" | "three-card" | "celtic-cross";
+  spreadType: SpreadType;
 
   // 歷史記錄
   readingHistory: TarotReading[];
 
   // Actions
   setQuestion: (question: string) => void;
-  setSpreadType: (type: "single" | "three-card" | "celtic-cross") => void;
+  setSpreadType: (type: SpreadType) => void;
   selectCard: (card: TarotCard, position: number, isReversed?: boolean) => void;
   removeCard: (position: number) => void;
   clearSelection: () => void;
   startReading: () => void;
   endReading: () => void;
   saveReading: () => void;
+  loadReadings: () => void;
   setAvailableCards: (cards: TarotCard[]) => void;
   shuffleCards: () => void;
 
@@ -58,7 +63,7 @@ export const useTarotStore = create<TarotStore>((set, get) => ({
     set({ currentQuestion: question });
   },
 
-  setSpreadType: (type: "single" | "three-card" | "celtic-cross") => {
+  setSpreadType: (type: SpreadType) => {
     set({
       spreadType: type,
       selectedCards: [], // 清空已選擇的牌
@@ -132,9 +137,32 @@ export const useTarotStore = create<TarotStore>((set, get) => ({
       spreadType,
     };
 
+    // 儲存到記憶體
     set({
       readingHistory: [newReading, ...readingHistory],
     });
+
+    // 同步到 localStorage
+    const storedReading: StoredReading = {
+      id: newReading.id,
+      timestamp: newReading.date.getTime(),
+      question: newReading.question,
+      spreadType: newReading.spreadType,
+      cards: newReading.selectedCards.map((sc) => ({
+        cardId: sc.card.id,
+        position: sc.position,
+        isReversed: sc.isReversed,
+      })),
+    };
+
+    storageService.saveReading(storedReading);
+  },
+
+  loadReadings: () => {
+    // 從 localStorage 載入記錄
+    // Note: 實際載入和轉換邏輯可在需要時實作
+    // 這裡保持簡單，主要是提供介面
+    storageService.getAllReadings();
   },
 
   setAvailableCards: (cards: TarotCard[]) => {

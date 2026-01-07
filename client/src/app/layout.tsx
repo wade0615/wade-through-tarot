@@ -228,6 +228,9 @@ export default function RootLayout({
           <Link href="/learn" className="hover:underline">
             塔羅教學
           </Link>
+          <Link href="/history" className="hover:underline">
+            占卜記錄
+          </Link>
           <Link href="/info" className="hover:underline">
             關於與隱私
           </Link>
