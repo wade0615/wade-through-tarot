@@ -22,7 +22,10 @@ const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID;
 
 export const metadata: Metadata = {
-  title: "Wade Through Tarot - 線上塔羅占卜 | AI 塔羅抽牌 | 凱爾特十字占卜",
+  title: {
+    default: "Wade Through Tarot - 線上塔羅占卜 | AI 塔羅抽牌 | 凱爾特十字占卜",
+    template: "%s | Wade Through Tarot",
+  },
   description:
     "免費線上塔羅占卜，提供單張牌、三張牌、凱爾特十字等多種牌陣。78張偉特塔羅牌完整解析，AI 智能抽牌系統，幫助您找到內心的答案。立即開始您的塔羅占卜之旅！",
   keywords: [

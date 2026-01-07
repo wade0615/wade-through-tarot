@@ -6,6 +6,7 @@ import { TarotCard } from "@/data/tarotCards";
 import { SetupView } from "@/components/SetupView";
 import { SelectionView } from "@/components/SelectionView";
 import { ResultView } from "@/components/ResultView";
+import { FAQ } from "@/components/FAQ";
 import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import OfflineIndicator from "@/components/OfflineIndicator";
 import {
@@ -125,7 +126,10 @@ export default function Home() {
       </section>
       <div className="container mx-auto px-4 py-8">
         {currentView === "setup" && (
-          <SetupView onQuestionSubmit={handleQuestionSubmit} />
+          <>
+            <SetupView onQuestionSubmit={handleQuestionSubmit} />
+            <FAQ />
+          </>
         )}
         {currentView === "selection" && (
           <SelectionView
