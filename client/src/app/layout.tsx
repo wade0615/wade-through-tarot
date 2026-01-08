@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { ToastProvider } from "@/components/ui/ToastProvider";
+import Navigation from "@/components/Navigation";
 import Link from "next/link";
 
 const geistSans = Geist({
@@ -218,27 +219,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* SEO 主選單 */}
-        <nav
-          className="w-full fixed top-0 left-0 z-50 bg-slate-900/80 text-blue-100 py-3 px-4 flex flex-wrap gap-4 justify-center shadow-md"
-          aria-label="主選單"
-        >
-          <Link href="/" className="hover:underline font-semibold">
-            首頁
-          </Link>
-          <Link href="/cards" className="hover:underline">
-            塔羅牌圖鑑
-          </Link>
-          <Link href="/learn" className="hover:underline">
-            塔羅教學
-          </Link>
-          <Link href="/history" className="hover:underline">
-            占卜記錄
-          </Link>
-          <Link href="/info" className="hover:underline">
-            關於與隱私
-          </Link>
-        </nav>
-        {/* 增加 padding-top 以避免內容被 nav 遮擋，高度與 nav 相同 */}
+        <Navigation />
+        {/* 增加 padding-top 以避免內容被 nav 遮擋 */}
         <div className="pt-[60px]">
           {/* nav 約 48~60px 高 */}
           {children}
