@@ -117,7 +117,7 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
               >
                 <h3 className="font-medium text-lg">{spread.name}</h3>
                 <p className="text-sm text-slate-400 mt-1">{spread.desc}</p>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-slate-300 mt-1">
                   {spread.cards} 張牌
                 </p>
                 <p className="text-xs text-blue-300 mt-2">
@@ -144,7 +144,7 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
               rows={3}
               aria-describedby="question-help"
             />
-            <p id="question-help" className="text-xs text-gray-400 mt-1">
+            <p id="question-help" className="text-xs text-slate-300 mt-1">
               輸入您的問題可以幫助您更好地理解牌面的含義
             </p>
           </div>
@@ -154,7 +154,8 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
 
           <button
             type="submit"
-            className="w-full py-6 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-lg"
+            className="w-full py-4 min-h-[48px] bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-lg"
+            aria-label="開始塔羅占卜"
           >
             開始占卜
           </button>
@@ -166,7 +167,8 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
         <button
           type="button"
           onClick={() => router.push("/cards")}
-          className="w-full py-3 bg-purple-300 text-purple-900 rounded-lg font-medium hover:bg-purple-400 transition-colors shadow-lg"
+          className="w-full py-3 min-h-[44px] bg-purple-300 text-purple-900 rounded-lg font-medium hover:bg-purple-400 transition-colors shadow-lg"
+          aria-label="查看全部78張塔羅牌面"
         >
           查看所有牌面
         </button>

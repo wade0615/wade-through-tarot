@@ -42,7 +42,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
           onClick={() => getCardAtPosition(0)}
           className={getCardAtPosition(0) ? "cursor-pointer" : ""}
         />
-        <div className="text-xs text-slate-400 max-w-32">
+        <div className="text-xs text-slate-300 max-w-32">
           {positions[0].description}
         </div>
       </div>
@@ -69,7 +69,7 @@ export function SpreadLayout({ className }: SpreadLayoutProps) {
               "w-20 h-30 sm:w-24 sm:h-36 md:w-32 md:h-48"
             )}
           />
-          <div className="text-xs text-slate-400 max-w-28 sm:max-w-32">
+          <div className="text-xs text-slate-300 max-w-28 sm:max-w-32">
             {pos.description}
           </div>
         </div>

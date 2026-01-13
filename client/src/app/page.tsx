@@ -6,8 +6,9 @@ import { TarotCard } from "@/data/tarotCards";
 import { SetupView } from "@/components/SetupView";
 import { SelectionView } from "@/components/SelectionView";
 import { ResultView } from "@/components/ResultView";
-import PWAInstallPrompt from "@/components/PWAInstallPrompt";
-import OfflineIndicator from "@/components/OfflineIndicator";
+import { FAQ } from "@/components/FAQ";
+// import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+// import OfflineIndicator from "@/components/OfflineIndicator";
 import {
   trackReadingStart,
   trackCardSelection,
@@ -27,12 +28,18 @@ export default function Home() {
     selectCard,
     clearSelection,
     getMaxCards,
+    saveReading,
   } = useTarotStore();
 
   // 追蹤頁面瀏覽
   useEffect(() => {
     trackPageView("首頁");
   }, []);
+
+  // 當視圖切換時，自動滾動到頂部
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentView]);
 
   /**
    * 處理牌卡選擇事件
@@ -98,10 +105,10 @@ export default function Home() {
 
   /**
    * 處理保存占卜結果
+   * 注意：結果頁面會自動儲存，此函數作為備用
    */
   const handleSaveReading = () => {
-    // 可以添加保存成功的提示
-    alert("占卜結果已保存！");
+    saveReading();
   };
 
   return (
@@ -124,7 +131,10 @@ export default function Home() {
       </section>
       <div className="container mx-auto px-4 py-8">
         {currentView === "setup" && (
-          <SetupView onQuestionSubmit={handleQuestionSubmit} />
+          <>
+            <SetupView onQuestionSubmit={handleQuestionSubmit} />
+            <FAQ />
+          </>
         )}
         {currentView === "selection" && (
           <SelectionView
@@ -141,8 +151,8 @@ export default function Home() {
         )}
       </div>
 
-      <PWAInstallPrompt />
-      <OfflineIndicator />
+      {/* <PWAInstallPrompt /> */}
+      {/* <OfflineIndicator /> */}
     </main>
   );
 }

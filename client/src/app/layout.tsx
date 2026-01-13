@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { ToastProvider } from "@/components/ui/ToastProvider";
+import Navigation from "@/components/Navigation";
 import Link from "next/link";
 
 const geistSans = Geist({
@@ -17,8 +19,14 @@ const geistMono = Geist_Mono({
 // 從環境變數獲取 Google Analytics Measurement ID
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
+// 從環境變數獲取 Google AdSense Publisher ID
+const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID;
+
 export const metadata: Metadata = {
-  title: "Wade Through Tarot - 線上塔羅占卜 | AI 塔羅抽牌 | 凱爾特十字占卜",
+  title: {
+    default: "Wade Through Tarot - 線上塔羅占卜 | AI 塔羅抽牌 | 凱爾特十字占卜",
+    template: "%s | Wade Through Tarot",
+  },
   description:
     "免費線上塔羅占卜，提供單張牌、三張牌、凱爾特十字等多種牌陣。78張偉特塔羅牌完整解析，AI 智能抽牌系統，幫助您找到內心的答案。立即開始您的塔羅占卜之旅！",
   keywords: [
@@ -198,38 +206,21 @@ export default function RootLayout({
           }}
         />
 
-        {/* Google AdSense 程式碼 */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4201768192395434"
-          crossOrigin="anonymous"
-        />
+        {/* Google AdSense 程式碼 - 只在有 Publisher ID 時載入 */}
+        {ADSENSE_ID && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ID}`}
+            crossOrigin="anonymous"
+          />
+        )}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* SEO 主選單 */}
-        <nav
-          className="w-full fixed top-0 left-0 z-50 bg-slate-900/80 text-blue-100 py-3 px-4 flex flex-wrap gap-4 justify-center shadow-md"
-          aria-label="主選單"
-        >
-          <Link href="/" className="hover:underline font-semibold">
-            首頁
-          </Link>
-          <Link href="/cards" className="hover:underline">
-            塔羅牌圖鑑
-          </Link>
-          <Link href="/learn" className="hover:underline">
-            塔羅教學
-          </Link>
-          <Link href="/about" className="hover:underline">
-            關於我們
-          </Link>
-          <Link href="/privacy" className="hover:underline">
-            隱私權政策
-          </Link>
-        </nav>
-        {/* 增加 padding-top 以避免內容被 nav 遮擋，高度與 nav 相同 */}
+        <Navigation />
+        {/* 增加 padding-top 以避免內容被 nav 遮擋 */}
         <div className="pt-[60px]">
           {/* nav 約 48~60px 高 */}
           {children}
@@ -241,8 +232,8 @@ export default function RootLayout({
         >
           <div>
             © {new Date().getFullYear()} Wade Through Tarot 線上塔羅占卜 |{" "}
-            <Link href="/privacy" className="underline">
-              隱私權政策
+            <Link href="/info" className="underline">
+              關於與隱私
             </Link>
           </div>
         </footer>
@@ -251,6 +242,9 @@ export default function RootLayout({
         {GA_MEASUREMENT_ID && (
           <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />
         )}
+
+        {/* Toast Notifications */}
+        <ToastProvider />
 
         <script
           dangerouslySetInnerHTML={{

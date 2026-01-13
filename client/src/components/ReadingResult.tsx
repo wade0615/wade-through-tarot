@@ -1,13 +1,14 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { TarotCardComponent } from "./TarotCard";
 import { SpreadLayout } from "./SpreadLayout";
 import { useTarotStore } from "@/store/tarotStore";
 import { TarotCard } from "@/data/tarotCards";
 import { spreadPositions, formatDate, cn } from "@/utils/helpers";
-import { useState } from "react";
 import { ResponsiveAd } from "@/components/GoogleAds";
 import { getAdSlot } from "@/config/ads";
+import { useToast } from "@/hooks/useToast";
 
 interface ReadingResultProps {
   onNewReading?: () => void;
@@ -21,20 +22,33 @@ interface ReadingResultProps {
  */
 export function ReadingResult({
   onNewReading,
-  // onSaveReading,
+  onSaveReading,
   className,
 }: ReadingResultProps) {
   const {
     selectedCards,
     currentQuestion,
     spreadType,
-    // saveReading,
+    saveReading,
     clearSelection,
   } = useTarotStore();
 
-  const [copySuccess, setCopySuccess] = useState(false);
-
+  const toast = useToast();
   const positions = spreadPositions[spreadType];
+  const hasSaved = useRef(false); // 追蹤是否已經儲存過
+
+  /**
+   * 自動儲存占卜記錄（當組件掛載時）
+   * 使用 useRef 防止重複儲存（React Strict Mode 會導致 useEffect 執行兩次）
+   */
+  useEffect(() => {
+    if (selectedCards.length > 0 && !hasSaved.current) {
+      hasSaved.current = true; // 標記為已儲存
+      saveReading();
+      onSaveReading?.();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // 只在組件掛載時執行一次
 
   /**
    * 開始新的占卜
@@ -55,10 +69,10 @@ export function ReadingResult({
     );
     try {
       await navigator.clipboard.writeText(content);
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
+      toast.success("已成功複製到剪貼簿！", 3000);
     } catch (err) {
       console.error("複製失敗:", err);
+      toast.error("複製失敗，請手動選取複製", 4000);
     }
   };
 
@@ -131,18 +145,15 @@ export function ReadingResult({
         <div className="flex flex-col sm:flex-row gap-3 mt-4 justify-end">
           <button
             onClick={handleCopyContent}
-            className={cn(
-              "px-4 py-2 rounded-lg font-medium transition-colors border",
-              copySuccess
-                ? "bg-green-600 text-white border-green-500"
-                : "bg-blue-600 text-white hover:bg-blue-700 border-blue-500"
-            )}
+            className="px-4 py-3 min-h-[44px] rounded-lg font-medium transition-colors border bg-blue-600 text-white hover:bg-blue-700 border-blue-500"
+            aria-label="複製占卜結果到剪貼簿"
           >
-            {copySuccess ? "✓ 已複製" : "📋 複製內容"}
+            📋 複製內容
           </button>
           <button
             onClick={handleGoToChatGPT}
-            className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors border border-green-500"
+            className="px-4 py-3 min-h-[44px] bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors border border-green-500"
+            aria-label="開啟 ChatGPT 進行深度分析"
           >
             🤖 前往 ChatGPT 詢問
           </button>
@@ -170,7 +181,7 @@ export function ReadingResult({
 
       {/* 牌卡解釋 */}
       <div className="space-y-6">
-        {selectedCards.map((selectedCard, index) => {
+        {selectedCards.map((_selectedCard, index) => {
           const interpretation = getInterpretation(index);
           if (!interpretation) return null;
 
@@ -207,7 +218,7 @@ export function ReadingResult({
                         ({interpretation.card.nameEn})
                       </span>
                       {interpretation.isReversed && (
-                        <span className="text-xs bg-red-900/30 text-red-300 px-2 py-1 rounded border border-red-800/50">
+                        <span className="text-xs bg-red-900 text-red-50 px-2 py-1 rounded border border-red-600">
                           逆位
                         </span>
                       )}
