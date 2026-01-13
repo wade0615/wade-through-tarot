@@ -268,19 +268,21 @@ const handleCardClick = (card: TarotCard, index: number) => {
 
 **桌面版** (≥1024px):
 
-- 左側開扇展開（垂直排列）
-- 右側已選牌區域（固定寬度）
+- 上下佈局
+- 上方開扇展開（水平重疊排列）
+- 下方已選牌區域（水平排列）
 
 **平板版** (768px - 1023px):
 
-- 左側開扇角度縮小
-- 右側已選牌區域縮窄
+- 上下佈局（同桌面版）
+- 開扇區域高度調整
+- 已選牌區域縮小
 
 **手機版** (<768px):
 
-- 上下佈局取代左右佈局
-- 上方開扇展開（水平排列，角度更小）
-- 下方已選牌區域
+- 左右佈局
+- 左側開扇展開（垂直扇形，-15° 到 +15°）
+- 右側已選牌區域（垂直堆疊）
 
 ---
 
@@ -589,7 +591,9 @@ const getPCFanCardStyle = (index: number, totalCards: number) => {
   const cardWidth = 70; // 完整卡片寬度
   const visibleWidth = 12; // 每張牌露出的寬度
   const containerWidth = 1000; // 容器寬度
-  const startX = (containerWidth - (totalCards * visibleWidth + cardWidth - visibleWidth)) / 2;
+  const startX =
+    (containerWidth - (totalCards * visibleWidth + cardWidth - visibleWidth)) /
+    2;
 
   return {
     transform: `translateX(${startX + index * visibleWidth}px)`,
@@ -614,7 +618,7 @@ const getMobileFanCardStyle = (index: number, totalCards: number) => {
 
   return {
     transform: `translateY(${translateY}px) rotate(${angle}deg)`,
-    transformOrigin: 'bottom center',
+    transformOrigin: "bottom center",
     zIndex: index,
   };
 };
