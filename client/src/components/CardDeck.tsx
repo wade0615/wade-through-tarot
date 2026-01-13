@@ -76,8 +76,7 @@ export function CardDeck({
     const visibleWidth = 12; // 每張牌露出的寬度（px）
     const totalCards = shuffledCards.length;
     const containerWidth = 1000; // 容器寬度（px）
-    const totalFanWidth =
-      totalCards * visibleWidth + cardWidth - visibleWidth;
+    const totalFanWidth = totalCards * visibleWidth + cardWidth - visibleWidth;
     const startX = (containerWidth - totalFanWidth) / 2;
 
     return {
@@ -92,15 +91,34 @@ export function CardDeck({
    */
   const getMobileFanCardStyle = (index: number) => {
     const totalCards = shuffledCards.length;
-    const fanSpreadAngle = 30; // 總扇形角度（-15° 到 +15°）
-    const cardOffset = 3; // 垂直間距（px）
+    const minAngle = 75; // 最小角度（度）
+    const maxAngle = 105; // 最大角度（度）
+    const cardOffset = 6; // 垂直間距（px）
+    const maxTranslateX = 10; // 最大水平偏移（px）
 
-    const angle = ((index - totalCards / 2) * fanSpreadAngle) / totalCards;
-    const translateY = index * cardOffset;
+    const angle = minAngle + (index / (totalCards - 1)) * (maxAngle - minAngle);
+    const translateY = index * cardOffset - 30;
+
+    // 計算拋物線效果：中間卡片偏移最大（5px），兩端為 0
+    const normalizedIndex = index / (totalCards - 1); // 0 到 1
+    const translateX = maxTranslateX * Math.sin(normalizedIndex * Math.PI) - 50;
 
     return {
-      transform: `translateY(${translateY}px) rotate(${angle}deg)`,
+      transform: `translateX(${translateX}px) translateY(${translateY}px) rotate(${angle}deg)`,
       transformOrigin: "bottom center",
+    };
+  };
+
+  const getMobilePickCardStyle = (index: number) => {
+    const visibleHeight = 20; // 每張牌露出的高度（px）
+
+    return {
+      position: "absolute" as const,
+      top: `${index * visibleHeight}px`,
+      left: "50%",
+      transform: "translateX(-50%)",
+      width: `60px`,
+      height: `90px`,
     };
   };
 
@@ -110,7 +128,10 @@ export function CardDeck({
       <div className="hidden lg:flex lg:flex-col lg:h-[calc(100vh-200px)] lg:gap-4">
         {/* 上方：開扇牌堆區域（60%） */}
         <div className="flex-[6] flex items-center justify-center overflow-hidden">
-          <div className="relative" style={{ width: "1000px", height: "120px" }}>
+          <div
+            className="relative"
+            style={{ width: "1000px", height: "120px" }}
+          >
             {shuffledCards.map((card, index) => (
               <div
                 key={card.id}
@@ -118,7 +139,7 @@ export function CardDeck({
                   "absolute top-0 transition-all duration-200",
                   slidingCardIds.has(card.id)
                     ? "animate-slide-down-pc"
-                    : "hover:scale-110 hover:z-[999] hover:shadow-glow cursor-pointer"
+                    : "hover:translate-y-[10px] hover:z-[999] hover:shadow-glow cursor-pointer"
                 )}
                 style={{
                   ...getPCFanCardStyle(index),
@@ -155,10 +176,10 @@ export function CardDeck({
       </div>
 
       {/* 手機版：左右佈局 */}
-      <div className="lg:hidden flex h-[calc(100vh-200px)] gap-4">
+      <div className="lg:hidden flex h-[90dvh)] gap-4">
         {/* 左側：開扇牌堆區域（60-70%） */}
         <div className="flex-[7] flex items-center justify-center overflow-hidden">
-          <div className="relative" style={{ width: "200px", height: "600px" }}>
+          <div className="relative" style={{ width: "200px", height: "90dvh" }}>
             {shuffledCards.map((card, index) => (
               <div
                 key={card.id}
@@ -185,20 +206,37 @@ export function CardDeck({
         </div>
 
         {/* 右側：已選牌區域（30-40%） */}
-        <div className="flex-[3] flex flex-col items-center gap-2 p-2 overflow-y-auto">
-          <div className="text-blue-200 text-xs text-center">
+        <div className="flex-[3] flex flex-col items-center p-2 overflow-y-auto">
+          <div className="text-blue-200 text-xs text-center mb-4">
             已選擇
             <br />
             {selectedCards.length} / {maxSelection}
           </div>
-          {selectedCards.map((sc) => (
-            <TarotCardComponent
-              key={sc.card.id}
-              showBack
-              size="sm"
-              className="animate-fade-in"
-            />
-          ))}
+          <div
+            className="relative w-full flex-1"
+            style={{
+              minHeight:
+                selectedCards.length > 0
+                  ? `${90 + (selectedCards.length - 1) * 20}px`
+                  : "0px",
+            }}
+          >
+            {selectedCards.map((sc, index) => (
+              <div
+                key={sc.card.id}
+                style={{
+                  ...getMobilePickCardStyle(index),
+                  zIndex: index,
+                }}
+              >
+                <TarotCardComponent
+                  showBack
+                  size="sm"
+                  className="animate-fade-in"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
