@@ -7,8 +7,8 @@ import { SetupView } from "@/components/SetupView";
 import { SelectionView } from "@/components/SelectionView";
 import { ResultView } from "@/components/ResultView";
 import { FAQ } from "@/components/FAQ";
-import PWAInstallPrompt from "@/components/PWAInstallPrompt";
-import OfflineIndicator from "@/components/OfflineIndicator";
+// import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+// import OfflineIndicator from "@/components/OfflineIndicator";
 import {
   trackReadingStart,
   trackCardSelection,
@@ -146,8 +146,8 @@ export default function Home() {
         )}
       </div>
 
-      <PWAInstallPrompt />
-      <OfflineIndicator />
+      {/* <PWAInstallPrompt /> */}
+      {/* <OfflineIndicator /> */}
     </main>
   );
 }
