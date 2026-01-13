@@ -46,4 +46,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 public/cards-backup/
-.claude/ 
+.claude/
+
+# Service Worker build artifacts
+src/sw-template.tmp.js 

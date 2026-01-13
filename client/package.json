@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "prebuild": "node scripts/prepare-sw.js",
+    "build": "next build && node scripts/build-sw.js",
+    "postbuild": "node scripts/verify-sw.js",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
@@ -53,6 +55,13 @@
     "ts-prune": "^0.10.3",
     "typescript": "^5",
     "vitest": "^4.0.16",
+    "workbox-build": "^7.4.0",
+    "workbox-cli": "^7.4.0",
+    "workbox-core": "^7.4.0",
+    "workbox-expiration": "^7.4.0",
+    "workbox-precaching": "^7.4.0",
+    "workbox-routing": "^7.4.0",
+    "workbox-strategies": "^7.4.0",
     "zod": "^4.3.5"
   },
   "lint-staged": {
