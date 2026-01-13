@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "prebuild": "node scripts/prepare-sw.js",
-    "build": "next build && node scripts/build-sw.js",
-    "postbuild": "node scripts/verify-sw.js",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
@@ -16,7 +14,11 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
-    "prepare": "husky"
+    "prepare": "husky",
+    "_comment": "PWA scripts (pending, uncomment to enable)",
+    "prebuild:pwa": "node scripts/prepare-sw.js",
+    "build:pwa": "next build && node scripts/build-sw.js",
+    "postbuild:pwa": "node scripts/verify-sw.js"
   },
   "dependencies": {
     "autoprefixer": "^10.4.21",
