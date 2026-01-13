@@ -36,6 +36,11 @@ export default function Home() {
     trackPageView("首頁");
   }, []);
 
+  // 當視圖切換時，自動滾動到頂部
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentView]);
+
   /**
    * 處理牌卡選擇事件
    * @param card - 被選中的塔羅牌
