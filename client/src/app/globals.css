@@ -117,6 +117,28 @@ select:focus {
   }
 }
 
+@keyframes slideDownPC {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(300px);
+    opacity: 0;
+  }
+}
+
+@keyframes slideRightMobile {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+}
+
 /* 動畫類 */
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out;
@@ -132,4 +154,16 @@ select:focus {
 
 .animate-pulse-slow {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-slide-down-pc {
+  animation: slideDownPC 0.5s ease-out forwards;
+}
+
+.animate-slide-right-mobile {
+  animation: slideRightMobile 0.5s ease-out forwards;
+}
+
+.shadow-glow {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
 }
