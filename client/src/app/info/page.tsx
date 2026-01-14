@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { cn } from '@/utils/helpers'
+import { ResponsiveAd } from "@/components/GoogleAds"
+import { getAdSlot } from "@/config/ads"
 
 export default function InfoPage() {
   const [activeTab, setActiveTab] = useState<'about' | 'privacy'>('about')
@@ -19,6 +21,9 @@ export default function InfoPage() {
             ← 返回首頁
           </Link>
         </nav>
+
+        {/* 廣告 */}
+        <ResponsiveAd adSlot={getAdSlot("RESPONSIVE_GENERAL")} />
 
         {/* Tab 切換 */}
         <div className="bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden">

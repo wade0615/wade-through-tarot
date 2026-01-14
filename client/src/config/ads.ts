@@ -23,7 +23,7 @@ export const ADS_CONFIG = {
     CARDS_PAGE_SIDEBAR: "ad-slot-cards-sidebar",
 
     // 響應式廣告（通用）
-    RESPONSIVE_GENERAL: "ad-slot-responsive-general",
+    RESPONSIVE_GENERAL: "5579450459",
   },
 
   // 廣告格式配置
