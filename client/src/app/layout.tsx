@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     siteName: "Wade Through Tarot",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Wade Through Tarot - 線上塔羅占卜",

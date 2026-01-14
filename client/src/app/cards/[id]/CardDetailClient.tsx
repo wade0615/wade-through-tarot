@@ -4,6 +4,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { TarotCard } from "@/data/tarotCards"
 import { Breadcrumb } from "@/components/Breadcrumb"
+import { ResponsiveAd } from "@/components/GoogleAds"
+import { getAdSlot } from "@/config/ads"
 
 interface Props {
   card: TarotCard
@@ -236,6 +238,9 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
               </div>
             </section>
           )}
+
+          {/* 廣告 */}
+          <ResponsiveAd adSlot={getAdSlot("RESPONSIVE_GENERAL")} />
 
           {/* 相關卡牌推薦 */}
           {relatedCards.length > 0 && (
