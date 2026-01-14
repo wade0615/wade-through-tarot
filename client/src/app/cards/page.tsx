@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { getTarotCardsBySuit, TarotCard } from "@/data/tarotCards";
 import Link from "next/link";
+import { ResponsiveAd } from "@/components/GoogleAds";
+import { getAdSlot } from "@/config/ads";
 
 const suitNames = {
   major: "大阿爾克納",
@@ -75,6 +77,9 @@ export default function CardsPage() {
           </div>
         </nav>
 
+        {/* 廣告 */}
+        <ResponsiveAd adSlot={getAdSlot("RESPONSIVE_GENERAL")} />
+
         <div className="space-y-12">
           {suitOrder.map((suit) => {
             const cards = getTarotCardsBySuit(suit);
@@ -94,10 +99,10 @@ export default function CardsPage() {
                         suit === "cups"
                           ? "情感和愛情"
                           : suit === "pentacles"
-                          ? "物質和金錢"
-                          : suit === "swords"
-                          ? "思維和挑戰"
-                          : "行動和創造"
+                            ? "物質和金錢"
+                            : suit === "swords"
+                              ? "思維和挑戰"
+                              : "行動和創造"
                       }`}
                 </p>
 

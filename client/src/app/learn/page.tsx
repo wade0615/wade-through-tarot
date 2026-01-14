@@ -1,4 +1,8 @@
 "use client";
+
+import { ResponsiveAd } from "@/components/GoogleAds";
+import { getAdSlot } from "@/config/ads";
+
 export default function LearnPage() {
   return (
     <main className="max-w-3xl mx-auto py-8 px-4 min-h-[100dvh]">
@@ -22,6 +26,9 @@ export default function LearnPage() {
           <li>根據每張牌的牌義與位置，綜合解讀</li>
         </ol>
       </section>
+      {/* 廣告 */}
+      <ResponsiveAd adSlot={getAdSlot("RESPONSIVE_GENERAL")} />
+
       <section>
         <h2 className="text-xl font-semibold text-blue-100 mb-2">常見問題</h2>
         <ul className="list-disc list-inside text-blue-100">
