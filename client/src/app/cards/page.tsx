@@ -81,7 +81,7 @@ export default function CardsPage() {
         <ResponsiveAd adSlot={getAdSlot("RESPONSIVE_GENERAL")} />
 
         <div className="space-y-12">
-          {suitOrder.map((suit) => {
+          {suitOrder.map((suit, index) => {
             const cards = getTarotCardsBySuit(suit);
             return (
               <section
