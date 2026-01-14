@@ -81,7 +81,7 @@ export default function CardsPage() {
         <ResponsiveAd adSlot={getAdSlot("RESPONSIVE_GENERAL")} />
 
         <div className="space-y-12">
-          {suitOrder.map((suit, index) => {
+          {suitOrder.map((suit) => {
             const cards = getTarotCardsBySuit(suit);
             return (
               <section
@@ -99,10 +99,10 @@ export default function CardsPage() {
                         suit === "cups"
                           ? "情感和愛情"
                           : suit === "pentacles"
-                          ? "物質和金錢"
-                          : suit === "swords"
-                          ? "思維和挑戰"
-                          : "行動和創造"
+                            ? "物質和金錢"
+                            : suit === "swords"
+                              ? "思維和挑戰"
+                              : "行動和創造"
                       }`}
                 </p>
 
