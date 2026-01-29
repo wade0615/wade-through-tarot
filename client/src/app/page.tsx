@@ -112,24 +112,29 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen min-h-[100dvh] bg-gradient-to-br from-gray-900 via-blue-900 to-slate-900">
+    <main className="min-h-screen min-h-[100dvh] bg-[#0F0F23]">
+      {/* 背景裝飾 - 微妙漸變 */}
+      <div className="fixed inset-0 bg-gradient-to-b from-purple-950/20 via-transparent to-transparent pointer-events-none" />
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/10 via-transparent to-transparent pointer-events-none" />
+
       {/* SEO 歡迎詞與服務介紹 */}
       <section
-        className="bg-white/10 rounded-lg p-6 mb-8 text-center"
+        className="glass-card mx-4 md:mx-auto md:max-w-3xl p-6 md:p-8 mb-8 text-center relative z-10"
         aria-label="網站介紹"
       >
-        <h1 className="text-3xl font-bold text-blue-200 mb-2">
-          歡迎來到 Wade Through Tarot 線上塔羅占卜
+        <h1 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-100 to-amber-200 mb-3">
+          歡迎來到 Wade Through Tarot
         </h1>
-        <p className="text-blue-100 mb-2">
+        <p className="text-purple-100/80 mb-2 text-sm md:text-base">
           本站提供免費、即時的 AI
           塔羅占卜服務，結合經典偉特塔羅牌與現代人工智慧，協助你探索內心、預見未來。
         </p>
-        <p className="text-blue-100">
-          你可以選擇多種牌陣，獲得專業的牌義解析與個人化建議，無論是感情、事業、人生方向，都能找到屬於你的答案。
+        <p className="text-slate-400 text-sm">
+          選擇多種牌陣，獲得專業的牌義解析與個人化建議，找到屬於你的答案。
         </p>
       </section>
-      <div className="container mx-auto px-4 py-8">
+
+      <div className="container mx-auto px-4 py-8 relative z-10">
         {currentView === "setup" && (
           <>
             <SetupView onQuestionSubmit={handleQuestionSubmit} />

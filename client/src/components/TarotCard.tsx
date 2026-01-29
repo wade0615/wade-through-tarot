@@ -37,21 +37,34 @@ export function TarotCardComponent({
 
   const cardContent =
     showBack || !card ? (
-      // 牌背
+      // 牌背 - 神秘紫金主題
       <div
         className={cn(
-          "w-full h-full rounded-lg border-2 border-blue-400",
-          "bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-900",
+          "w-full h-full rounded-lg border border-purple-500/50",
+          "bg-gradient-to-br from-violet-950 via-purple-900 to-slate-900",
           "flex items-center justify-center",
           "shadow-lg relative overflow-hidden"
         )}
       >
-        <div className="absolute inset-2 border border-blue-400 rounded opacity-50" />
-        <div className="absolute inset-4 border border-blue-400 rounded opacity-30" />
-        <div className="text-blue-200 text-center">
-          <div className="text-xs opacity-60">TAROT</div>
-          <div className="text-2xl">✨</div>
+        {/* 裝飾邊框 */}
+        <div className="absolute inset-2 border border-purple-400/40 rounded-md" />
+        <div className="absolute inset-4 border border-amber-500/30 rounded-sm" />
+
+        {/* 角落裝飾 */}
+        <div className="absolute top-2 left-2 w-3 h-3 border-t border-l border-amber-400/50" />
+        <div className="absolute top-2 right-2 w-3 h-3 border-t border-r border-amber-400/50" />
+        <div className="absolute bottom-2 left-2 w-3 h-3 border-b border-l border-amber-400/50" />
+        <div className="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-amber-400/50" />
+
+        {/* 中心圖案 */}
+        <div className="text-center z-10">
+          <div className="text-purple-300/80 text-[8px] tracking-[0.2em] font-light">TAROT</div>
+          <div className="text-amber-400/90 text-lg my-1">✦</div>
+          <div className="text-purple-300/60 text-[6px] tracking-wider">WADE</div>
         </div>
+
+        {/* 微光效果 */}
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-purple-500/5 to-transparent opacity-50" />
       </div>
     ) : (
       // 牌面 - 使用圖片
@@ -123,10 +136,11 @@ export function TarotCardComponent({
       className={cn(
         sizeClasses[size],
         "cursor-pointer transition-all duration-300 transform mx-auto",
-        "hover:scale-105 hover:shadow-xl",
+        "hover:scale-105 hover:-translate-y-1",
+        "hover:shadow-[0_20px_40px_rgba(139,92,246,0.3)]",
         isSelected &&
-          "ring-2 ring-blue-400 ring-offset-2 ring-offset-slate-900 scale-105",
-        isFlipped && "animate-pulse",
+          "ring-2 ring-purple-400 ring-offset-2 ring-offset-[#0F0F23] scale-105 shadow-[0_0_30px_rgba(139,92,246,0.4)]",
+        isFlipped && "animate-mystic-pulse",
         onClick && "hover:brightness-110",
         className
       )}

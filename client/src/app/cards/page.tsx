@@ -31,23 +31,26 @@ export default function CardsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-[#0F0F23] p-4">
+      {/* 背景裝飾 */}
+      <div className="fixed inset-0 bg-gradient-to-b from-purple-950/20 via-transparent to-transparent pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* SEO 塔羅牌圖鑑說明 */}
         <section
-          className="bg-white/10 rounded-lg p-6 my-8"
+          className="glass-card p-6 my-8"
           aria-label="塔羅牌介紹"
         >
-          <h2 className="text-xl font-bold text-blue-200 mb-2">
+          <h2 className="text-xl font-bold text-purple-200 mb-2">
             什麼是塔羅牌？
           </h2>
-          <p className="text-blue-100 mb-2">
+          <p className="text-slate-300 mb-2">
             塔羅牌是一套源自歐洲的神秘工具，包含22張大阿爾卡納與56張小阿爾卡納，象徵人生各種階段與課題。每張牌都有獨特的圖像與深刻的象徵意義，能協助我們自我探索、預測未來、獲得指引。
           </p>
-          <h3 className="text-lg font-semibold text-blue-100 mt-4">
+          <h3 className="text-lg font-semibold text-purple-300 mt-4">
             塔羅牌的分類
           </h3>
-          <ul className="list-disc list-inside text-blue-100">
+          <ul className="list-disc list-inside text-slate-300">
             <li>大阿爾卡納（Major Arcana）：代表人生重大轉折與靈性課題</li>
             <li>
               小阿爾卡納（Minor
@@ -56,9 +59,11 @@ export default function CardsPage() {
           </ul>
         </section>
         <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">塔羅牌圖鑑</h1>
-          <p className="text-lg text-blue-200 mb-2">78張偉特塔羅牌完整解析</p>
-          <p className="text-sm text-gray-300">
+          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-100 to-amber-200 mb-4">
+            塔羅牌圖鑑
+          </h1>
+          <p className="text-lg text-purple-200/80 mb-2">78張偉特塔羅牌完整解析</p>
+          <p className="text-sm text-slate-400">
             包含大阿爾卡納22張和小阿爾卡納56張，每張牌都有詳細的正逆位解釋
           </p>
         </header>
@@ -69,7 +74,8 @@ export default function CardsPage() {
               <a
                 key={suit}
                 href={`#${suit}`}
-                className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg text-white hover:bg-white/30 transition-colors"
+                className="px-4 py-2 bg-purple-500/20 border border-purple-400/30 backdrop-blur-sm rounded-xl
+                  text-purple-200 hover:bg-purple-500/30 hover:border-purple-400/50 transition-all duration-200"
               >
                 {suitNames[suit]}
               </a>
@@ -87,12 +93,12 @@ export default function CardsPage() {
               <section
                 key={suit}
                 id={suit}
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-6"
+                className="glass-card p-6"
               >
-                <h2 className="text-2xl font-semibold text-white mb-4 text-center">
+                <h2 className="text-2xl font-semibold text-purple-200 mb-4 text-center">
                   {suitNames[suit]}
                 </h2>
-                <p className="text-center text-gray-300 mb-6">
+                <p className="text-center text-slate-400 mb-6">
                   {suit === "major"
                     ? "22張大阿爾卡納牌，代表人生的重要階段和精神旅程"
                     : `${cards.length}張${suitNames[suit]}牌，代表${
@@ -115,7 +121,10 @@ export default function CardsPage() {
                     >
                       <article
                         id={card.id}
-                        className="bg-white/20 backdrop-blur-sm rounded-lg p-3 cursor-pointer transition-all duration-300 hover:bg-white/30 hover:scale-105 hover:shadow-lg"
+                        className="bg-white/5 border border-purple-500/20 backdrop-blur-sm rounded-xl p-3
+                          cursor-pointer transition-all duration-300
+                          hover:bg-purple-500/15 hover:border-purple-400/40 hover:scale-105
+                          hover:shadow-[0_10px_30px_rgba(139,92,246,0.2)]"
                       >
                         <div className="aspect-[3/5] relative mb-3">
                           <Image
@@ -127,12 +136,12 @@ export default function CardsPage() {
                           />
                         </div>
                         <div className="text-center">
-                          <h3 className="text-sm font-medium text-white mb-1">
+                          <h3 className="text-sm font-medium text-purple-100 mb-1">
                             {card.name}
                           </h3>
-                          <p className="text-xs text-gray-300">{card.nameEn}</p>
+                          <p className="text-xs text-slate-400">{card.nameEn}</p>
                           {card.number !== undefined && (
-                            <p className="text-xs text-gray-400 mt-1">
+                            <p className="text-xs text-amber-400/70 mt-1">
                               {card.number === 0 ? "0" : card.number}
                             </p>
                           )}
@@ -148,10 +157,14 @@ export default function CardsPage() {
       </div>
 
       {/* 返回按鈕 */}
-      <div className="fixed bottom-6 right-6">
+      <div className="fixed bottom-6 right-6 z-20">
         <button
           onClick={handleGoBack}
-          className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-lg font-medium hover:bg-white/30 transition-all duration-300 shadow-lg"
+          className="bg-purple-500/20 border border-purple-400/30 backdrop-blur-md
+            text-purple-200 px-6 py-3 rounded-xl font-medium
+            hover:bg-purple-500/30 hover:border-purple-400/50
+            hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]
+            transition-all duration-300"
         >
           返回上一頁
         </button>

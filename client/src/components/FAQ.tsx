@@ -53,15 +53,15 @@ export function FAQ() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <section className="bg-white/10 backdrop-blur-sm rounded-lg p-6 sm:p-8 my-8">
-        <h2 className="text-2xl font-bold text-white mb-6">常見問題</h2>
+      <section className="glass-card p-6 sm:p-8 my-8">
+        <h2 className="text-2xl font-bold text-purple-200 mb-6">常見問題</h2>
         <div className="space-y-6">
           {faqs.map((faq, index) => (
-            <div key={index} className="border-b border-white/10 pb-6 last:border-b-0 last:pb-0">
-              <h3 className="text-lg font-semibold text-blue-100 mb-3">
+            <div key={index} className="border-b border-purple-500/20 pb-6 last:border-b-0 last:pb-0">
+              <h3 className="text-lg font-semibold text-purple-300 mb-3">
                 {faq.question}
               </h3>
-              <p className="text-blue-200 leading-relaxed">{faq.answer}</p>
+              <p className="text-slate-400 leading-relaxed text-sm">{faq.answer}</p>
             </div>
           ))}
         </div>

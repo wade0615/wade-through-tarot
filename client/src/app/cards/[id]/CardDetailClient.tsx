@@ -22,19 +22,22 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+    <div className="min-h-screen bg-[#0F0F23]">
+      {/* 背景裝飾 */}
+      <div className="fixed inset-0 bg-gradient-to-b from-purple-950/20 via-transparent to-transparent pointer-events-none" />
+
       {/* Navigation */}
-      <nav className="p-4">
+      <nav className="p-4 relative z-10">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link
             href="/cards"
-            className="text-white hover:text-blue-300 transition-colors"
+            className="text-purple-300 hover:text-amber-300 transition-colors duration-200"
           >
             ← 返回塔羅牌圖鑑
           </Link>
-          <div className="text-white text-sm">
-            {suitNames[card.suit]} •{" "}
-            {card.number !== undefined ? `編號 ${card.number}` : ""}
+          <div className="text-slate-400 text-sm">
+            <span className="text-purple-300">{suitNames[card.suit]}</span>
+            {card.number !== undefined && <span> • 編號 <span className="text-amber-400">{card.number}</span></span>}
           </div>
         </div>
       </nav>
@@ -50,10 +53,10 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
         />
       </div>
 
-      <div className="max-w-6xl mx-auto p-4 flex flex-col lg:flex-row gap-10 items-start">
+      <div className="max-w-6xl mx-auto p-4 flex flex-col lg:flex-row gap-10 items-start relative z-10">
         {/* Card Image 區塊 */}
         <div className="flex-shrink-0 w-full lg:w-[340px] flex justify-center">
-          <div className="relative aspect-[3/5] w-[260px] sm:w-[300px] lg:w-[320px] bg-white rounded-xl shadow-2xl border-4 border-white flex items-center justify-center">
+          <div className="relative aspect-[3/5] w-[260px] sm:w-[300px] lg:w-[320px] bg-white/95 rounded-xl shadow-2xl shadow-purple-500/20 border border-purple-400/30 flex items-center justify-center">
             <Image
               src={card.imageUrl}
               alt={card.name}
@@ -69,30 +72,32 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
         <div className="flex-1 space-y-6">
           {/* 標題與分類 */}
           <header className="mb-2">
-            <h1 className="text-3xl font-bold text-white mb-1">{card.name}</h1>
-            <div className="text-lg text-blue-200 mb-1">{card.nameEn}</div>
-            <div className="flex flex-wrap gap-2 text-sm text-blue-100">
-              <span>{suitNames[card.suit]}</span>
-              {card.number !== undefined && <span>• 編號 {card.number}</span>}
+            <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-amber-200 mb-1">
+              {card.name}
+            </h1>
+            <div className="text-lg text-purple-300/80 mb-1">{card.nameEn}</div>
+            <div className="flex flex-wrap gap-2 text-sm text-slate-400">
+              <span className="text-purple-300">{suitNames[card.suit]}</span>
+              {card.number !== undefined && <span>• 編號 <span className="text-amber-400">{card.number}</span></span>}
             </div>
           </header>
 
           {/* 牌面描述 */}
-          <section className="bg-white/10 backdrop-blur-sm rounded-lg p-5">
-            <h2 className="text-xl font-semibold text-white mb-2">牌面描述</h2>
-            <p className="text-blue-100 leading-relaxed text-base">
+          <section className="glass-card p-5">
+            <h2 className="text-xl font-semibold text-purple-200 mb-2">牌面描述</h2>
+            <p className="text-slate-300 leading-relaxed text-base">
               {card.description}
             </p>
           </section>
 
           {/* 關鍵詞 */}
-          <section className="bg-white/10 backdrop-blur-sm rounded-lg p-5">
-            <h2 className="text-xl font-semibold text-white mb-2">關鍵詞</h2>
+          <section className="glass-card p-5">
+            <h2 className="text-xl font-semibold text-purple-200 mb-3">關鍵詞</h2>
             <div className="flex flex-wrap gap-2">
               {card.keywords.map((keyword, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1 bg-purple-500/30 text-purple-100 rounded-full text-sm font-medium"
+                  className="px-3 py-1 bg-amber-500/20 border border-amber-400/30 text-amber-200 rounded-full text-sm font-medium"
                 >
                   {keyword}
                 </span>
@@ -103,27 +108,27 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
           {/* 正逆位含義 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* 正位含義 */}
-            <section className="bg-white/10 backdrop-blur-sm rounded-lg p-5">
-              <h2 className="text-lg font-semibold text-white mb-2">
+            <section className="glass-card-subtle p-5">
+              <h2 className="text-lg font-semibold text-purple-200 mb-3">
                 正位含義
               </h2>
-              <ul className="space-y-1">
+              <ul className="space-y-2">
                 {card.meaning.upright.map((meaning, index) => (
-                  <li key={index} className="text-green-200 flex items-start">
-                    <span className="text-green-400 mr-2">✓</span>
+                  <li key={index} className="text-emerald-200/90 flex items-start text-sm">
+                    <span className="text-emerald-400 mr-2">✓</span>
                     {meaning}
                   </li>
                 ))}
               </ul>
             </section>
             {/* 逆位含義 */}
-            <section className="bg-white/10 backdrop-blur-sm rounded-lg p-5">
-              <h2 className="text-lg font-semibold text-white mb-2">
+            <section className="glass-card-subtle p-5">
+              <h2 className="text-lg font-semibold text-purple-200 mb-3">
                 逆位含義
               </h2>
-              <ul className="space-y-1">
+              <ul className="space-y-2">
                 {card.meaning.reversed.map((meaning, index) => (
-                  <li key={index} className="text-red-200 flex items-start">
+                  <li key={index} className="text-red-200/90 flex items-start text-sm">
                     <span className="text-red-400 mr-2">⚠</span>
                     {meaning}
                   </li>
@@ -136,82 +141,82 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
           {card.deepAnalysis && (
             <div className="space-y-4">
               {card.deepAnalysis.symbolism && (
-                <section className="bg-white/10 backdrop-blur-sm rounded-lg p-5">
-                  <h2 className="text-lg font-semibold text-white mb-2">
+                <section className="glass-card p-5">
+                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
                     象徵意義
                   </h2>
-                  <p className="text-blue-100 leading-relaxed">
+                  <p className="text-slate-300 leading-relaxed">
                     {card.deepAnalysis.symbolism}
                   </p>
                 </section>
               )}
               {card.deepAnalysis.numerology && (
-                <section className="bg-white/10 backdrop-blur-sm rounded-lg p-5">
-                  <h2 className="text-lg font-semibold text-white mb-2">
+                <section className="glass-card p-5">
+                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
                     數字學含義
                   </h2>
-                  <p className="text-blue-100 leading-relaxed">
+                  <p className="text-slate-300 leading-relaxed">
                     {card.deepAnalysis.numerology}
                   </p>
                 </section>
               )}
               {card.deepAnalysis.astrology && (
-                <section className="bg-white/10 backdrop-blur-sm rounded-lg p-5">
-                  <h2 className="text-lg font-semibold text-white mb-2">
+                <section className="glass-card p-5">
+                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
                     占星學關聯
                   </h2>
-                  <p className="text-blue-100 leading-relaxed">
+                  <p className="text-slate-300 leading-relaxed">
                     {card.deepAnalysis.astrology}
                   </p>
                 </section>
               )}
               {card.deepAnalysis.mythology && (
-                <section className="bg-white/10 backdrop-blur-sm rounded-lg p-5">
-                  <h2 className="text-lg font-semibold text-white mb-2">
+                <section className="glass-card p-5">
+                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
                     神話背景
                   </h2>
-                  <p className="text-blue-100 leading-relaxed">
+                  <p className="text-slate-300 leading-relaxed">
                     {card.deepAnalysis.mythology}
                   </p>
                 </section>
               )}
               {card.deepAnalysis.practicalAdvice && (
-                <section className="bg-white/10 backdrop-blur-sm rounded-lg p-5">
-                  <h2 className="text-lg font-semibold text-white mb-2">
+                <section className="glass-card p-5">
+                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
                     實用建議
                   </h2>
-                  <p className="text-blue-100 leading-relaxed">
+                  <p className="text-slate-300 leading-relaxed">
                     {card.deepAnalysis.practicalAdvice}
                   </p>
                 </section>
               )}
               <div className="grid md:grid-cols-3 gap-4">
                 {card.deepAnalysis.loveReading && (
-                  <section className="bg-white/10 backdrop-blur-sm rounded-lg p-5">
-                    <h3 className="text-base font-semibold text-white mb-2">
+                  <section className="glass-card-subtle p-5">
+                    <h3 className="text-base font-semibold text-purple-200 mb-2">
                       愛情解讀
                     </h3>
-                    <p className="text-blue-100 text-sm leading-relaxed">
+                    <p className="text-slate-400 text-sm leading-relaxed">
                       {card.deepAnalysis.loveReading}
                     </p>
                   </section>
                 )}
                 {card.deepAnalysis.careerReading && (
-                  <section className="bg-white/10 backdrop-blur-sm rounded-lg p-5">
-                    <h3 className="text-base font-semibold text-white mb-2">
+                  <section className="glass-card-subtle p-5">
+                    <h3 className="text-base font-semibold text-purple-200 mb-2">
                       事業解讀
                     </h3>
-                    <p className="text-blue-100 text-sm leading-relaxed">
+                    <p className="text-slate-400 text-sm leading-relaxed">
                       {card.deepAnalysis.careerReading}
                     </p>
                   </section>
                 )}
                 {card.deepAnalysis.healthReading && (
-                  <section className="bg-white/10 backdrop-blur-sm rounded-lg p-5">
-                    <h3 className="text-base font-semibold text-white mb-2">
+                  <section className="glass-card-subtle p-5">
+                    <h3 className="text-base font-semibold text-purple-200 mb-2">
                       健康解讀
                     </h3>
-                    <p className="text-blue-100 text-sm leading-relaxed">
+                    <p className="text-slate-400 text-sm leading-relaxed">
                       {card.deepAnalysis.healthReading}
                     </p>
                   </section>
@@ -222,11 +227,11 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
 
           {/* Fallback Content for cards without deep analysis */}
           {!card.deepAnalysis && (
-            <section className="bg-white/10 backdrop-blur-sm rounded-lg p-5">
-              <h2 className="text-lg font-semibold text-white mb-2">
+            <section className="glass-card p-5">
+              <h2 className="text-lg font-semibold text-purple-200 mb-2">
                 深度解析
               </h2>
-              <div className="text-blue-100 space-y-2">
+              <div className="text-slate-300 space-y-2">
                 <p>
                   {card.name}{" "}
                   在塔羅牌中代表著重要的象徵意義。這張牌提醒我們要關注內在的智慧，並在人生的旅程中找到正確的方向。
@@ -245,14 +250,16 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
           {/* 相關卡牌推薦 */}
           {relatedCards.length > 0 && (
             <section className="mt-12">
-              <h2 className="text-2xl font-bold text-white mb-6">相關卡牌</h2>
+              <h2 className="text-2xl font-bold text-purple-200 mb-6">相關卡牌</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {relatedCards.map((relatedCard) => (
                   <Link
                     key={relatedCard.id}
                     href={`/cards/${relatedCard.id}`}
-                    className="block bg-white/10 backdrop-blur-sm rounded-lg p-4
-                             hover:bg-white/20 transition-colors"
+                    className="block glass-card-subtle p-4
+                      hover:bg-purple-500/15 hover:border-purple-400/40
+                      hover:shadow-[0_10px_30px_rgba(139,92,246,0.2)]
+                      transition-all duration-300"
                   >
                     <div className="aspect-[3/5] relative mb-2">
                       <Image
@@ -263,7 +270,7 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                         className="object-contain"
                       />
                     </div>
-                    <h3 className="text-white text-sm font-medium text-center">
+                    <h3 className="text-purple-100 text-sm font-medium text-center">
                       {relatedCard.name}
                     </h3>
                   </Link>

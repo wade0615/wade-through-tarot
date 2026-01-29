@@ -26,12 +26,14 @@ export function SelectionView({
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-white mb-2">選擇您的牌卡</h2>
+        <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-purple-100 mb-3">
+          選擇您的牌卡
+        </h2>
         {currentQuestion && (
-          <p className="text-blue-200 italic mb-4">「{currentQuestion}」</p>
+          <p className="text-purple-300/80 italic mb-4">「{currentQuestion}」</p>
         )}
-        <p className="text-sm text-slate-400">
-          請選擇 {getMaxCards()} 張牌來完成占卜
+        <p className="text-sm text-slate-500">
+          請選擇 <span className="text-amber-400">{getMaxCards()}</span> 張牌來完成占卜
         </p>
       </div>
 
@@ -47,7 +49,9 @@ export function SelectionView({
       <div className="flex justify-center space-x-4">
         <button
           onClick={onBackToSetup}
-          className="px-6 py-3 min-h-[44px] bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-colors"
+          className="px-6 py-3 min-h-[44px] bg-white/5 border border-purple-500/30 text-purple-200
+            rounded-xl hover:bg-purple-500/15 hover:border-purple-400/50
+            transition-all duration-300"
           aria-label="重新開始占卜"
         >
           重新開始
@@ -55,7 +59,11 @@ export function SelectionView({
         {isReadingComplete() && (
           <button
             onClick={onViewResult}
-            className="px-6 py-3 min-h-[44px] bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-6 py-3 min-h-[44px] bg-gradient-to-r from-amber-600 to-amber-500
+              text-slate-900 font-semibold rounded-xl
+              hover:from-amber-500 hover:to-amber-400
+              hover:shadow-[0_0_25px_rgba(251,191,36,0.4)]
+              transition-all duration-300"
             aria-label="查看占卜結果"
           >
             查看結果

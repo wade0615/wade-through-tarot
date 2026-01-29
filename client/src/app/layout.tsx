@@ -223,19 +223,18 @@ export default function RootLayout({
       >
         {/* SEO 主選單 */}
         <Navigation />
-        {/* 增加 padding-top 以避免內容被 nav 遮擋 */}
-        <div className="pt-[60px]">
-          {/* nav 約 48~60px 高 */}
+        {/* 增加 padding-top 以避免內容被浮動導航遮擋 (top-4 + nav高度) */}
+        <div className="pt-[80px]">
           {children}
         </div>
-        {/* SEO 頁腳 */}
+        {/* SEO 頁腳 - 神秘紫金主題 */}
         <footer
-          className="w-full bg-slate-900/90 text-blue-200 text-center py-6"
+          className="w-full bg-[#0a0a18] border-t border-purple-500/20 text-purple-200/70 text-center py-8"
           aria-label="網站頁腳"
         >
-          <div>
+          <div className="text-sm">
             © {new Date().getFullYear()} Wade Through Tarot 線上塔羅占卜 |{" "}
-            <Link href="/info" className="underline">
+            <Link href="/info" className="text-purple-300 hover:text-amber-300 transition-colors duration-200">
               關於與隱私
             </Link>
           </div>
