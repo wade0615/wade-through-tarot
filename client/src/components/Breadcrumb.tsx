@@ -16,20 +16,20 @@ export function Breadcrumb({ items }: Props) {
         <li>
           <Link
             href="/"
-            className="text-blue-300 hover:text-blue-100 transition-colors"
+            className="text-purple-300/70 hover:text-amber-300 transition-colors duration-200"
           >
             首頁
           </Link>
         </li>
         {items.map((item, index) => (
           <li key={item.href} className="flex items-center gap-2">
-            <span className="text-slate-300">/</span>
+            <span className="text-slate-600">/</span>
             {index === items.length - 1 ? (
-              <span className="text-white font-medium">{item.label}</span>
+              <span className="text-purple-200 font-medium">{item.label}</span>
             ) : (
               <Link
                 href={item.href}
-                className="text-blue-300 hover:text-blue-100 transition-colors"
+                className="text-purple-300/70 hover:text-amber-300 transition-colors duration-200"
               >
                 {item.label}
               </Link>

@@ -139,7 +139,7 @@ export function CardDeck({
                   "absolute top-0 transition-all duration-200",
                   slidingCardIds.has(card.id)
                     ? "animate-slide-down-pc"
-                    : "hover:translate-y-[10px] hover:z-[999] hover:shadow-glow cursor-pointer"
+                    : "hover:translate-y-[10px] hover:z-[999] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] cursor-pointer"
                 )}
                 style={{
                   ...getPCFanCardStyle(index),
@@ -159,8 +159,8 @@ export function CardDeck({
 
         {/* 下方：已選牌區域（40%） */}
         <div className="flex-[4] flex items-start justify-center gap-4 p-4">
-          <div className="text-blue-200 text-sm">
-            已選擇 {selectedCards.length} / {maxSelection} 張牌
+          <div className="text-purple-300/80 text-sm">
+            已選擇 <span className="text-amber-400">{selectedCards.length}</span> / {maxSelection} 張牌
           </div>
           <div className="flex gap-4">
             {selectedCards.map((sc) => (
@@ -207,10 +207,10 @@ export function CardDeck({
 
         {/* 右側：已選牌區域（30-40%） */}
         <div className="flex-[3] flex flex-col items-center p-2 overflow-y-auto">
-          <div className="text-blue-200 text-xs text-center mb-4">
+          <div className="text-purple-300/80 text-xs text-center mb-4">
             已選擇
             <br />
-            {selectedCards.length} / {maxSelection}
+            <span className="text-amber-400">{selectedCards.length}</span> / {maxSelection}
           </div>
           <div
             className="relative w-full flex-1"
@@ -246,10 +246,11 @@ export function CardDeck({
           onClick={shuffleDeck}
           disabled={isShuffling}
           className={cn(
-            "px-6 py-3 min-h-[44px] rounded-lg font-medium transition-all shadow-lg",
-            "bg-blue-600 text-white hover:bg-blue-700",
+            "px-6 py-3 min-h-[44px] rounded-xl font-medium transition-all duration-300",
+            "bg-purple-500/20 border border-purple-400/30 text-purple-200",
+            "hover:bg-purple-500/30 hover:border-purple-400/50 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]",
             "disabled:opacity-50 disabled:cursor-not-allowed",
-            isShuffling && "animate-pulse"
+            isShuffling && "animate-mystic-pulse"
           )}
           aria-label={isShuffling ? "洗牌中" : "重新洗牌"}
           aria-busy={isShuffling}

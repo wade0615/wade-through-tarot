@@ -1,8 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
-  --foreground: #ededed;
+  /* 基礎色彩 - 神秘深紫主題 */
+  --background: #0F0F23;
+  --foreground: #F8FAFC;
+
+  /* 主色系 */
+  --primary: #8B5CF6;
+  --primary-light: #A78BFA;
+  --primary-dark: #7C3AED;
+
+  /* 金色強調 */
+  --accent-gold: #CA8A04;
+  --accent-gold-light: #FBBF24;
+
+  /* 毛玻璃效果 */
+  --glass-bg: rgba(139, 92, 246, 0.08);
+  --glass-bg-light: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(139, 92, 246, 0.15);
+  --glass-border-light: rgba(255, 255, 255, 0.08);
+
+  /* 文字層級 */
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
 }
 
 @theme {
@@ -159,4 +180,97 @@ select:focus {
 
 .shadow-glow {
   box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+}
+
+/* 神秘紫色光暈 */
+.glow-purple {
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+}
+
+.glow-purple-intense {
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.5), 0 0 80px rgba(139, 92, 246, 0.2);
+}
+
+/* 金色強調光暈 */
+.glow-gold {
+  box-shadow: 0 0 20px rgba(202, 138, 4, 0.4);
+}
+
+.glow-gold-intense {
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.5), 0 0 60px rgba(202, 138, 4, 0.3);
+}
+
+/* 毛玻璃卡片 */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+.glass-card-subtle {
+  background: var(--glass-bg-light);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border-light);
+  border-radius: 12px;
+}
+
+/* 毛玻璃導航 */
+.glass-nav {
+  background: rgba(15, 15, 35, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+/* 神秘脈衝動畫 */
+@keyframes mysticPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.6), 0 0 60px rgba(139, 92, 246, 0.3);
+  }
+}
+
+@keyframes goldShimmer {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(202, 138, 4, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(251, 191, 36, 0.5);
+  }
+}
+
+@keyframes floatUp {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-mystic-pulse {
+  animation: mysticPulse 3s ease-in-out infinite;
+}
+
+.animate-gold-shimmer {
+  animation: goldShimmer 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: floatUp 4s ease-in-out infinite;
+}
+
+/* 懸停卡片效果 */
+.hover-lift {
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 300ms ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(139, 92, 246, 0.2);
 }

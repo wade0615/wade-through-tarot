@@ -121,41 +121,49 @@ export function ReadingResult({
   }
 
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn("space-y-8", className)}>
       {/* 標題和問題 */}
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-blue-100 mb-2">占卜結果</h2>
+        <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-purple-100 to-amber-200 mb-3">
+          占卜結果
+        </h2>
         {currentQuestion && (
-          <p className="text-blue-200 italic">「{currentQuestion}」</p>
+          <p className="text-purple-300/80 italic">「{currentQuestion}」</p>
         )}
-        <p className="text-sm text-blue-300 mt-1">{formatDate(new Date())}</p>
+        <p className="text-sm text-slate-500 mt-2">{formatDate(new Date())}</p>
       </div>
       {/* 牌陣佈局 */}
       <SpreadLayout />
       {/* 複製內文給 GPT 解牌 */}
-      <div className="bg-gradient-to-r from-gray-800/80 to-blue-900/80 rounded-lg p-6 border border-blue-800/30">
-        <h3 className="text-lg font-semibold text-blue-100 mb-3">
+      <div className="glass-card p-6">
+        <h3 className="text-lg font-semibold text-purple-200 mb-3">
           請 GPT 解牌
         </h3>
-        <p className="text-blue-200 leading-relaxed">
+        <p className="text-slate-300 leading-relaxed text-sm">
           {generateOverallAdvice(selectedCards, spreadType, currentQuestion)}
         </p>
 
         {/* 複製和 ChatGPT 按鈕 */}
-        <div className="flex flex-col sm:flex-row gap-3 mt-4 justify-end">
+        <div className="flex flex-col sm:flex-row gap-3 mt-5 justify-end">
           <button
             onClick={handleCopyContent}
-            className="px-4 py-3 min-h-[44px] rounded-lg font-medium transition-colors border bg-blue-600 text-white hover:bg-blue-700 border-blue-500"
+            className="px-5 py-3 min-h-[44px] rounded-xl font-medium transition-all duration-300
+              bg-purple-500/20 border border-purple-400/30 text-purple-200
+              hover:bg-purple-500/30 hover:border-purple-400/50
+              hover:shadow-[0_0_20px_rgba(139,92,246,0.2)]"
             aria-label="複製占卜結果到剪貼簿"
           >
-            📋 複製內容
+            複製內容
           </button>
           <button
             onClick={handleGoToChatGPT}
-            className="px-4 py-3 min-h-[44px] bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors border border-green-500"
+            className="px-5 py-3 min-h-[44px] rounded-xl font-semibold transition-all duration-300
+              bg-gradient-to-r from-amber-600 to-amber-500 text-slate-900
+              hover:from-amber-500 hover:to-amber-400
+              hover:shadow-[0_0_25px_rgba(251,191,36,0.4)]"
             aria-label="開啟 ChatGPT 進行深度分析"
           >
-            🤖 前往 ChatGPT 詢問
+            前往 ChatGPT 詢問
           </button>
         </div>
       </div>
@@ -165,15 +173,12 @@ export function ReadingResult({
 
       {/* 操作按鈕 */}
       <div className="flex justify-center space-x-4">
-        {/* <button
-          onClick={handleSaveReading}
-          className="px-6 py-3 bg-blue-900 text-white rounded-lg font-medium hover:bg-blue-800 transition-colors border border-blue-700"
-        >
-          保存這次占卜
-        </button> */}
         <button
           onClick={handleNewReading}
-          className="px-6 py-3 bg-gray-700 text-blue-100 rounded-lg font-medium hover:bg-gray-600 transition-colors border border-gray-600"
+          className="px-6 py-3 min-h-[44px] rounded-xl font-medium transition-all duration-300
+            bg-white/5 border border-purple-500/30 text-purple-200
+            hover:bg-purple-500/15 hover:border-purple-400/50
+            hover:shadow-[0_0_20px_rgba(139,92,246,0.2)]"
         >
           開始新的占卜
         </button>
@@ -188,7 +193,7 @@ export function ReadingResult({
           return (
             <div
               key={index}
-              className="bg-gray-800/90 rounded-lg shadow-lg p-6 border border-blue-900/30"
+              className="glass-card-subtle p-6 hover-lift"
             >
               <div className="flex flex-col md:flex-row gap-6">
                 {/* 牌卡 */}
@@ -204,21 +209,21 @@ export function ReadingResult({
                 <div className="flex-1 space-y-4">
                   {/* 位置和牌名 */}
                   <div>
-                    <h3 className="text-lg font-semibold text-blue-100">
+                    <h3 className="text-lg font-semibold text-purple-200">
                       {interpretation.position.name}
                     </h3>
-                    <p className="text-sm text-blue-200 mb-2">
+                    <p className="text-sm text-slate-400 mb-2">
                       {interpretation.position.description}
                     </p>
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium text-blue-100">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="font-medium text-purple-100">
                         {interpretation.card.name}
                       </span>
-                      <span className="text-sm text-blue-300">
+                      <span className="text-sm text-slate-400">
                         ({interpretation.card.nameEn})
                       </span>
                       {interpretation.isReversed && (
-                        <span className="text-xs bg-red-900 text-red-50 px-2 py-1 rounded border border-red-600">
+                        <span className="text-xs bg-red-500/20 text-red-300 px-2 py-1 rounded-full border border-red-500/30">
                           逆位
                         </span>
                       )}
@@ -227,8 +232,8 @@ export function ReadingResult({
 
                   {/* 牌義 */}
                   <div>
-                    <h4 className="font-medium text-blue-200 mb-2">
-                      {interpretation.isReversed ? "逆位含義：" : "正位含義："}
+                    <h4 className="font-medium text-purple-300/80 mb-2 text-sm">
+                      {interpretation.isReversed ? "逆位含義" : "正位含義"}
                     </h4>
                     <div className="flex flex-wrap gap-2 mb-3">
                       {interpretation.meanings.map((meaning, idx) => (
@@ -237,8 +242,8 @@ export function ReadingResult({
                           className={cn(
                             "px-3 py-1 rounded-full text-sm",
                             interpretation.isReversed
-                              ? "bg-red-900/30 text-red-300 border border-red-800/50"
-                              : "bg-green-900/30 text-green-300 border border-green-800/50"
+                              ? "bg-red-500/15 text-red-300 border border-red-500/25"
+                              : "bg-emerald-500/15 text-emerald-300 border border-emerald-500/25"
                           )}
                         >
                           {meaning}
@@ -249,28 +254,13 @@ export function ReadingResult({
 
                   {/* 牌卡描述 */}
                   <div>
-                    <h4 className="font-medium text-blue-200 mb-2">
-                      牌面解釋：
+                    <h4 className="font-medium text-purple-300/80 mb-2 text-sm">
+                      牌面解釋
                     </h4>
-                    <p className="text-blue-100 leading-relaxed">
+                    <p className="text-slate-300 leading-relaxed text-sm">
                       {interpretation.card.description}
                     </p>
                   </div>
-
-                  {/* 關鍵詞 */}
-                  {/* <div>
-                    <h4 className="font-medium text-blue-200 mb-2">牌面關鍵詞：</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {interpretation.card.keywords.map((keyword, idx) => (
-                        <span
-                          key={idx}
-                          className="px-2 py-1 bg-blue-900/30 text-blue-200 rounded text-sm border border-blue-800/50"
-                        >
-                          {keyword}
-                        </span>
-                      ))}
-                    </div>
-                  </div> */}
                 </div>
               </div>
             </div>

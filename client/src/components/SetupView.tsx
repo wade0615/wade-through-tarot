@@ -40,44 +40,46 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
         </p>
       </header> */}
 
-      {/* 功能特色 */}
-      <section className="bg-white/5 backdrop-blur-sm rounded-lg p-6">
-        <h2 className="text-xl font-semibold text-blue-100 mb-4">平台特色</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
-          <div className="flex items-center space-x-2">
-            <span className="text-blue-400">✓</span>
+      {/* 功能特色 - 毛玻璃卡片 */}
+      <section className="glass-card p-6 hover-lift">
+        <h2 className="text-xl font-semibold text-purple-200 mb-4">平台特色</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-300">
+          <div className="flex items-center space-x-3">
+            <span className="text-amber-400">✦</span>
             <span>78張偉特塔羅牌完整解析</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <span className="text-blue-400">✓</span>
+          <div className="flex items-center space-x-3">
+            <span className="text-amber-400">✦</span>
             <span>三種專業牌陣選擇</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <span className="text-blue-400">✓</span>
+          <div className="flex items-center space-x-3">
+            <span className="text-amber-400">✦</span>
             <span>正逆位詳細解釋</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <span className="text-blue-400">✓</span>
+          <div className="flex items-center space-x-3">
+            <span className="text-amber-400">✦</span>
             <span>AI 智能抽牌系統</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <span className="text-blue-400">✓</span>
+          <div className="flex items-center space-x-3">
+            <span className="text-amber-400">✦</span>
             <span>完全免費使用</span>
           </div>
-          <div className="flex items-center space-x-2">
-            <span className="text-blue-400">✓</span>
+          <div className="flex items-center space-x-3">
+            <span className="text-amber-400">✦</span>
             <span>離線也能使用</span>
           </div>
         </div>
       </section>
 
       {/* 牌陣選擇 */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-blue-100">選擇牌陣</h2>
-        <p className="text-sm text-gray-300 mb-4">
-          根據您的問題複雜程度選擇合適的牌陣
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <section className="space-y-6">
+        <div className="text-center">
+          <h2 className="text-xl font-semibold text-purple-200">選擇牌陣</h2>
+          <p className="text-sm text-slate-400 mt-2">
+            根據您的問題複雜程度選擇合適的牌陣
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {[
             {
               type: "single" as const,
@@ -104,23 +106,38 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
             <article
               key={spread.type}
               className={cn(
-                "p-4 rounded-lg border-2 transition-all",
-                "hover:shadow-md bg-slate-800/50 backdrop-blur-sm",
+                "p-5 rounded-xl border transition-all duration-300 cursor-pointer",
+                "backdrop-blur-md hover:-translate-y-1",
                 spreadType === spread.type
-                  ? "border-blue-400 bg-blue-900/30 text-blue-200"
-                  : "border-slate-600 hover:border-blue-500 text-slate-200"
+                  ? "bg-purple-500/15 border-purple-400/50 shadow-[0_0_30px_rgba(139,92,246,0.3)]"
+                  : "bg-white/5 border-white/10 hover:bg-purple-500/10 hover:border-purple-400/30 hover:shadow-[0_10px_30px_rgba(139,92,246,0.15)]"
               )}
             >
               <button
                 onClick={() => setSpreadType(spread.type)}
                 className="w-full text-left"
               >
-                <h3 className="font-medium text-lg">{spread.name}</h3>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className={cn(
+                    "font-medium text-lg",
+                    spreadType === spread.type ? "text-purple-200" : "text-slate-200"
+                  )}>{spread.name}</h3>
+                  <span className={cn(
+                    "text-xs px-2 py-1 rounded-full",
+                    spreadType === spread.type
+                      ? "bg-amber-500/20 text-amber-300"
+                      : "bg-slate-700/50 text-slate-400"
+                  )}>
+                    {spread.cards} 張
+                  </span>
+                </div>
                 <p className="text-sm text-slate-400 mt-1">{spread.desc}</p>
-                <p className="text-xs text-slate-300 mt-1">
-                  {spread.cards} 張牌
-                </p>
-                <p className="text-xs text-blue-300 mt-2">
+                <p className={cn(
+                  "text-xs mt-3 pt-3 border-t",
+                  spreadType === spread.type
+                    ? "border-purple-500/30 text-purple-300"
+                    : "border-white/10 text-slate-500"
+                )}>
                   適合：{spread.bestFor}
                 </p>
               </button>
@@ -131,20 +148,23 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
 
       {/* 問題輸入 */}
       <section>
-        <form onSubmit={handleQuestionSubmit} className="space-y-4">
+        <form onSubmit={handleQuestionSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-blue-200 mb-2">
+            <label className="block text-sm font-medium text-purple-200 mb-3">
               想問什麼？（可選）
             </label>
             <textarea
               value={currentQuestion}
               onChange={(e) => setQuestion(e.target.value)}
               placeholder="例如：我該如何面對目前的挑戰？我的感情發展如何？事業上需要注意什麼？"
-              className="w-full p-3 bg-slate-800/50 border border-slate-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-white placeholder-slate-400 backdrop-blur-sm"
+              className="w-full p-4 bg-white/5 border border-purple-500/20 rounded-xl
+                focus:ring-2 focus:ring-purple-500/50 focus:border-purple-400/50
+                focus:bg-purple-500/5 resize-none text-white placeholder-slate-500
+                backdrop-blur-md transition-all duration-300"
               rows={3}
               aria-describedby="question-help"
             />
-            <p id="question-help" className="text-xs text-slate-300 mt-1">
+            <p id="question-help" className="text-xs text-slate-500 mt-2">
               輸入您的問題可以幫助您更好地理解牌面的含義
             </p>
           </div>
@@ -154,7 +174,11 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
 
           <button
             type="submit"
-            className="w-full py-4 min-h-[48px] bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-lg"
+            className="w-full py-4 min-h-[48px] bg-gradient-to-r from-amber-600 to-amber-500
+              text-slate-900 rounded-xl font-semibold
+              hover:from-amber-500 hover:to-amber-400
+              hover:shadow-[0_0_30px_rgba(251,191,36,0.4)]
+              transition-all duration-300 shadow-lg"
             aria-label="開始塔羅占卜"
           >
             開始占卜
@@ -163,18 +187,22 @@ export function SetupView({ onQuestionSubmit }: SetupViewProps) {
       </section>
 
       {/* 額外功能 */}
-      <section className="space-y-4 mb-12">
+      <section className="space-y-5 mb-12">
         <button
           type="button"
           onClick={() => router.push("/cards")}
-          className="w-full py-3 min-h-[44px] bg-purple-300 text-purple-900 rounded-lg font-medium hover:bg-purple-400 transition-colors shadow-lg"
+          className="w-full py-3 min-h-[44px] bg-purple-500/20 text-purple-200
+            border border-purple-400/30 rounded-xl font-medium
+            hover:bg-purple-500/30 hover:border-purple-400/50
+            hover:shadow-[0_0_20px_rgba(139,92,246,0.2)]
+            transition-all duration-300"
           aria-label="查看全部78張塔羅牌面"
         >
           查看所有牌面
         </button>
 
-        <div className="text-center">
-          <p className="text-xs text-gray-400">
+        <div className="text-center pt-4">
+          <p className="text-xs text-slate-500">
             開始您的塔羅占卜之旅，探索內心的智慧與指引
           </p>
         </div>
