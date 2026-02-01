@@ -150,6 +150,46 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                   </p>
                 </section>
               )}
+              {card.deepAnalysis.loveReading && (
+                <section className="glass-card p-5">
+                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
+                    愛情解讀
+                  </h2>
+                  <p className="text-slate-300 leading-relaxed">
+                    {card.deepAnalysis.loveReading}
+                  </p>
+                </section>
+              )}
+              {card.deepAnalysis.careerReading && (
+                <section className="glass-card p-5">
+                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
+                    事業解讀
+                  </h2>
+                  <p className="text-slate-300 leading-relaxed">
+                    {card.deepAnalysis.careerReading}
+                  </p>
+                </section>
+              )}
+              {card.deepAnalysis.healthReading && (
+                <section className="glass-card p-5">
+                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
+                    健康解讀
+                  </h2>
+                  <p className="text-slate-300 leading-relaxed">
+                    {card.deepAnalysis.healthReading}
+                  </p>
+                </section>
+              )}
+              {card.deepAnalysis.practicalAdvice && (
+                <section className="glass-card p-5">
+                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
+                    實用建議
+                  </h2>
+                  <p className="text-slate-300 leading-relaxed">
+                    {card.deepAnalysis.practicalAdvice}
+                  </p>
+                </section>
+              )}
               {card.deepAnalysis.numerology && (
                 <section className="glass-card p-5">
                   <h2 className="text-lg font-semibold text-purple-200 mb-2">
@@ -180,48 +220,6 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                   </p>
                 </section>
               )}
-              {card.deepAnalysis.practicalAdvice && (
-                <section className="glass-card p-5">
-                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
-                    實用建議
-                  </h2>
-                  <p className="text-slate-300 leading-relaxed">
-                    {card.deepAnalysis.practicalAdvice}
-                  </p>
-                </section>
-              )}
-              <div className="grid md:grid-cols-3 gap-4">
-                {card.deepAnalysis.loveReading && (
-                  <section className="glass-card-subtle p-5">
-                    <h3 className="text-base font-semibold text-purple-200 mb-2">
-                      愛情解讀
-                    </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      {card.deepAnalysis.loveReading}
-                    </p>
-                  </section>
-                )}
-                {card.deepAnalysis.careerReading && (
-                  <section className="glass-card-subtle p-5">
-                    <h3 className="text-base font-semibold text-purple-200 mb-2">
-                      事業解讀
-                    </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      {card.deepAnalysis.careerReading}
-                    </p>
-                  </section>
-                )}
-                {card.deepAnalysis.healthReading && (
-                  <section className="glass-card-subtle p-5">
-                    <h3 className="text-base font-semibold text-purple-200 mb-2">
-                      健康解讀
-                    </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      {card.deepAnalysis.healthReading}
-                    </p>
-                  </section>
-                )}
-              </div>
             </div>
           )}
 
