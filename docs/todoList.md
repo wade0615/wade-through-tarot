@@ -16,7 +16,6 @@
 | 項目                    | 說明                                                                    | 文件                                            |
 | ----------------------- | ----------------------------------------------------------------------- | ----------------------------------------------- |
 | PWA 更新機制            | PWA 更新機制與 Google Ads 整合問題                                      | [pwa-update.md](todo/pwa-update.md)             |
-| 卡片文案更新            | 將牌面解釋 practicalAdvice, numerology, astrology, mythology 單一區塊文案字數增加 | [card-text-update-2.md](todo/card-text-update-2.md) |
 
 ### 後端優化
 
@@ -38,3 +37,4 @@
 | 抽牌畫面 UIUX 機制更新 | 抽牌動作目前為點擊牌堆抽牌，更新為點擊攤平鋪開的的牌進行抽牌 | -                                                   |
 | 卡片文案更新            | 將牌面解釋 loveReading careerReading healthReading 單一區塊文案字數增加 | [card-text-update.md](todo/card-text-update.md) |
 | 卡片項目 SEO 檢查與增強 | 將牌面解釋 loveReading careerReading healthReading 的 SEO 增強          | [singleCardReadSEO](todo/singleCardReadSEO.md) |
+| 卡片文案更新            | 將牌面解釋 practicalAdvice, numerology, astrology, mythology 單一區塊文案字數增加 | [card-text-update-2.md](todo/card-text-update-2.md) |
