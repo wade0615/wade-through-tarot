@@ -12,6 +12,25 @@ interface Props {
   relatedCards: TarotCard[]
 }
 
+function formatReadingText(text: string) {
+  const segments = text.split(/(?=【)/).filter(Boolean)
+  if (segments.length <= 1) {
+    return <p className="text-slate-300 leading-relaxed">{text}</p>
+  }
+  return (
+    <div className="space-y-3">
+      {segments.map((segment, index) => (
+        <p key={index} className="text-slate-300 leading-relaxed">
+          <span className="text-purple-300 font-medium">
+            {segment.match(/^【[^】]+】/)?.[0]}
+          </span>
+          {segment.replace(/^【[^】]+】/, "")}
+        </p>
+      ))}
+    </div>
+  )
+}
+
 export default function CardDetailClient({ card, relatedCards }: Props) {
   const suitNames = {
     major: "大阿爾克納",
@@ -155,9 +174,7 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                   <h2 className="text-lg font-semibold text-purple-200 mb-2">
                     愛情解讀
                   </h2>
-                  <p className="text-slate-300 leading-relaxed">
-                    {card.deepAnalysis.loveReading}
-                  </p>
+                  {formatReadingText(card.deepAnalysis.loveReading)}
                 </section>
               )}
               {card.deepAnalysis.careerReading && (
@@ -165,9 +182,7 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                   <h2 className="text-lg font-semibold text-purple-200 mb-2">
                     事業解讀
                   </h2>
-                  <p className="text-slate-300 leading-relaxed">
-                    {card.deepAnalysis.careerReading}
-                  </p>
+                  {formatReadingText(card.deepAnalysis.careerReading)}
                 </section>
               )}
               {card.deepAnalysis.healthReading && (
@@ -175,9 +190,7 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                   <h2 className="text-lg font-semibold text-purple-200 mb-2">
                     健康解讀
                   </h2>
-                  <p className="text-slate-300 leading-relaxed">
-                    {card.deepAnalysis.healthReading}
-                  </p>
+                  {formatReadingText(card.deepAnalysis.healthReading)}
                 </section>
               )}
               {card.deepAnalysis.practicalAdvice && (
