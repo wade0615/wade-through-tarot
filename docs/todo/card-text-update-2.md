@@ -129,6 +129,6 @@ ace-wands ~ king-wands
 - [x] Phase 1 — 大阿爾克納前半（11 張）
 - [x] Phase 2 — 大阿爾克納後半（11 張）
 - [x] Phase 3 — 聖杯牌組（14 張）
-- [ ] Phase 4 — 金幣牌組（14 張）
+- [x] Phase 4 — 金幣牌組（14 張）
 - [ ] Phase 5 — 寶劍牌組（14 張）
 - [ ] Phase 6 — 權杖牌組（14 張）
