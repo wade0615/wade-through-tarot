@@ -131,4 +131,4 @@ ace-wands ~ king-wands
 - [x] Phase 3 — 聖杯牌組（14 張）
 - [x] Phase 4 — 金幣牌組（14 張）
 - [x] Phase 5 — 寶劍牌組（14 張）
-- [ ] Phase 6 — 權杖牌組（14 張）
+- [x] Phase 6 — 權杖牌組（14 張）
