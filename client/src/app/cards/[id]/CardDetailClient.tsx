@@ -12,6 +12,75 @@ interface Props {
   relatedCards: TarotCard[]
 }
 
+const readingTypeLabels: Record<string, Record<string, string>> = {
+  love: {
+    正位: "愛情正位",
+    逆位: "愛情逆位",
+    單身者: "愛情單身者建議",
+    有伴侶者: "愛情有伴侶者建議",
+    行動: "愛情行動建議",
+  },
+  career: {
+    正位: "事業正位",
+    逆位: "事業逆位",
+    求職者: "事業求職者建議",
+    在職者: "事業在職者建議",
+    財務: "事業財務建議",
+  },
+  health: {
+    身體: "健康身體",
+    心理: "健康心理",
+    生活習慣: "健康生活習慣",
+    逆位: "健康逆位",
+  },
+}
+
+function formatReadingText(
+  text: string,
+  cardName?: string,
+  readingType?: "love" | "career" | "health"
+) {
+  const segments = text.split(/(?=【)/).filter(Boolean)
+  if (segments.length <= 1) {
+    return <p className="text-slate-300 leading-relaxed">{text}</p>
+  }
+
+  const labels = readingType ? readingTypeLabels[readingType] : null
+
+  return (
+    <div className="space-y-3">
+      {segments.map((segment, index) => {
+        const markerMatch = segment.match(/^【([^】]+)】/)
+        const marker = markerMatch?.[1] || ""
+        const content = segment.replace(/^【[^】]+】/, "")
+
+        const h3Text =
+          cardName && labels && marker && labels[marker]
+            ? `${cardName}${labels[marker]}`
+            : null
+
+        return (
+          <div key={index}>
+            {h3Text && (
+              <h3 className="text-base font-semibold text-purple-300 mb-1">
+                {h3Text}
+              </h3>
+            )}
+            <p className="text-slate-300 leading-relaxed">
+              {!h3Text && markerMatch && (
+                <span className="text-purple-300 font-medium">
+                  {markerMatch[0]}
+                </span>
+              )}
+              {content}
+            </p>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 export default function CardDetailClient({ card, relatedCards }: Props) {
   const suitNames = {
     major: "大阿爾克納",
@@ -53,7 +122,7 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
         />
       </div>
 
-      <div className="max-w-6xl mx-auto p-4 flex flex-col lg:flex-row gap-10 items-start relative z-10">
+      <article className="max-w-6xl mx-auto p-4 flex flex-col lg:flex-row gap-10 items-start relative z-10">
         {/* Card Image 區塊 */}
         <div className="flex-shrink-0 w-full lg:w-[340px] flex justify-center">
           <div className="relative aspect-[3/5] w-[260px] sm:w-[300px] lg:w-[320px] bg-white/95 rounded-xl shadow-2xl shadow-purple-500/20 border border-purple-400/30 flex items-center justify-center">
@@ -84,7 +153,7 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
 
           {/* 牌面描述 */}
           <section className="glass-card p-5">
-            <h2 className="text-xl font-semibold text-purple-200 mb-2">牌面描述</h2>
+            <h2 className="text-xl font-semibold text-purple-200 mb-2">{card.name}牌面描述</h2>
             <p className="text-slate-300 leading-relaxed text-base">
               {card.description}
             </p>
@@ -92,7 +161,7 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
 
           {/* 關鍵詞 */}
           <section className="glass-card p-5">
-            <h2 className="text-xl font-semibold text-purple-200 mb-3">關鍵詞</h2>
+            <h2 className="text-xl font-semibold text-purple-200 mb-3">{card.name}關鍵詞</h2>
             <div className="flex flex-wrap gap-2">
               {card.keywords.map((keyword, index) => (
                 <span
@@ -110,7 +179,7 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
             {/* 正位含義 */}
             <section className="glass-card-subtle p-5">
               <h2 className="text-lg font-semibold text-purple-200 mb-3">
-                正位含義
+                {card.name}正位含義
               </h2>
               <ul className="space-y-2">
                 {card.meaning.upright.map((meaning, index) => (
@@ -124,7 +193,7 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
             {/* 逆位含義 */}
             <section className="glass-card-subtle p-5">
               <h2 className="text-lg font-semibold text-purple-200 mb-3">
-                逆位含義
+                {card.name}逆位含義
               </h2>
               <ul className="space-y-2">
                 {card.meaning.reversed.map((meaning, index) => (
@@ -143,17 +212,51 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
               {card.deepAnalysis.symbolism && (
                 <section className="glass-card p-5">
                   <h2 className="text-lg font-semibold text-purple-200 mb-2">
-                    象徵意義
+                    {card.name}象徵意義
                   </h2>
                   <p className="text-slate-300 leading-relaxed">
                     {card.deepAnalysis.symbolism}
                   </p>
                 </section>
               )}
+              {card.deepAnalysis.loveReading && (
+                <section className="glass-card p-5">
+                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
+                    {card.name}愛情占卜解析
+                  </h2>
+                  {formatReadingText(card.deepAnalysis.loveReading, card.name, "love")}
+                </section>
+              )}
+              {card.deepAnalysis.careerReading && (
+                <section className="glass-card p-5">
+                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
+                    {card.name}事業占卜解析
+                  </h2>
+                  {formatReadingText(card.deepAnalysis.careerReading, card.name, "career")}
+                </section>
+              )}
+              {card.deepAnalysis.healthReading && (
+                <section className="glass-card p-5">
+                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
+                    {card.name}健康占卜解析
+                  </h2>
+                  {formatReadingText(card.deepAnalysis.healthReading, card.name, "health")}
+                </section>
+              )}
+              {card.deepAnalysis.practicalAdvice && (
+                <section className="glass-card p-5">
+                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
+                    {card.name}實用建議
+                  </h2>
+                  <p className="text-slate-300 leading-relaxed">
+                    {card.deepAnalysis.practicalAdvice}
+                  </p>
+                </section>
+              )}
               {card.deepAnalysis.numerology && (
                 <section className="glass-card p-5">
                   <h2 className="text-lg font-semibold text-purple-200 mb-2">
-                    數字學含義
+                    {card.name}數字學含義
                   </h2>
                   <p className="text-slate-300 leading-relaxed">
                     {card.deepAnalysis.numerology}
@@ -163,7 +266,7 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
               {card.deepAnalysis.astrology && (
                 <section className="glass-card p-5">
                   <h2 className="text-lg font-semibold text-purple-200 mb-2">
-                    占星學關聯
+                    {card.name}占星學關聯
                   </h2>
                   <p className="text-slate-300 leading-relaxed">
                     {card.deepAnalysis.astrology}
@@ -173,55 +276,13 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
               {card.deepAnalysis.mythology && (
                 <section className="glass-card p-5">
                   <h2 className="text-lg font-semibold text-purple-200 mb-2">
-                    神話背景
+                    {card.name}神話背景
                   </h2>
                   <p className="text-slate-300 leading-relaxed">
                     {card.deepAnalysis.mythology}
                   </p>
                 </section>
               )}
-              {card.deepAnalysis.practicalAdvice && (
-                <section className="glass-card p-5">
-                  <h2 className="text-lg font-semibold text-purple-200 mb-2">
-                    實用建議
-                  </h2>
-                  <p className="text-slate-300 leading-relaxed">
-                    {card.deepAnalysis.practicalAdvice}
-                  </p>
-                </section>
-              )}
-              <div className="grid md:grid-cols-3 gap-4">
-                {card.deepAnalysis.loveReading && (
-                  <section className="glass-card-subtle p-5">
-                    <h3 className="text-base font-semibold text-purple-200 mb-2">
-                      愛情解讀
-                    </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      {card.deepAnalysis.loveReading}
-                    </p>
-                  </section>
-                )}
-                {card.deepAnalysis.careerReading && (
-                  <section className="glass-card-subtle p-5">
-                    <h3 className="text-base font-semibold text-purple-200 mb-2">
-                      事業解讀
-                    </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      {card.deepAnalysis.careerReading}
-                    </p>
-                  </section>
-                )}
-                {card.deepAnalysis.healthReading && (
-                  <section className="glass-card-subtle p-5">
-                    <h3 className="text-base font-semibold text-purple-200 mb-2">
-                      健康解讀
-                    </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      {card.deepAnalysis.healthReading}
-                    </p>
-                  </section>
-                )}
-              </div>
             </div>
           )}
 
@@ -229,7 +290,7 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
           {!card.deepAnalysis && (
             <section className="glass-card p-5">
               <h2 className="text-lg font-semibold text-purple-200 mb-2">
-                深度解析
+                {card.name}深度解析
               </h2>
               <div className="text-slate-300 space-y-2">
                 <p>
@@ -279,7 +340,7 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
             </section>
           )}
         </div>
-      </div>
+      </article>
     </div>
   )
 }

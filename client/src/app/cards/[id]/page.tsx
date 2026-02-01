@@ -2,6 +2,20 @@ import { Metadata } from "next"
 import { getTarotCardById, getAllTarotCards, getRelatedCards } from "@/data/tarotCards"
 import { notFound } from "next/navigation"
 import CardDetailClient from "./CardDetailClient"
+import {
+  generateCardSEODescription,
+  generateCardSEOKeywords,
+  generateFAQSchema,
+  generateBreadcrumbSchema,
+} from "@/utils/seo"
+
+const suitNames = {
+  major: "大阿爾克納",
+  cups: "聖杯",
+  pentacles: "金幣",
+  swords: "寶劍",
+  wands: "權杖",
+} as const
 
 // 生成所有卡牌的靜態路徑
 export async function generateStaticParams() {
@@ -27,25 +41,9 @@ export async function generateMetadata({
     }
   }
 
-  const suitNames = {
-    major: "大阿爾克納",
-    cups: "聖杯",
-    pentacles: "金幣",
-    swords: "寶劍",
-    wands: "權杖",
-  }
-
-  const title = `${card.name} (${card.nameEn}) | ${suitNames[card.suit]} | Wade Through Tarot`
-  const description = `${card.description.substring(0, 150)}... 了解 ${card.name} 的正位與逆位含義、關鍵詞、象徵意義，以及在愛情、事業、健康方面的解讀。`
-  const keywords = [
-    card.name,
-    card.nameEn,
-    "塔羅牌",
-    suitNames[card.suit],
-    "塔羅占卜",
-    "塔羅解析",
-    ...card.keywords,
-  ].join(", ")
+  const title = `${card.name}塔羅牌解析 - 愛情事業健康正位逆位解讀 | ${card.nameEn} | Wade Through Tarot`
+  const description = generateCardSEODescription(card)
+  const keywords = generateCardSEOKeywords(card).join(", ")
 
   return {
     title,
@@ -90,24 +88,19 @@ export default async function CardPage({
     notFound()
   }
 
-  const suitNames = {
-    major: "大阿爾克納",
-    cups: "聖杯",
-    pentacles: "金幣",
-    swords: "寶劍",
-    wands: "權杖",
-  }
-
   // 獲取相關卡牌
   const relatedCards = getRelatedCards(card.id)
 
-  // 結構化資料
-  const jsonLd = {
+  // Article JSON-LD
+  const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: `${card.name} (${card.nameEn})`,
+    headline: `${card.name} (${card.nameEn}) 塔羅牌完整解析`,
     image: card.imageUrl,
     description: card.description,
+    datePublished: "2025-01-01",
+    dateModified: "2025-06-01",
+    inLanguage: "zh-TW",
     author: {
       "@type": "Organization",
       name: "Wade Through Tarot",
@@ -128,13 +121,31 @@ export default async function CardPage({
     articleSection: suitNames[card.suit],
   }
 
+  // BreadcrumbList JSON-LD
+  const breadcrumbJsonLd = generateBreadcrumbSchema(card)
+
+  // FAQPage JSON-LD
+  const faqJsonLd = generateFAQSchema(card)
+
   return (
     <>
-      {/* JSON-LD */}
+      {/* Article JSON-LD */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
+      {/* BreadcrumbList JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {/* FAQPage JSON-LD */}
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <CardDetailClient card={card} relatedCards={relatedCards} />
     </>
   )
