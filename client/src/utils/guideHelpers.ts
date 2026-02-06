@@ -70,3 +70,97 @@ export const cautionLoveCardIds = [
   "swords-10",
   "cups-5",
 ]
+
+// --- 事業解讀 ---
+
+export interface CareerReadingData {
+  card: TarotCard
+  upright: string
+  reversed: string
+  jobSeeker: string
+  employed: string
+  finance: string
+}
+
+export function extractCareerReading(
+  card: TarotCard
+): CareerReadingData | null {
+  const text = card.deepAnalysis?.careerReading
+  if (!text) return null
+
+  return {
+    card,
+    upright: extractSegment(text, "正位"),
+    reversed: extractSegment(text, "逆位"),
+    jobSeeker: extractSegment(text, "求職者"),
+    employed: extractSegment(text, "在職者"),
+    finance: extractSegment(text, "財務"),
+  }
+}
+
+/** 事業解讀中最具代表性的牌 */
+export const featuredCareerCardIds = [
+  "emperor",
+  "chariot",
+  "wheel-of-fortune",
+  "pentacles-ace",
+  "pentacles-3",
+  "wands-3",
+  "sun",
+]
+
+/** 事業解讀中需要留意的牌 */
+export const cautionCareerCardIds = [
+  "tower",
+  "swords-10",
+  "pentacles-5",
+  "moon",
+  "hermit",
+  "cups-4",
+]
+
+// --- 健康解讀 ---
+
+export interface HealthReadingData {
+  card: TarotCard
+  body: string
+  mental: string
+  habits: string
+  caution: string
+}
+
+export function extractHealthReading(
+  card: TarotCard
+): HealthReadingData | null {
+  const text = card.deepAnalysis?.healthReading
+  if (!text) return null
+
+  return {
+    card,
+    body: extractSegment(text, "身體"),
+    mental: extractSegment(text, "心理"),
+    habits: extractSegment(text, "生活習慣"),
+    caution: extractSegment(text, "注意"),
+  }
+}
+
+/** 健康解讀中最具代表性的牌 */
+export const featuredHealthCardIds = [
+  "star",
+  "sun",
+  "temperance",
+  "empress",
+  "strength",
+  "pentacles-ace",
+  "wands-ace",
+]
+
+/** 健康解讀中需要留意的牌 */
+export const cautionHealthCardIds = [
+  "tower",
+  "moon",
+  "devil",
+  "swords-10",
+  "swords-9",
+  "pentacles-5",
+]

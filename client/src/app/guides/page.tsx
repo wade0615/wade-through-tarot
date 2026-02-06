@@ -28,15 +28,13 @@ const guides = [
     title: "事業塔羅指南",
     description:
       "解析塔羅牌在事業與財務方面的意義，掌握職涯決策、工作挑戰的塔羅智慧。",
-    href: "/guides",
-    comingSoon: true,
+    href: "/guides/career-readings",
   },
   {
     title: "健康塔羅指南",
     description:
       "了解塔羅牌在身心健康方面的提示，包含身體健康、心理狀態與生活習慣的指引。",
-    href: "/guides",
-    comingSoon: true,
+    href: "/guides/health-readings",
   },
 ]
 
@@ -79,8 +77,8 @@ export default function GuidesPage() {
           </p>
 
           <div className="space-y-4">
-            {guides.map((guide) => {
-              const content = (
+            {guides.map((guide) => (
+              <Link key={guide.title} href={guide.href} className="block">
                 <div className="glass-card p-6 hover:bg-white/10 hover:border-purple-400/30 transition-all duration-300 relative">
                   <div className="flex items-start justify-between gap-3">
                     <div>
@@ -91,33 +89,13 @@ export default function GuidesPage() {
                         {guide.description}
                       </p>
                     </div>
-                    {guide.comingSoon ? (
-                      <span className="text-xs px-2 py-1 rounded-full bg-purple-500/20 text-purple-300 flex-shrink-0">
-                        即將推出
-                      </span>
-                    ) : (
-                      <span className="text-amber-400/70 text-sm flex-shrink-0">
-                        →
-                      </span>
-                    )}
+                    <span className="text-amber-400/70 text-sm flex-shrink-0">
+                      →
+                    </span>
                   </div>
                 </div>
-              )
-
-              if (guide.comingSoon) {
-                return (
-                  <div key={guide.title} className="opacity-60 cursor-default">
-                    {content}
-                  </div>
-                )
-              }
-
-              return (
-                <Link key={guide.title} href={guide.href} className="block">
-                  {content}
-                </Link>
-              )
-            })}
+              </Link>
+            ))}
           </div>
 
           <div className="mt-8">
