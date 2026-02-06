@@ -339,6 +339,41 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
               </div>
             </section>
           )}
+
+          {/* 延伸閱讀 */}
+          <section className="mt-12">
+            <h2 className="text-2xl font-bold text-purple-200 mb-4">延伸閱讀</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <Link
+                href="/guides/upright-meanings"
+                className="glass-card-subtle p-4 hover:bg-purple-500/15 hover:border-purple-400/40 transition-all duration-300 block"
+              >
+                <h3 className="text-purple-100 text-sm font-medium mb-1">塔羅牌正位意義大全</h3>
+                <p className="text-slate-400 text-xs">78 張牌正位完整解析</p>
+              </Link>
+              <Link
+                href="/guides/reversed-meanings"
+                className="glass-card-subtle p-4 hover:bg-purple-500/15 hover:border-purple-400/40 transition-all duration-300 block"
+              >
+                <h3 className="text-purple-100 text-sm font-medium mb-1">塔羅牌逆位意義大全</h3>
+                <p className="text-slate-400 text-xs">78 張牌逆位完整解析</p>
+              </Link>
+              <Link
+                href="/guides/love-readings"
+                className="glass-card-subtle p-4 hover:bg-purple-500/15 hover:border-purple-400/40 transition-all duration-300 block"
+              >
+                <h3 className="text-purple-100 text-sm font-medium mb-1">塔羅牌愛情解讀指南</h3>
+                <p className="text-slate-400 text-xs">感情占卜完整攻略</p>
+              </Link>
+              <Link
+                href="/guides/career-readings"
+                className="glass-card-subtle p-4 hover:bg-purple-500/15 hover:border-purple-400/40 transition-all duration-300 block"
+              >
+                <h3 className="text-purple-100 text-sm font-medium mb-1">塔羅牌事業解讀指南</h3>
+                <p className="text-slate-400 text-xs">職場占卜完整攻略</p>
+              </Link>
+            </div>
+          </section>
         </div>
       </article>
     </div>
