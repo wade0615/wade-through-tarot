@@ -10,6 +10,7 @@
 - **前置依賴**: SEO 主題導向頁面（已完成）
 - **相關檔案**:
   - `client/src/data/tarotCards.ts` — 資料來源（需擴充）
+  - `client/src/data/tarotCardsDetail.ts` — 新增：子頁面專用詳細內容（待建立）
   - `client/src/app/cards/[id]/` — 現有卡片頁面
   - `client/src/app/guides/` — 已完成的指南彙整頁面
 
@@ -55,28 +56,59 @@
 
 | 子頁主題 | 目前欄位 | 現有字數 | 目標字數 | 缺口 |
 |---------|---------|---------|---------|------|
-| 正位詳解 | `meaning.upright`（5 關鍵詞） | ~25 字 | 500 字 | **完全缺少** |
-| 逆位詳解 | `meaning.reversed`（5 關鍵詞） | ~25 字 | 500 字 | **完全缺少** |
-| 愛情詳解 | `deepAnalysis.loveReading` | ~200 字 | 500 字 | 需擴充 |
-| 事業詳解 | `deepAnalysis.careerReading` | ~200 字 | 500 字 | 需擴充 |
-| 健康詳解 | `deepAnalysis.healthReading` | ~200 字 | 500 字 | 需擴充 |
+| 正位詳解 | `meaning.upright`（5 關鍵詞） | ~25 字 | 500 字 | **完全缺少（從零撰寫）** |
+| 逆位詳解 | `meaning.reversed`（5 關鍵詞） | ~25 字 | 500 字 | **完全缺少（從零撰寫）** |
+| 愛情詳解 | `deepAnalysis.loveReading` | ~200 字 | 500 字 | 需擴充（有基礎） |
+| 事業詳解 | `deepAnalysis.careerReading` | ~200 字 | 500 字 | 需擴充（有基礎） |
+| 健康詳解 | `deepAnalysis.healthReading` | ~200 字 | 500 字 | 需擴充（有基礎） |
 
-### 新增欄位設計
+### 資料檔案架構（必須拆檔）
 
-在 `TarotCard` 介面的 `deepAnalysis` 中新增 5 個欄位：
+目前 `tarotCards.ts` 約 **439 KB / 2,031 行**。新增 ~19.5 萬字（中文 UTF-8 約 3 bytes/字）將帶來 **~585 KB** 新增內容，檔案總體積將超過 **1 MB**。
+
+**因此必須拆分為獨立檔案**，而非在現有檔案中新增欄位：
+
+```
+client/src/data/
+├── tarotCards.ts              # 現有：基礎資料（維持不變，~439 KB）
+└── tarotCardsDetail.ts        # 新增：子頁面專用詳細內容（~585 KB）
+```
 
 ```typescript
-deepAnalysis?: {
-  // ... 現有欄位保持不變 ...
+// tarotCardsDetail.ts
 
-  // 新增：子頁面專用詳細內容（每欄 400-600 字）
-  uprightDetail: string;     // 正位詳細解析
-  reversedDetail: string;    // 逆位詳細解析
-  loveDetail: string;        // 愛情詳細解析（擴充版）
-  careerDetail: string;      // 事業詳細解析（擴充版）
-  healthDetail: string;      // 健康詳細解析（擴充版）
-};
+export interface CardDetail {
+  cardId: string;              // 對應 TarotCard.id
+  uprightDetail: string;       // 正位詳細解析（400-600 字）
+  reversedDetail: string;      // 逆位詳細解析（400-600 字）
+  loveDetail: string;          // 愛情詳細解析（400-600 字）
+  careerDetail: string;        // 事業詳細解析（400-600 字）
+  healthDetail: string;        // 健康詳細解析（400-600 字）
+}
+
+// 以 Map 形式存儲，方便快速查詢
+export const cardDetails: Record<string, CardDetail> = {
+  "fool": {
+    cardId: "fool",
+    uprightDetail: "...",
+    reversedDetail: "...",
+    loveDetail: "...",
+    careerDetail: "...",
+    healthDetail: "...",
+  },
+  // ... 78 張牌
+}
+
+export function getCardDetail(cardId: string): CardDetail | undefined {
+  return cardDetails[cardId]
+}
 ```
+
+**拆檔優勢**：
+1. 現有頁面不受影響，不需 import 新檔案
+2. 只有子頁面才 import `tarotCardsDetail.ts`，tree-shaking 有效
+3. 子頁面為 Server Component，詳細內容不進入 client bundle
+4. 可依牌組進一步拆分（若未來需要）
 
 ### 欄位內容規範
 
@@ -159,6 +191,7 @@ deepAnalysis?: {
 
 - 每張牌 5 個欄位 × 500 字 = 2,500 字
 - 78 張牌 × 2,500 字 = **195,000 字**（約 19.5 萬字）
+- UTF-8 中文約 3 bytes/字，檔案新增量約 **585 KB**
 
 ---
 
@@ -278,28 +311,39 @@ const cardThemeUrls = allCards.flatMap((card) =>
 2. **`/guides/[theme]` 指南彙整頁**：每張牌卡片的「查看完整解析」改為連結到對應子頁面
 3. **CardSummaryList / LoveCardSummary / ThemeCardSummary**：連結目標從 `/cards/[id]` 調整為 `/cards/[id]/[theme]`
 
+**重要**：元件連結更新必須在 Phase B 子頁面建好後才執行，Phase A 期間不可提前修改，否則連結會指向不存在的頁面。
+
 ---
 
 ## 實作階段
 
 ### Phase A：內容擴充（資料層）
 
-分 5 批次，每批處理一個牌組：
+#### A-0：建立資料檔案與介面（前置步驟）
 
-| 批次 | 牌組 | 張數 | 新增欄位 | 預估字數 |
-|------|------|------|---------|---------|
-| A-1 | 大阿爾克納 | 22 張 | 5 欄位 | ~55,000 字 |
-| A-2 | 聖杯牌組 | 14 張 | 5 欄位 | ~35,000 字 |
-| A-3 | 金幣牌組 | 14 張 | 5 欄位 | ~35,000 字 |
-| A-4 | 寶劍牌組 | 14 張 | 5 欄位 | ~35,000 字 |
-| A-5 | 權杖牌組 | 14 張 | 5 欄位 | ~35,000 字 |
+1. 建立 `client/src/data/tarotCardsDetail.ts`，定義 `CardDetail` 介面與 `getCardDetail()` 函數
+2. 先以 1 張牌（fool）作為範本填入內容，驗證資料結構正確
+3. 確認 import 路徑與 type 匯出正常
+
+#### A-1 ~ A-5：依牌組批次擴充內容
+
+每批次先完成**有基礎的 3 個欄位**（loveDetail / careerDetail / healthDetail），再處理**從零撰寫的 2 個欄位**（uprightDetail / reversedDetail）。
+
+| 批次 | 牌組 | 張數 | 先做（有基礎） | 後做（從零寫） | 預估字數 |
+|------|------|------|---------------|---------------|---------|
+| A-1 | 大阿爾克納 | 22 張 | loveDetail, careerDetail, healthDetail | uprightDetail, reversedDetail | ~55,000 字 |
+| A-2 | 聖杯牌組 | 14 張 | loveDetail, careerDetail, healthDetail | uprightDetail, reversedDetail | ~35,000 字 |
+| A-3 | 金幣牌組 | 14 張 | loveDetail, careerDetail, healthDetail | uprightDetail, reversedDetail | ~35,000 字 |
+| A-4 | 寶劍牌組 | 14 張 | loveDetail, careerDetail, healthDetail | uprightDetail, reversedDetail | ~35,000 字 |
+| A-5 | 權杖牌組 | 14 張 | loveDetail, careerDetail, healthDetail | uprightDetail, reversedDetail | ~35,000 字 |
 
 **每批次交付物**：
-1. 更新 `tarotCards.ts` 中對應牌組的 `deepAnalysis` 欄位
+1. 更新 `tarotCardsDetail.ts` 中對應牌組的所有欄位
 2. 驗證所有新欄位可正確讀取
 
 **內容撰寫原則**：
 - 每段文案需獨特，不可與現有 `loveReading` / `careerReading` / `healthReading` 重複
+- `*Detail` 欄位提供比現有欄位更深入、更具體的解析
 - 使用【】標記格式（愛情/事業/健康），與現有格式一致
 - 正位/逆位詳解使用純文字段落，不使用【】標記
 - 語調保持一致：溫暖、專業、引導性，避免絕對性預言語句
@@ -308,13 +352,12 @@ const cardThemeUrls = allCards.flatMap((card) =>
 
 | 步驟 | 工作項目 | 依賴 |
 |------|---------|------|
-| B-1 | 更新 `TarotCard` 介面，新增 5 個 optional 欄位 | - |
-| B-2 | 建立 `/cards/[id]/[theme]/page.tsx` 動態路由 | B-1 |
-| B-3 | 建立共用組件 `CardThemeHeader`、`CrossThemeLinks`、`CardThemeFAQ` | B-1 |
-| B-4 | 更新 Sitemap 加入 390 條 URL | B-2 |
-| B-5 | 更新現有 `CardDetailClient.tsx`，在各 deepAnalysis 區塊加入子頁面連結 | B-2 |
-| B-6 | 更新指南頁面元件（CardSummaryList 等），連結指向子頁面 | B-2 |
-| B-7 | 驗證：build 成功、頁面渲染正確、JSON-LD 正確、Sitemap 包含所有 URL | B-2~B-6 |
+| B-1 | 建立 `/cards/[id]/[theme]/page.tsx` 動態路由與 `generateStaticParams` | A-0 |
+| B-2 | 建立共用組件 `CardThemeHeader`、`CrossThemeLinks`、`CardThemeFAQ` | - |
+| B-3 | 更新 Sitemap 加入 390 條 URL | B-1 |
+| B-4 | 更新現有 `CardDetailClient.tsx`，在各 deepAnalysis 區塊加入子頁面連結 | B-1 |
+| B-5 | 更新指南頁面元件（CardSummaryList 等），連結指向子頁面 | B-1 |
+| B-6 | 驗證：build 成功、頁面渲染正確、JSON-LD 正確、Sitemap 包含所有 URL | B-1~B-5 |
 
 ### Phase C：優化與驗證
 
@@ -334,7 +377,7 @@ const cardThemeUrls = allCards.flatMap((card) =>
 **問題**：子頁面與 `/cards/[id]` 母頁面內容可能重複。
 
 **解決方案**：
-1. 子頁面使用 `*Detail` 新欄位（專屬內容），不複製 `loveReading` 等現有欄位
+1. 子頁面使用 `*Detail` 新欄位（專屬內容，存於獨立檔案），不複製 `loveReading` 等現有欄位
 2. 母頁面保留現有摘要級內容，子頁面提供深度詳解
 3. 各頁設定正確的 `canonical` URL 指向自身
 
@@ -348,12 +391,21 @@ const cardThemeUrls = allCards.flatMap((card) =>
 
 ### 資料檔案體積
 
-**問題**：`tarotCards.ts` 新增 ~19.5 萬字，檔案體積顯著增加。
+**問題**：新增 ~19.5 萬字（~585 KB），若放入現有 `tarotCards.ts` 將使檔案超過 1 MB。
+
+**解決方案**（必須執行）：
+1. 拆分為獨立檔案 `tarotCardsDetail.ts`，與 `tarotCards.ts` 分離
+2. 只有子頁面才 import 新檔案，現有頁面完全不受影響
+3. Next.js tree-shaking 確保未使用的資料不進入 client bundle
+4. 子頁面為 Server Component，詳細內容不傳到瀏覽器端
+
+### 元件連結更新時機
+
+**問題**：指南頁面元件（CardSummaryList、LoveCardSummary、ThemeCardSummary）的連結需從 `/cards/[id]` 改為 `/cards/[id]/[theme]`，但若在子頁面建好前提前修改，連結將指向 404。
 
 **解決方案**：
-1. 考慮將 `*Detail` 欄位拆分到獨立檔案（例如 `tarotCardsDetail.ts`）
-2. Next.js tree-shaking 會確保未使用的資料不會進入 client bundle
-3. 子頁面為 Server Component，資料不會傳到瀏覽器端
+1. 元件連結更新統一在 Phase B-5 執行，不可在 Phase A 期間提前修改
+2. Phase B-5 與 B-1（子頁面建立）在同一次 PR 中完成
 
 ---
 
@@ -369,6 +421,19 @@ const cardThemeUrls = allCards.flatMap((card) =>
 
 ---
 
+## 審計結果（2026-02-06）
+
+實作前的程式碼審計確認：
+
+- [x] Next.js 路由不衝突：`/cards/[id]` 與 `/cards/[id]/[theme]` 可並存
+- [x] 78 張牌 deepAnalysis 覆蓋率 100%
+- [x] generateStaticParams 父子層互不干擾
+- [x] Sitemap 478 URLs 遠低於 Google 50,000 上限
+- [x] 3 個指南元件需更新連結（Phase B-5 處理）
+- [x] 資料檔案必須拆分（已納入 Phase A-0）
+
+---
+
 **最後更新**: 2026-02-06
-**文檔狀態**: 規劃完成，待實作
+**文檔狀態**: 規劃完成，已通過審計，待實作
 **負責人**: 待指派
