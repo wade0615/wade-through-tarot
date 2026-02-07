@@ -6,79 +6,11 @@ import { TarotCard } from "@/data/tarotCards"
 import { Breadcrumb } from "@/components/Breadcrumb"
 import { ResponsiveAd } from "@/components/GoogleAds"
 import { getAdSlot } from "@/config/ads"
+import { formatReadingText } from "@/utils/formatReading"
 
 interface Props {
   card: TarotCard
   relatedCards: TarotCard[]
-}
-
-const readingTypeLabels: Record<string, Record<string, string>> = {
-  love: {
-    正位: "愛情正位",
-    逆位: "愛情逆位",
-    單身者: "愛情單身者建議",
-    有伴侶者: "愛情有伴侶者建議",
-    行動: "愛情行動建議",
-  },
-  career: {
-    正位: "事業正位",
-    逆位: "事業逆位",
-    求職者: "事業求職者建議",
-    在職者: "事業在職者建議",
-    財務: "事業財務建議",
-  },
-  health: {
-    身體: "健康身體",
-    心理: "健康心理",
-    生活習慣: "健康生活習慣",
-    逆位: "健康逆位",
-  },
-}
-
-function formatReadingText(
-  text: string,
-  cardName?: string,
-  readingType?: "love" | "career" | "health"
-) {
-  const segments = text.split(/(?=【)/).filter(Boolean)
-  if (segments.length <= 1) {
-    return <p className="text-slate-300 leading-relaxed">{text}</p>
-  }
-
-  const labels = readingType ? readingTypeLabels[readingType] : null
-
-  return (
-    <div className="space-y-3">
-      {segments.map((segment, index) => {
-        const markerMatch = segment.match(/^【([^】]+)】/)
-        const marker = markerMatch?.[1] || ""
-        const content = segment.replace(/^【[^】]+】/, "")
-
-        const h3Text =
-          cardName && labels && marker && labels[marker]
-            ? `${cardName}${labels[marker]}`
-            : null
-
-        return (
-          <div key={index}>
-            {h3Text && (
-              <h3 className="text-base font-semibold text-purple-300 mb-1">
-                {h3Text}
-              </h3>
-            )}
-            <p className="text-slate-300 leading-relaxed">
-              {!h3Text && markerMatch && (
-                <span className="text-purple-300 font-medium">
-                  {markerMatch[0]}
-                </span>
-              )}
-              {content}
-            </p>
-          </div>
-        )
-      })}
-    </div>
-  )
 }
 
 export default function CardDetailClient({ card, relatedCards }: Props) {
