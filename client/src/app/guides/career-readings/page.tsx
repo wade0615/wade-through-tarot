@@ -201,6 +201,7 @@ export default function CareerReadingsPage() {
                   key={data.card.id}
                   card={data.card}
                   excerpts={careerExcerpts(data)}
+                  theme="career-readings"
                   variant="featured"
                 />
               ))}
@@ -221,6 +222,7 @@ export default function CareerReadingsPage() {
                   key={data.card.id}
                   card={data.card}
                   excerpts={careerExcerpts(data)}
+                  theme="career-readings"
                   variant="caution"
                 />
               ))}
@@ -252,6 +254,7 @@ export default function CareerReadingsPage() {
                       key={data.card.id}
                       card={data.card}
                       excerpts={careerExcerpts(data)}
+                  theme="career-readings"
                     />
                   ))}
                 </div>

@@ -19,7 +19,7 @@ export function LoveCardSummary({ data, variant = "default" }: Props) {
 
   return (
     <Link
-      href={`/cards/${card.id}`}
+      href={`/cards/${card.id}/love-readings`}
       className={`group bg-white/5 ${borderColor} border backdrop-blur-sm rounded-xl p-4 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 block`}
     >
       <div className="flex items-start gap-3">

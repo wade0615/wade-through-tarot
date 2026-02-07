@@ -206,6 +206,7 @@ export default function HealthReadingsPage() {
                   key={data.card.id}
                   card={data.card}
                   excerpts={healthExcerpts(data)}
+                  theme="health-readings"
                   variant="featured"
                 />
               ))}
@@ -226,6 +227,7 @@ export default function HealthReadingsPage() {
                   key={data.card.id}
                   card={data.card}
                   excerpts={healthExcerpts(data)}
+                  theme="health-readings"
                   variant="caution"
                 />
               ))}
@@ -257,6 +259,7 @@ export default function HealthReadingsPage() {
                       key={data.card.id}
                       card={data.card}
                       excerpts={healthExcerpts(data)}
+                  theme="health-readings"
                     />
                   ))}
                 </div>
