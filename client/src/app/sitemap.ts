@@ -5,12 +5,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://wade-through-tarot.vercel.app"
   const allCards = getAllTarotCards()
 
+  const themes = [
+    "upright-meanings",
+    "reversed-meanings",
+    "love-readings",
+    "career-readings",
+    "health-readings",
+  ]
+
   const cardUrls = allCards.map((card) => ({
     url: `${baseUrl}/cards/${card.id}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }))
+
+  const cardThemeUrls = allCards.flatMap((card) =>
+    themes.map((theme) => ({
+      url: `${baseUrl}/cards/${card.id}/${theme}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }))
+  )
 
   return [
     {
@@ -26,6 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     ...cardUrls,
+    ...cardThemeUrls,
     {
       url: `${baseUrl}/guides`,
       lastModified: new Date(),
