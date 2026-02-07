@@ -121,6 +121,12 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                   </li>
                 ))}
               </ul>
+              <Link
+                href={`/cards/${card.id}/upright-meanings`}
+                className="inline-block mt-3 text-sm text-purple-300 hover:text-amber-300 transition-colors duration-200"
+              >
+                查看完整正位解析 →
+              </Link>
             </section>
             {/* 逆位含義 */}
             <section className="glass-card-subtle p-5">
@@ -135,6 +141,12 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                   </li>
                 ))}
               </ul>
+              <Link
+                href={`/cards/${card.id}/reversed-meanings`}
+                className="inline-block mt-3 text-sm text-purple-300 hover:text-amber-300 transition-colors duration-200"
+              >
+                查看完整逆位解析 →
+              </Link>
             </section>
           </div>
 
@@ -157,6 +169,12 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                     {card.name}愛情占卜解析
                   </h2>
                   {formatReadingText(card.deepAnalysis.loveReading, card.name, "love")}
+                  <Link
+                    href={`/cards/${card.id}/love-readings`}
+                    className="inline-block mt-3 text-sm text-purple-300 hover:text-amber-300 transition-colors duration-200"
+                  >
+                    查看完整愛情解讀 →
+                  </Link>
                 </section>
               )}
               {card.deepAnalysis.careerReading && (
@@ -165,6 +183,12 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                     {card.name}事業占卜解析
                   </h2>
                   {formatReadingText(card.deepAnalysis.careerReading, card.name, "career")}
+                  <Link
+                    href={`/cards/${card.id}/career-readings`}
+                    className="inline-block mt-3 text-sm text-purple-300 hover:text-amber-300 transition-colors duration-200"
+                  >
+                    查看完整事業解讀 →
+                  </Link>
                 </section>
               )}
               {card.deepAnalysis.healthReading && (
@@ -173,6 +197,12 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                     {card.name}健康占卜解析
                   </h2>
                   {formatReadingText(card.deepAnalysis.healthReading, card.name, "health")}
+                  <Link
+                    href={`/cards/${card.id}/health-readings`}
+                    className="inline-block mt-3 text-sm text-purple-300 hover:text-amber-300 transition-colors duration-200"
+                  >
+                    查看完整健康解讀 →
+                  </Link>
                 </section>
               )}
               {card.deepAnalysis.practicalAdvice && (
