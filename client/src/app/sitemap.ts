@@ -2,7 +2,7 @@ import { MetadataRoute } from "next"
 import { getAllTarotCards } from "@/data/tarotCards"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://wade-through-tarot.vercel.app"
+  const baseUrl = "https://www.wade-through-tarot.com"
   const allCards = getAllTarotCards()
 
   const themes = [
