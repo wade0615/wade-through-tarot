@@ -6,79 +6,11 @@ import { TarotCard } from "@/data/tarotCards"
 import { Breadcrumb } from "@/components/Breadcrumb"
 import { ResponsiveAd } from "@/components/GoogleAds"
 import { getAdSlot } from "@/config/ads"
+import { formatReadingText } from "@/utils/formatReading"
 
 interface Props {
   card: TarotCard
   relatedCards: TarotCard[]
-}
-
-const readingTypeLabels: Record<string, Record<string, string>> = {
-  love: {
-    正位: "愛情正位",
-    逆位: "愛情逆位",
-    單身者: "愛情單身者建議",
-    有伴侶者: "愛情有伴侶者建議",
-    行動: "愛情行動建議",
-  },
-  career: {
-    正位: "事業正位",
-    逆位: "事業逆位",
-    求職者: "事業求職者建議",
-    在職者: "事業在職者建議",
-    財務: "事業財務建議",
-  },
-  health: {
-    身體: "健康身體",
-    心理: "健康心理",
-    生活習慣: "健康生活習慣",
-    逆位: "健康逆位",
-  },
-}
-
-function formatReadingText(
-  text: string,
-  cardName?: string,
-  readingType?: "love" | "career" | "health"
-) {
-  const segments = text.split(/(?=【)/).filter(Boolean)
-  if (segments.length <= 1) {
-    return <p className="text-slate-300 leading-relaxed">{text}</p>
-  }
-
-  const labels = readingType ? readingTypeLabels[readingType] : null
-
-  return (
-    <div className="space-y-3">
-      {segments.map((segment, index) => {
-        const markerMatch = segment.match(/^【([^】]+)】/)
-        const marker = markerMatch?.[1] || ""
-        const content = segment.replace(/^【[^】]+】/, "")
-
-        const h3Text =
-          cardName && labels && marker && labels[marker]
-            ? `${cardName}${labels[marker]}`
-            : null
-
-        return (
-          <div key={index}>
-            {h3Text && (
-              <h3 className="text-base font-semibold text-purple-300 mb-1">
-                {h3Text}
-              </h3>
-            )}
-            <p className="text-slate-300 leading-relaxed">
-              {!h3Text && markerMatch && (
-                <span className="text-purple-300 font-medium">
-                  {markerMatch[0]}
-                </span>
-              )}
-              {content}
-            </p>
-          </div>
-        )
-      })}
-    </div>
-  )
 }
 
 export default function CardDetailClient({ card, relatedCards }: Props) {
@@ -189,6 +121,12 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                   </li>
                 ))}
               </ul>
+              <Link
+                href={`/cards/${card.id}/upright-meanings`}
+                className="inline-block mt-3 text-sm text-purple-300 hover:text-amber-300 transition-colors duration-200"
+              >
+                查看完整正位解析 →
+              </Link>
             </section>
             {/* 逆位含義 */}
             <section className="glass-card-subtle p-5">
@@ -203,6 +141,12 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                   </li>
                 ))}
               </ul>
+              <Link
+                href={`/cards/${card.id}/reversed-meanings`}
+                className="inline-block mt-3 text-sm text-purple-300 hover:text-amber-300 transition-colors duration-200"
+              >
+                查看完整逆位解析 →
+              </Link>
             </section>
           </div>
 
@@ -225,6 +169,12 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                     {card.name}愛情占卜解析
                   </h2>
                   {formatReadingText(card.deepAnalysis.loveReading, card.name, "love")}
+                  <Link
+                    href={`/cards/${card.id}/love-readings`}
+                    className="inline-block mt-3 text-sm text-purple-300 hover:text-amber-300 transition-colors duration-200"
+                  >
+                    查看完整愛情解讀 →
+                  </Link>
                 </section>
               )}
               {card.deepAnalysis.careerReading && (
@@ -233,6 +183,12 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                     {card.name}事業占卜解析
                   </h2>
                   {formatReadingText(card.deepAnalysis.careerReading, card.name, "career")}
+                  <Link
+                    href={`/cards/${card.id}/career-readings`}
+                    className="inline-block mt-3 text-sm text-purple-300 hover:text-amber-300 transition-colors duration-200"
+                  >
+                    查看完整事業解讀 →
+                  </Link>
                 </section>
               )}
               {card.deepAnalysis.healthReading && (
@@ -241,6 +197,12 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
                     {card.name}健康占卜解析
                   </h2>
                   {formatReadingText(card.deepAnalysis.healthReading, card.name, "health")}
+                  <Link
+                    href={`/cards/${card.id}/health-readings`}
+                    className="inline-block mt-3 text-sm text-purple-300 hover:text-amber-300 transition-colors duration-200"
+                  >
+                    查看完整健康解讀 →
+                  </Link>
                 </section>
               )}
               {card.deepAnalysis.practicalAdvice && (
@@ -339,6 +301,41 @@ export default function CardDetailClient({ card, relatedCards }: Props) {
               </div>
             </section>
           )}
+
+          {/* 延伸閱讀 */}
+          <section className="mt-12">
+            <h2 className="text-2xl font-bold text-purple-200 mb-4">延伸閱讀</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <Link
+                href="/guides/upright-meanings"
+                className="glass-card-subtle p-4 hover:bg-purple-500/15 hover:border-purple-400/40 transition-all duration-300 block"
+              >
+                <h3 className="text-purple-100 text-sm font-medium mb-1">塔羅牌正位意義大全</h3>
+                <p className="text-slate-400 text-xs">78 張牌正位完整解析</p>
+              </Link>
+              <Link
+                href="/guides/reversed-meanings"
+                className="glass-card-subtle p-4 hover:bg-purple-500/15 hover:border-purple-400/40 transition-all duration-300 block"
+              >
+                <h3 className="text-purple-100 text-sm font-medium mb-1">塔羅牌逆位意義大全</h3>
+                <p className="text-slate-400 text-xs">78 張牌逆位完整解析</p>
+              </Link>
+              <Link
+                href="/guides/love-readings"
+                className="glass-card-subtle p-4 hover:bg-purple-500/15 hover:border-purple-400/40 transition-all duration-300 block"
+              >
+                <h3 className="text-purple-100 text-sm font-medium mb-1">塔羅牌愛情解讀指南</h3>
+                <p className="text-slate-400 text-xs">感情占卜完整攻略</p>
+              </Link>
+              <Link
+                href="/guides/career-readings"
+                className="glass-card-subtle p-4 hover:bg-purple-500/15 hover:border-purple-400/40 transition-all duration-300 block"
+              >
+                <h3 className="text-purple-100 text-sm font-medium mb-1">塔羅牌事業解讀指南</h3>
+                <p className="text-slate-400 text-xs">職場占卜完整攻略</p>
+              </Link>
+            </div>
+          </section>
         </div>
       </article>
     </div>
