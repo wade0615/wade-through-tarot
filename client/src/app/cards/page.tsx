@@ -154,6 +154,52 @@ export default function CardsPage() {
             );
           })}
         </div>
+
+        {/* 主題解讀指南入口 */}
+        <section className="glass-card p-6 mt-12">
+          <h2 className="text-2xl font-semibold text-purple-200 mb-2 text-center">
+            主題解讀指南
+          </h2>
+          <p className="text-center text-slate-400 mb-6 text-sm">
+            從不同角度深入了解塔羅牌的意義
+          </p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            {[
+              {
+                title: "正位意義大全",
+                desc: "78 張牌正位完整解析",
+                href: "/guides/upright-meanings",
+              },
+              {
+                title: "逆位意義大全",
+                desc: "78 張牌逆位完整解析",
+                href: "/guides/reversed-meanings",
+              },
+              {
+                title: "愛情解讀指南",
+                desc: "感情占卜完整攻略",
+                href: "/guides/love-readings",
+              },
+              {
+                title: "事業解讀指南",
+                desc: "職場占卜完整攻略",
+                href: "/guides/career-readings",
+              },
+            ].map((guide) => (
+              <Link
+                key={guide.href}
+                href={guide.href}
+                className="block bg-white/5 border border-purple-500/20 backdrop-blur-sm rounded-xl p-4
+                  hover:bg-purple-500/15 hover:border-purple-400/40 transition-all duration-300 text-center"
+              >
+                <h3 className="text-purple-100 text-sm font-medium mb-1">
+                  {guide.title}
+                </h3>
+                <p className="text-slate-400 text-xs">{guide.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
       </div>
 
       {/* 返回按鈕 */}

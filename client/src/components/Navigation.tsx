@@ -32,6 +32,9 @@ export default function Navigation() {
           <Link href="/cards" className="px-3 py-2 rounded-lg text-purple-200/80 hover:text-purple-100 hover:bg-purple-500/10 transition-all duration-200">
             塔羅牌圖鑑
           </Link>
+          <Link href="/guides" className="px-3 py-2 rounded-lg text-purple-200/80 hover:text-purple-100 hover:bg-purple-500/10 transition-all duration-200">
+            塔羅指南
+          </Link>
           <Link href="/learn" className="px-3 py-2 rounded-lg text-purple-200/80 hover:text-purple-100 hover:bg-purple-500/10 transition-all duration-200">
             塔羅教學
           </Link>
@@ -91,6 +94,13 @@ export default function Navigation() {
             onClick={closeMenu}
           >
             塔羅牌圖鑑
+          </Link>
+          <Link
+            href="/guides"
+            className="py-2.5 px-4 text-purple-200/80 hover:text-purple-100 hover:bg-purple-500/15 rounded-lg transition-all duration-200"
+            onClick={closeMenu}
+          >
+            塔羅指南
           </Link>
           <Link
             href="/learn"
